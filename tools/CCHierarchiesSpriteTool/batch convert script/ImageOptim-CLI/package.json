@@ -1,0 +1,48 @@
+{
+  "name": "imageoptim-cli",
+  "author": "Jamie Mason (https://github.com/JamieMason)",
+  "description": "Automates ImageOptim, ImageAlpha, and JPEGmini for Mac to make batch optimisation of images part of your automated build process.",
+  "homepage": "https://github.com/JamieMason/ImageOptim-CLI",
+  "bugs": "https://github.com/JamieMason/ImageOptim-CLI/issues",
+  "main": "./bin/imageOptim",
+  "version": "1.6.19",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JamieMason/ImageOptim-CLI.git"
+  },
+  "bin": {
+    "imageOptim": "bin/imageOptim",
+    "imageOptimAppleScriptLib": "bin/imageOptimAppleScriptLib"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://raw.github.com/JamieMason/ImageOptim-CLI/master/LICENSE"
+  }],
+  "keywords": [
+    "advpng",
+    "build",
+    "compress",
+    "compression",
+    "gifsicle",
+    "ImageOptim",
+    "ImageAlpha",
+    "images",
+    "jpegoptim",
+    "JPEGmini",
+    "jpegtran",
+    "optimization",
+    "optimize",
+    "optipng",
+    "pngcrush",
+    "pngout"
+  ],
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-watch": "~0.4.4"
+  },
+  "contributors": [
+    "Jamie Mason (https://github.com/JamieMason)",
+    "James Stout (https://github.com/jamesstout)"
+  ]
+}
