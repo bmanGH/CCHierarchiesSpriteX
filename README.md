@@ -16,6 +16,7 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
    * 通过缓存提高加载和动画计算的速度
    * 支持Flash中MovieClip的嵌套
    * 支持Graphics的所有循环播放模式
+   * 支持自定义动画事件
 
 
 局限
@@ -35,6 +36,7 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
    * 支持动画Avatar
    * 支持滤镜
    * 支持骨骼的CCNode插接
+   * 支持内嵌声音播放数据
 
 
 依赖
