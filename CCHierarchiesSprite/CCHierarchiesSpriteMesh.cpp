@@ -28,9 +28,11 @@ CCHierarchiesSpriteMesh::~CCHierarchiesSpriteMesh()
     
     glDeleteBuffers(2, m_pBuffersVBO);
     
+#if CC_TEXTURE_ATLAS_USE_VAO
     if (CCConfiguration::sharedConfiguration()->supportsShareableVAO()) {
         glDeleteVertexArrays(1, &m_uVAOname);
     }
+#endif
     
 #if CC_ENABLE_CACHE_TEXTURE_DATA
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_COME_TO_FOREGROUND);
@@ -103,12 +105,16 @@ bool CCHierarchiesSpriteMesh::initWithCapacity(unsigned int capacity)
                                                                   NULL);
 #endif
     
+#if CC_TEXTURE_ATLAS_USE_VAO
     if (CCConfiguration::sharedConfiguration()->supportsShareableVAO()) {
         setupVBOandVAO();
     }
     else {
         setupVBO();
     }
+#else
+    setupVBO();
+#endif
     
     m_bDirty = true;
     
@@ -117,12 +123,16 @@ bool CCHierarchiesSpriteMesh::initWithCapacity(unsigned int capacity)
 
 void CCHierarchiesSpriteMesh::listenBackToForeground(CCObject *obj)
 {
+#if CC_TEXTURE_ATLAS_USE_VAO
     if (CCConfiguration::sharedConfiguration()->supportsShareableVAO()) {
         setupVBOandVAO();
     }
     else {
         setupVBO();
     }
+#else
+    setupVBO();
+#endif
     
     // set m_bDirty to true to force it rebinding buffer
     m_bDirty = true;
@@ -163,7 +173,7 @@ void CCHierarchiesSpriteMesh::setupIndices()
 }
 
 //TextureAtlas - VAO / VBO specific
-
+#if CC_TEXTURE_ATLAS_USE_VAO
 void CCHierarchiesSpriteMesh::setupVBOandVAO()
 {
     glGenVertexArrays(1, &m_uVAOname);
@@ -200,6 +210,7 @@ void CCHierarchiesSpriteMesh::setupVBOandVAO()
     
     CHECK_GL_ERROR_DEBUG();
 }
+#endif
 
 void CCHierarchiesSpriteMesh::setupVBO()
 {
@@ -499,34 +510,36 @@ void CCHierarchiesSpriteMesh::drawNumberOfQuads(unsigned int n, unsigned int sta
         return;
     }
     
+#if CC_TEXTURE_ATLAS_USE_VAO
     if (CCConfiguration::sharedConfiguration()->supportsShareableVAO()) {
         //
         // Using VBO and VAO
         //
         ccGLBindVAO(m_uVAOname);
         
-#if CC_REBIND_INDICES_BUFFER
+#   if CC_REBIND_INDICES_BUFFER
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pBuffersVBO[1]);
-#endif
+#   endif
         
-#if HIERARCHIES_USE_TRIANGLE_STRIP
+#   if HIERARCHIES_USE_TRIANGLE_STRIP
         glDrawElements(GL_TRIANGLE_STRIP, (GLsizei) n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])) );
-#else
+#   else
         glDrawElements(GL_TRIANGLES, (GLsizei) n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])) );
-#endif // HIERARCHIES_USE_TRIANGLE_STRIP
+#   endif // HIERARCHIES_USE_TRIANGLE_STRIP
         
-#if CC_REBIND_INDICES_BUFFER
+#   if CC_REBIND_INDICES_BUFFER
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-#endif
+#   endif
         
         //    glBindVertexArray(0);
     }
-    else {
+    else
+    {
         //
         // Using VBO without VAO
         //
         
-#define kQuadSize sizeof(m_pQuads[0].bl)
+#   define kQuadSize sizeof(m_pQuads[0].bl)
         glBindBuffer(GL_ARRAY_BUFFER, m_pBuffersVBO[0]);
         
         ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords);
@@ -545,11 +558,11 @@ void CCHierarchiesSpriteMesh::drawNumberOfQuads(unsigned int n, unsigned int sta
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pBuffersVBO[1]);
         
-#if HIERARCHIES_USE_TRIANGLE_STRIP
+#   if HIERARCHIES_USE_TRIANGLE_STRIP
         glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])));
-#else
+#   else
         glDrawElements(GL_TRIANGLES, (GLsizei)n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])));
-#endif // HIERARCHIES_USE_TRIANGLE_STRIP
+#   endif // HIERARCHIES_USE_TRIANGLE_STRIP
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -557,6 +570,42 @@ void CCHierarchiesSpriteMesh::drawNumberOfQuads(unsigned int n, unsigned int sta
         glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Mul);
         glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Add);
     }
+#else
+    //
+    // Using VBO without VAO
+    //
+    
+#   define kQuadSize sizeof(m_pQuads[0].bl)
+    glBindBuffer(GL_ARRAY_BUFFER, m_pBuffersVBO[0]);
+    
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords);
+    glEnableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Mul);
+    glEnableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Add);
+    
+    // vertices
+    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof(CCHierarchiesSprite_V3F_C4B_T2F, vertices));
+    
+    // colors
+    glVertexAttribPointer(kCCHierarchiesSprite_VertexAttrib_Color_Mul, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (GLvoid*) offsetof(CCHierarchiesSprite_V3F_C4B_T2F, colorsMul));
+    glVertexAttribPointer(kCCHierarchiesSprite_VertexAttrib_Color_Add, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (GLvoid*) offsetof(CCHierarchiesSprite_V3F_C4B_T2F, colorsAdd));
+    
+    // tex coords
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (GLvoid*) offsetof(CCHierarchiesSprite_V3F_C4B_T2F, texCoords));
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pBuffersVBO[1]);
+    
+#   if HIERARCHIES_USE_TRIANGLE_STRIP
+    glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])));
+#   else
+    glDrawElements(GL_TRIANGLES, (GLsizei)n*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(m_pIndices[0])));
+#   endif // HIERARCHIES_USE_TRIANGLE_STRIP
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+    glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Mul);
+    glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Add);
+#endif
     
     CC_INCREMENT_GL_DRAWS(1);
     CHECK_GL_ERROR_DEBUG();

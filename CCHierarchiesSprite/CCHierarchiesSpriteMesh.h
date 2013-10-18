@@ -58,7 +58,9 @@ class CC_DLL CCHierarchiesSpriteMesh : public CCObject {
     
 protected:
     GLushort*           m_pIndices;
+#if CC_TEXTURE_ATLAS_USE_VAO
     GLuint              m_uVAOname;
+#endif
     GLuint              m_pBuffersVBO[2]; // 0: vertex  1: indices
     bool                m_bDirty; // indicates whether or not the array buffer of the VBO needs to be updated
     
@@ -187,7 +189,9 @@ public:
 private:
     void setupIndices();
     void mapBuffers();
+#if CC_TEXTURE_ATLAS_USE_VAO
     void setupVBOandVAO();
+#endif
     void setupVBO();
     
 };
