@@ -3,6 +3,9 @@ CCHierarchiesSpriteX
 
 render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x, base on hierarchies node like bone.
 
+![Demo Vedio 1](http://cl.ly/image/111k3Y0N0R3r/CCHierarchiesSpriteXDemo_Video_1_optimized.gif)
+![Demo Vedio 2](http://cl.ly/image/1z1M2t1d3x3v/CCHierarchiesSpriteXDemo_Video_2_optimized.gif)
+
 
 功能
 -------------------
