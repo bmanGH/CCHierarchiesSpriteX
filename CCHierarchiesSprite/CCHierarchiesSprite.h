@@ -156,19 +156,19 @@ public:
 	
 	static CCHierarchiesSprite* create (const char* sheetFileName,
                                         const char* animationFileName,
-                                        CCHierarchiesSpriteEventDelegate* delegate = NULL);
+                                        CCHierarchiesSpriteEventDelegate* delegate);
     static CCHierarchiesSprite* create (const char* sheetFileName,
                                         const char* animationFileNameBase,
                                         const char* animationFileNameSub,
-                                        CCHierarchiesSpriteEventDelegate* delegate = NULL);
+                                        CCHierarchiesSpriteEventDelegate* delegate);
 	
 	virtual bool initWithFile (const char* sheetFileName,
                        const char* animationFileName,
-                       CCHierarchiesSpriteEventDelegate* delegate = NULL);
+                       CCHierarchiesSpriteEventDelegate* delegate);
     virtual bool initWithFile (const char* sheetFileName,
                        const char* animationFileNameBase,
                        const char* animationFileNameSub,
-                       CCHierarchiesSpriteEventDelegate* delegate = NULL);
+                       CCHierarchiesSpriteEventDelegate* delegate);
     
     virtual void onEnter ();
     virtual void onExit ();
