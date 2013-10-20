@@ -16,15 +16,15 @@
     <layers>
         <L>
             <F id="0" dur="2" mot="true" >
-                <E si="0" x="101.55" y="178.2" ax="21.75" ay="39.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
+                <E si="0" x="101.55" y="178.2" ax="21.75" ay="39.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
             <F id="2" dur="2" mot="true" >
-                <E si="1" x="101.9" y="177.7" ax="22.1" ay="39.6" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
+                <E si="1" x="101.9" y="177.7" ax="22.1" ay="39.6" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
             <F id="4" dur="1" mot="false" >
-                <E si="2" x="101.55" y="178.2" ax="21.75" ay="39.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
+                <E si="2" x="101.55" y="178.2" ax="21.75" ay="39.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
         </L>

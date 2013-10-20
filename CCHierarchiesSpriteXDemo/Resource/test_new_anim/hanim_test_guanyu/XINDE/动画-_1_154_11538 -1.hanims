@@ -4,7 +4,7 @@
     <symbols>
         <S name="XINDE/zuiba-1" soc="true" le="0" bo="0" >
         </S>
-        <S name="GRAPHIC__206" soc="false" le="-11.7" bo="12.4" >
+        <S name="Symbol 190" soc="false" le="-11.7" bo="12.4" >
         </S>
     </symbols>
     <anims>
@@ -14,15 +14,15 @@
     <layers>
         <L>
             <F id="0" dur="3" mot="true" >
-                <E si="0" x="53.4" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
+                <E si="0" x="53.4" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
             <F id="3" dur="8" mot="true" >
-                <E si="0" x="53.4" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="0.22999999999999998" ra="196" gp="0.22999999999999998" ga="0" bp="0.22999999999999998" ba="0" lo="none" fo="3" >
+                <E si="0" x="53.4" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="0.22999999999999998" ra="196" gp="0.22999999999999998" ga="0" bp="0.22999999999999998" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
             <F id="11" dur="95" mot="false" >
-                <E si="0" x="53.3" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="11" >
+                <E si="0" x="53.3" y="55.15" ax="7.55" ay="8.1" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
                 </E>
             </F>
         </L>
