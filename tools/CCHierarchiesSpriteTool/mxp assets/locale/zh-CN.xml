@@ -1,10 +1,6 @@
 <locale>
 	<string key="preprocess_button"><![CDATA[预处理]]></string>
-	<string key="just_log_warning_checkbox"><![CDATA[仅打印警告信息]]></string>
-	<string key="skip_convert_shape_to_graphic_checkbox"><![CDATA[不转换图形到图元]]></string>
 	<string key="skip_convert_guided_frames_to_key_frames_checkbox"><![CDATA[不进行引导层复制到关键帧]]></string>
-	<string key="skip_convert_multi_layer_graphic_checkbox"><![CDATA[不转换多层单帧图元]]></string>
-	<string key="skip_convert_multi_element_single_frame_graphic_checkbox"><![CDATA[不转换单帧多图形图元]]></string>
 	<string key="export_button"><![CDATA[导出]]></string>
 	<string key="skip_export_bitmap_checkbox"><![CDATA[不导出位图]]></string>
 	<string key="skip_export_filter_checkbox"><![CDATA[不导出滤镜]]></string>

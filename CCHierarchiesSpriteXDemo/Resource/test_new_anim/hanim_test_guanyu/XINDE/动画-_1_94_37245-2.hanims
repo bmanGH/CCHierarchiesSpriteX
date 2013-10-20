@@ -12,23 +12,23 @@
     <layers>
         <L>
             <F id="0" dur="4" mot="false" >
-                <E si="0" x="64.4" y="96.85" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="64.4" y="96.85" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
                 </E>
             </F>
             <F id="4" dur="4" mot="false" >
-                <E si="0" x="64.4" y="96.85" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="64.4" y="96.85" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="4" >
                 </E>
             </F>
             <F id="8" dur="4" mot="false" >
-                <E si="0" x="64.25" y="97.2" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="64.25" y="97.2" ax="65.45" ay="95.55" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="8" >
                 </E>
             </F>
             <F id="12" dur="4" mot="false" >
-                <E si="0" x="65.3" y="96.85" ax="65.45" ay="95.55" sx="1.0000152587890625" sy="0.9996337890625" kx="-4.0080718994140625" ky="2.9951171875" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="65.3" y="96.85" ax="65.45" ay="95.55" sx="1.0000152587890625" sy="0.9996337890625" kx="-4.0080718994140625" ky="2.9951171875" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="12" >
                 </E>
             </F>
             <F id="16" dur="4" mot="false" >
-                <E si="0" x="65.1" y="97.05" ax="65.45" ay="95.55" sx="1" sy="1" kx="-1.75933837890625" ky="-1.75933837890625" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="65.1" y="97.05" ax="65.45" ay="95.55" sx="1" sy="1" kx="-1.75933837890625" ky="-1.75933837890625" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="16" >
                 </E>
             </F>
         </L>

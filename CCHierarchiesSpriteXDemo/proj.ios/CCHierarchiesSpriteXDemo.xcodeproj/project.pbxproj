@@ -33,9 +33,9 @@
 		064C5CBD181064820070FBA9 /* CCHierarchiesSpriteShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5CAE181064820070FBA9 /* CCHierarchiesSpriteShader.cpp */; };
 		064C5CBE181064820070FBA9 /* CCHierarchiesSpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5CB0181064820070FBA9 /* CCHierarchiesSpriteSheet.cpp */; };
 		064C5CBF181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5CB2181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp */; };
-		064C5CC9181067F40070FBA9 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 064C5CC3181067F40070FBA9 /* license.txt */; };
-		064C5CCA181067F40070FBA9 /* manual.html in Resources */ = {isa = PBXBuildFile; fileRef = 064C5CC4181067F40070FBA9 /* manual.html */; };
 		064C5CCD181069940070FBA9 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064C5C98181062850070FBA9 /* libcocos2dx.a */; };
+		06D241F618140811006EF478 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D241F018140811006EF478 /* license.txt */; };
+		06D241F718140811006EF478 /* manual.html in Resources */ = {isa = PBXBuildFile; fileRef = 06D241F118140811006EF478 /* manual.html */; };
 		D46906111797CE1100CCAFD3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA87178BE7AB00A0A776 /* QuartzCore.framework */; };
 		D46906121797CE1100CCAFD3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA89178BE7AB00A0A776 /* OpenGLES.framework */; };
 		D46906131797CE1100CCAFD3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA8B178BE7AB00A0A776 /* OpenAL.framework */; };
@@ -110,12 +110,6 @@
 		064C5CB2181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteSheetCache.cpp; sourceTree = "<group>"; };
 		064C5CB3181064820070FBA9 /* CCHierarchiesSpriteSheetCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteSheetCache.h; sourceTree = "<group>"; };
 		064C5CC0181065C80070FBA9 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
-		064C5CC3181067F40070FBA9 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		064C5CC4181067F40070FBA9 /* manual.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = manual.html; sourceTree = "<group>"; };
-		064C5CC5181067F40070FBA9 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
-		064C5CC6181067F40070FBA9 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
-		064C5CC7181067F40070FBA9 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
-		064C5CC8181067F40070FBA9 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
 		064C5CCE18106C320070FBA9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		064C5CD018106C500070FBA9 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		064C5CD518106DDB0070FBA9 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -123,6 +117,12 @@
 		064C5CD918106E470070FBA9 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		064C5CDB18106E5B0070FBA9 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		064C5CE1181070530070FBA9 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
+		06D241F018140811006EF478 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		06D241F118140811006EF478 /* manual.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = manual.html; sourceTree = "<group>"; };
+		06D241F218140811006EF478 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		06D241F318140811006EF478 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
+		06D241F418140811006EF478 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
+		06D241F518140811006EF478 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
 		D469062D1797CE1100CCAFD3 /* DemoTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D477CA87178BE7AB00A0A776 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D477CA89178BE7AB00A0A776 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -255,22 +255,23 @@
 		064C5CC1181067F40070FBA9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				064C5CC2181067F40070FBA9 /* rapidxml */,
+				06D241EF18140811006EF478 /* rapidxml */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
 		};
-		064C5CC2181067F40070FBA9 /* rapidxml */ = {
+		06D241EF18140811006EF478 /* rapidxml */ = {
 			isa = PBXGroup;
 			children = (
-				064C5CC3181067F40070FBA9 /* license.txt */,
-				064C5CC4181067F40070FBA9 /* manual.html */,
-				064C5CC5181067F40070FBA9 /* rapidxml.hpp */,
-				064C5CC6181067F40070FBA9 /* rapidxml_iterators.hpp */,
-				064C5CC7181067F40070FBA9 /* rapidxml_print.hpp */,
-				064C5CC8181067F40070FBA9 /* rapidxml_utils.hpp */,
+				06D241F018140811006EF478 /* license.txt */,
+				06D241F118140811006EF478 /* manual.html */,
+				06D241F218140811006EF478 /* rapidxml.hpp */,
+				06D241F318140811006EF478 /* rapidxml_iterators.hpp */,
+				06D241F418140811006EF478 /* rapidxml_print.hpp */,
+				06D241F518140811006EF478 /* rapidxml_utils.hpp */,
 			);
-			path = rapidxml;
+			name = rapidxml;
+			path = ../../rapidxml;
 			sourceTree = "<group>";
 		};
 		D477CA7B178BE7AB00A0A776 = {
@@ -398,15 +399,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				064C5CC9181067F40070FBA9 /* license.txt in Resources */,
 				064C5C5E181044A70070FBA9 /* Default-568h@2x.png in Resources */,
 				064C5C65181044A70070FBA9 /* Icon@2x.png in Resources */,
+				06D241F618140811006EF478 /* license.txt in Resources */,
 				064C5C67181044A70070FBA9 /* iTunesArtwork in Resources */,
 				064C5C61181044A70070FBA9 /* Icon-Small-50.png in Resources */,
 				064C5C5F181044A70070FBA9 /* Default.png in Resources */,
 				064C5C63181044A70070FBA9 /* Icon-Small@2x.png in Resources */,
 				064C5C8C181061E10070FBA9 /* test_new_anim in Resources */,
-				064C5CCA181067F40070FBA9 /* manual.html in Resources */,
+				06D241F718140811006EF478 /* manual.html in Resources */,
 				064C5C62181044A70070FBA9 /* Icon-Small.png in Resources */,
 				064C5C64181044A70070FBA9 /* Icon.png in Resources */,
 				064C5C60181044A70070FBA9 /* Icon-72.png in Resources */,
@@ -480,7 +481,7 @@
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = DemoTest;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../Libraries/rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../../rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -513,7 +514,7 @@
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = DemoTest;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../Libraries/rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../../rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

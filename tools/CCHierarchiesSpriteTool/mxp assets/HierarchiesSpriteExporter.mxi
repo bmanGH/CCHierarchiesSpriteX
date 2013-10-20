@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <macromedia-extension
 	 name="HierarchiesSpriteExporter"
-	 version="0.29"
+	 version="0.29.1"
 	 type="other"
 	 requires-restart="true">
 

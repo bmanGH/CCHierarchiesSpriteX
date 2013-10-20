@@ -14,37 +14,37 @@
     <layers>
         <L>
             <F id="0" dur="9" mot="true" >
-                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
                 </E>
             </F>
             <F id="9" dur="4" mot="true" >
-                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="9" >
                 </E>
             </F>
             <F id="13" dur="6" mot="true" >
-                <E si="0" x="8.4" y="46.45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="8.4" y="46.45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="13" >
                 </E>
             </F>
             <F id="19" dur="1" mot="false" >
-                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="0" x="8.65" y="45" ax="9.1" ay="39.75" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="19" >
                 </E>
             </F>
         </L>
         <L>
             <F id="0" dur="9" mot="true" >
-                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="0" >
                 </E>
             </F>
             <F id="9" dur="4" mot="true" >
-                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="9" >
                 </E>
             </F>
             <F id="13" dur="6" mot="true" >
-                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="13" >
                 </E>
             </F>
             <F id="19" dur="1" mot="false" >
-                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="undefined" fo="undefined" >
+                <E si="1" x="8.35" y="53.6" ax="6" ay="12.05" sx="1" sy="1" kx="0" ky="0" ap="1" aa="0" rp="1" ra="0" gp="1" ga="0" bp="1" ba="0" lo="none" fo="19" >
                 </E>
             </F>
         </L>

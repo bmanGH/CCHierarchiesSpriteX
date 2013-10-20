@@ -1161,6 +1161,6 @@ function main (skip_export_bitmap, skip_export_filter, export_pack_image_sheet) 
 
 //-------------------------------------
 
-main(SKIP_EXPORT_BITMAP, 
-	SKIP_EXPORT_FILTER,
-	EXPORT_PACK_IMAGE_SHEET);
+// main(SKIP_EXPORT_BITMAP, 
+// 	SKIP_EXPORT_FILTER,
+// 	EXPORT_PACK_IMAGE_SHEET);

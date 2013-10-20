@@ -483,4 +483,4 @@ function main (skip_convert_guided_frames_key_frames) {
 
 //-------------------------------------
 
-main (SKIP_ConvertGuidedFramesToKeyframes);
+// main (SKIP_ConvertGuidedFramesToKeyframes);
