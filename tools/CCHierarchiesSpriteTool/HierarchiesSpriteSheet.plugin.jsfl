@@ -4,6 +4,7 @@
  * author: bman <zx123xz321hm3@hotmail.com>
  *
  * version 0.1   9/28/2013
+ * version 0.2   10/20/2013   fix bitmap export
  */
 
 function getPluginInfo(lang)
@@ -65,10 +66,16 @@ function frameExport(frame)
 	fl.trace("   symbolName:" + frame.symbolName);
 	// for (var key in frame) { 
 	// 	fl.trace(key + ":" + frame[key]); 
+	// 	// if (frame[key] instanceof Bitmap) {
+	// 	// 	var obj = frame[key];
+	// 	// 	for (var k in obj) { 
+	// 	// 		fl.trace("--- " + k + ":" + obj[k]); 
+	// 	// 	}
+	// 	// }
 	// }
 
 	var xml =  '    <spr'
-		+ ' name="' + frame.symbol.name + '"'
+		+ ' name="' + frame.frameSource.libraryItem.name + '"'
 		+ ' x="' + frame.frame.x + '"' 
 		+ ' y="' + frame.frame.y + '"'
 		+ ' w="' + frame.frame.w + '"'

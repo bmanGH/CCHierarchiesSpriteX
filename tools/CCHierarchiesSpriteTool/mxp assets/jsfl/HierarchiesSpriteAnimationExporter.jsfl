@@ -35,6 +35,7 @@
  * version 0.27     9/22/2013   add support symbol instance's looping options
  * version 0.28     9/27/2013   merge sub sprites to one animation file, move item's left and bottom property to animation file, rename .sprites to .hsheet
  * version 0.29     9/30/2013   use abbreviation xml tag
+ * version 0.29.1   10/20/2013  support movie clip symbol frame offset inherit without loop
  */
 
 
@@ -45,10 +46,10 @@ var ANIM_TAGS_LAYER_NAME = "anim_tags";							// animation data layer name
 var SPACE_SHIFT_STEP = 4;										// export xml's space shift step
 var EVENT_TAGS_LAYER_NAME = "event_tags";						// event data layer name
 var ITEMS_ATLAS_MAX_WIDTH = 2048;								// export sprite sheet image width
-var ITEMS_SPACING = 5;											// export sprite sheet iamge spacing
+var ITEMS_SPACING = 4;											// export sprite sheet iamge spacing
 var IGNORE_ITEM_NAME_PREFIX = "IGNORE__";						// ignore item name prefix
 
-var SKIP_EXPORT_BITMAP = true;									// don't export bitmap if 'true'
+var SKIP_EXPORT_BITMAP = false;									// don't export bitmap if 'true'
 var SKIP_EXPORT_FILTER = true;									// don't export filter if 'true'
 var EXPORT_PACK_IMAGE_SHEET = true;							// export packed image sheet if 'true'
 
@@ -88,6 +89,7 @@ ExportElement = function () {
 	// if symbol is a socket than looping should be 'loop', 'play once' or 'single frame', other should be 'none'
 	this.loopMode = "none";
 	this.frameOffset = 0;
+	this.frameOffsetInherited = false; // NOT export
 	this.filters = [];
 }
 ExportElement.prototype.toXML = function (shift) {
@@ -477,7 +479,9 @@ function getCustomItemType (item) {
 		if (item.timeline.layers.length == 1 &&
 			item.timeline.layers[0].frames.length == 1 && 
 			item.timeline.layers[0].frames[0].duration == 1 &&
-			item.timeline.layers[0].frames[0].elements.length > 0) {
+			item.timeline.layers[0].frames[0].elements.length == 1 &&
+			(item.timeline.layers[0].frames[0].elements[0].elementType == "shape" || 
+			item.timeline.layers[0].frames[0].elements[0].elementType == "shapeObj")) {
 			return "graphic";
 		}
 		else {
@@ -556,15 +560,15 @@ function hexToB(h) { return parseInt((cutHex(h)).substring(4, 6), 16) }
 
 //------------- Exporter -----------------
 
-function buildKeyFrame (doc, timeline, layer, j, spriteData) {
+function buildKeyFrame (doc, timeline, layer, j, spriteData, lastKeyFrame) {
 	fl.trace("    export key frame[" + j + "]");
-	var lastKeyFrame = new ExportKeyFrame();
-	lastKeyFrame.id = j;
+	var keyFrame = new ExportKeyFrame();
+	keyFrame.id = j;
 	if (layer.frames[j].tweenType == "motion") {
-		lastKeyFrame.isMotion = true;
+		keyFrame.isMotion = true;
 	}
 	else {
-		lastKeyFrame.isMotion = false;
+		keyFrame.isMotion = false;
 	}
 
 	var frame = layer.frames[j];
@@ -581,17 +585,17 @@ function buildKeyFrame (doc, timeline, layer, j, spriteData) {
 				// export element
 				var element = frame.elements[k];
 				fl.trace("      export element[" + k + "]");
-				var elementData = buildElement(element, spriteData);
-				lastKeyFrame.elements.push(elementData);
+				var elementData = buildElement(element, spriteData, lastKeyFrame);
+				keyFrame.elements.push(elementData); // array order is reverse as depth index order
 			}
 
 		}
 	}
 
-	return lastKeyFrame;
+	return keyFrame;
 }
 
-function buildElement (element, spriteData) {
+function buildElement (element, spriteData, lastKeyFrame) {
 	var elementData = new ExportElement();
 	elementData.x = element.transformX;
 	elementData.y = element.transformY;
@@ -662,9 +666,31 @@ function buildElement (element, spriteData) {
 	var symbolIndex = buildSymbol(element, spriteData);
 
 	if (spriteData.symbols[symbolIndex].isSocket == true) {
-		if (element.loop) {
+		if (element.loop) { // graphic symbol in flash
 			elementData.loopMode = element.loop;
 			elementData.frameOffset = element.firstFrame;
+		}
+		else { // movie clip symbol in flash
+
+			// !!! if there is a same movie clip symbol in last key frame, 
+			//     then new element will inherit the frame offset from it.
+			// !!! inherit order is same as elements array order
+			elementData.loopMode = "none";
+			elementData.frameOffset = 0;
+			if (lastKeyFrame) {
+				for (var lei = 0; lei < lastKeyFrame.elements.length; lei++) {
+					if (lastKeyFrame.elements[lei].symbolIndex == symbolIndex &&
+						lastKeyFrame.elements[lei].loopMode == "none" &&
+						lastKeyFrame.elements[lei].frameOffsetInherited == false) {
+
+						lastKeyFrame.elements[lei].frameOffsetInherited = true;
+						elementData.frameOffset = lastKeyFrame.elements[lei].frameOffset + lastKeyFrame.duration;
+
+						break;
+					}
+				}
+			}
+
 		}
 
 		if (!SKIP_EXPORT_FILTER) {
@@ -860,7 +886,7 @@ function buildSprite (doc, spriteItem) {
 			// export key frame data
 			if (layer.frames[j].startFrame == j) { // is key frame
 				if (lastKeyFrame == null) { // begin key frame
-					lastKeyFrame = buildKeyFrame(doc, timeline, layer, j, spriteData);
+					lastKeyFrame = buildKeyFrame(doc, timeline, layer, j, spriteData, lastKeyFrame);
 				}
 				else { // end key frame
 					lastKeyFrame.duration = j - lastKeyFrame.id;
@@ -870,7 +896,7 @@ function buildSprite (doc, spriteItem) {
 
 					fl.trace("");
 
-					lastKeyFrame = buildKeyFrame(doc, timeline, layer, j, spriteData);
+					lastKeyFrame = buildKeyFrame(doc, timeline, layer, j, spriteData, lastKeyFrame);
 				}
 			}
 		} // export key frame END
@@ -1135,6 +1161,6 @@ function main (skip_export_bitmap, skip_export_filter, export_pack_image_sheet) 
 
 //-------------------------------------
 
-// main(SKIP_EXPORT_BITMAP, 
-// 	SKIP_EXPORT_FILTER,
-// 	EXPORT_PACK_IMAGE_SHEET);
+main(SKIP_EXPORT_BITMAP, 
+	SKIP_EXPORT_FILTER,
+	EXPORT_PACK_IMAGE_SHEET);

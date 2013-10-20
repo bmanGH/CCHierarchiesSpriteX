@@ -191,12 +191,12 @@ void CCHierarchiesSpriteFunctionalTestScene::loadSprites () {
                     break;
                 }
                 case 2: {
-//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_zhangfei/zhangfeiquan.hsheet",
-//                                                      "test_new_anim/hanim_test_zhangfei/zhangfeiquan.hanims",
-//                                                      this);
-                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hsheet",
-                                                      "test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hanims",
+                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_zhangfei/zhangfeiquan.hsheet",
+                                                      "test_new_anim/hanim_test_zhangfei/zhangfeiquan.hanims",
                                                       this);
+//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hsheet",
+//                                                      "test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hanims",
+//                                                      this);
                     spr->setFlipX(true);
                     break;
                 }

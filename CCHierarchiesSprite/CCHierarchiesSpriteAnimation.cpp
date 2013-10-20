@@ -1080,8 +1080,8 @@ bool CCHierarchiesSpriteAnimation::getEventByFrameId (unsigned int frameId, Even
 
 int CCHierarchiesSpriteAnimation::getFrameElementsAtFrameIndex (ElementLoopMode loopMode, int frameOffset, unsigned int& frameIndex, FrameElements& out) const {
     switch (loopMode) {
-        case kNoneLoopMode: { // same as kLoopLoopMode with 0 frame offset
-            frameIndex = frameIndex % _frameCount;
+        case kNoneLoopMode: { // same as kLoopLoopMode
+            frameIndex = (frameIndex + frameOffset) % _frameCount;
             break;
         }
         case kLoopLoopMode: {
