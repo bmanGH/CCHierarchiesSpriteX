@@ -181,6 +181,9 @@ void CCHierarchiesSpriteFunctionalTestScene::loadSprites () {
                     spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_lvmeng/lumengquan.hsheet",
                                                       "test_new_anim/hanim_test_lvmeng/lumengquan.hanims",
                                                       this);
+//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xuzhu/xuzhuquan.hsheet",
+//                                                      "test_new_anim/hanim_test_xuzhu/xuzhuquan.hanims",
+//                                                      this);
                     break;
                 }
                 case 1: {
