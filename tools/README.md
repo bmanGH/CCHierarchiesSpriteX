@@ -5,7 +5,7 @@ CCHierarchiesSprite工具
 CCHierarchiesSpriteTool
 ----------------------------
 
-   * HierarchiesSpriteExporter.mxp是Flash工具的GUI界面扩展插件包(mxp assets和mxp FLA是插件开发用的源文件)(Flash CS6以上才能支持使用Sprite Sheet Exporter排序导出功能)
+   * HierarchiesSpriteExporter.zxp是Flash工具的GUI界面扩展插件包(mxp assets和mxp FLA是插件开发用的源文件)(Flash CS6以上才能支持使用Sprite Sheet Exporter排序导出功能)
        * 在装有Adobe Extension Manager的情况下双击安装
        * 在没有安装Adobe Extension Manager的情况下:
            1. 将 mxp assets/jsfl/HierarchiesSpriteAnimationPreprocess.jsfl 文件放置到 ***(Mac)*** [User Home目录]/Library/Application Support/Adobe/Flash CS6/en_US/Configuration/HierarchiesSpriteExporter/jsfl/ 目录下
