@@ -36,6 +36,7 @@
  * version 0.28     9/27/2013   merge sub sprites to one animation file, move item's left and bottom property to animation file, rename .sprites to .hsheet
  * version 0.29     9/30/2013   use abbreviation xml tag
  * version 0.29.1   10/20/2013  support movie clip symbol frame offset inherit without loop
+ * version 0.29.2   11/28/2013  fix save .hanims file fail which include folder uri on windows platform
  */
 
 
@@ -513,6 +514,12 @@ function saveXMLToFile (contents, fileURL, fileEnding) {
 	
 	var contentsLinebreaks = stringReplace(contents, "\n", "\r\n");
 	
+	// create folder before write file
+	var foundIndex = fileURL.lastIndexOf("/");
+	if (foundIndex != -1) {
+		var folderURL = fileURL.substring(0, foundIndex);
+		FLfile.createFolder(folderURL);
+	}
 	if (!FLfile.write(fileURL, contentsLinebreaks))
 	{
 		return false;
