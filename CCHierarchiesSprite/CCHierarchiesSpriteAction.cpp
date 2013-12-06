@@ -8,6 +8,7 @@
 
 #include "CCHierarchiesSpriteAction.h"
 #include "CCHierarchiesSprite.h"
+#include "CCHierarchiesSpriteDynamic.h"
 #include "CCHierarchiesSpriteAnimationCache.h"
 
 
@@ -114,6 +115,20 @@ void CCHierarchiesAnimate::startWithTarget (CCNode* pTarget) {
     target->displayFrameAtIndex(_curFrameIndex);
 }
 
+CCActionInterval* CCHierarchiesAnimate::reverse(void) {
+    CCHierarchiesAnimate* animate = NULL;
+    if (_animationName == HIERARCHIES_WHOLE_ANIMATION_NAME) {
+        animate = CCHierarchiesAnimate::createWholeAnimation(_spriteAnimationName.c_str());
+    }
+    else {
+        animate = CCHierarchiesAnimate::create(_animationName.c_str(), _spriteAnimationName.c_str());
+    }
+    unsigned int tmp = animate->_currentAnimation.endFrameIndex;
+    animate->_currentAnimation.endFrameIndex = animate->_currentAnimation.startFrameIndex;
+    animate->_currentAnimation.startFrameIndex = tmp;
+    return animate;
+}
+
 CCObject* CCHierarchiesAnimate::copyWithZone (CCZone* pZone) {
     CCZone* pNewZone = NULL;
     CCHierarchiesAnimate* pCopy = NULL;
@@ -133,23 +148,134 @@ CCObject* CCHierarchiesAnimate::copyWithZone (CCZone* pZone) {
     CC_SAFE_DELETE(pNewZone);
     return pCopy;
     
-    //    if (pCopy->initWithName(_animationName.c_str(), _spriteAnimationName.c_str())) {
-    //        CC_SAFE_DELETE(pNewZone);
-    //        return pCopy;
-    //    }
-    //    else {
-    //        CC_SAFE_DELETE(pNewZone);
-    //        return NULL;
-    //    }
+//    if (pCopy->initWithName(_animationName.c_str(), _spriteAnimationName.c_str())) {
+//        CC_SAFE_DELETE(pNewZone);
+//        return pCopy;
+//    }
+//    else {
+//        CC_SAFE_DELETE(pNewZone);
+//        return NULL;
+//    }
 }
 
 void CCHierarchiesAnimate::update (float time) {
     CCHierarchiesSprite* target = dynamic_cast<CCHierarchiesSprite*>(m_pTarget);
-    unsigned int curFrameIndex = _currentAnimation.startFrameIndex + time * (_currentAnimation.endFrameIndex - _currentAnimation.startFrameIndex);
-    while (_curFrameIndex != curFrameIndex) {
-        _curFrameIndex++;
-        target->displayFrameAtIndex(_curFrameIndex);
+    if (_currentAnimation.endFrameIndex >= _currentAnimation.startFrameIndex) {
+        unsigned int curFrameIndex = _currentAnimation.startFrameIndex + time * (_currentAnimation.endFrameIndex - _currentAnimation.startFrameIndex);
+        
+        while (_curFrameIndex != curFrameIndex) {
+            _curFrameIndex++;
+            target->displayFrameAtIndex(_curFrameIndex);
+        }
     }
+    else { // animation reverse play
+        unsigned int curFrameIndex = _currentAnimation.endFrameIndex + (1 - time) * (_currentAnimation.startFrameIndex - _currentAnimation.endFrameIndex);
+        
+        while (_curFrameIndex != curFrameIndex) {
+            _curFrameIndex--;
+            target->displayFrameAtIndex(_curFrameIndex);
+        }
+    }
+}
+
+
+#pragma mark - CCHierarchiesFlipX
+
+CCHierarchiesFlipX* CCHierarchiesFlipX::create (bool x)
+{
+    CCHierarchiesFlipX* ret = new CCHierarchiesFlipX();
+    
+    if (ret && ret->initWithFlipX(x)) {
+        ret->autorelease();
+        return ret;
+    }
+
+    CC_SAFE_DELETE(ret);
+    return NULL;
+}
+
+bool CCHierarchiesFlipX::initWithFlipX (bool x) {
+    _flipX = x;
+    return true;
+}
+
+void CCHierarchiesFlipX::update(float time) {
+    CC_UNUSED_PARAM(time);
+    
+    CCHierarchiesSpriteBase* target = dynamic_cast<CCHierarchiesSpriteBase*>(m_pTarget);
+    CCAssert(target, "CCHierarchiesFlipX only valid on CCHierarchiesSpriteBase class");
+    target->setFlipX(_flipX);
+}
+
+CCFiniteTimeAction* CCHierarchiesFlipX::reverse() {
+    return CCHierarchiesFlipX::create(!_flipX);
+}
+
+CCObject * CCHierarchiesFlipX::copyWithZone(CCZone* zone) {
+    CCZone* newZone = NULL;
+    CCHierarchiesFlipX* ret = NULL;
+    
+    if (zone && zone->m_pCopyObject) {
+        ret = (CCHierarchiesFlipX*) (zone->m_pCopyObject);
+    } else {
+        ret = new CCHierarchiesFlipX();
+        zone = newZone = new CCZone(ret);
+    }
+    
+    CCActionInstant::copyWithZone(zone);
+    ret->initWithFlipX(_flipX);
+    CC_SAFE_DELETE(newZone);
+    return ret;
+}
+
+
+#pragma mark - CCHierarchiesFlipY
+
+CCHierarchiesFlipY* CCHierarchiesFlipY::create (bool y)
+{
+    CCHierarchiesFlipY* ret = new CCHierarchiesFlipY();
+    
+    if (ret && ret->initWithFlipY(y)) {
+        ret->autorelease();
+        return ret;
+    }
+    
+    CC_SAFE_DELETE(ret);
+    return NULL;
+}
+
+bool CCHierarchiesFlipY::initWithFlipY (bool y) {
+    _flipY = y;
+    return true;
+}
+
+void CCHierarchiesFlipY::update(float time) {
+    CC_UNUSED_PARAM(time);
+    
+    CCHierarchiesSpriteBase* target = dynamic_cast<CCHierarchiesSpriteBase*>(m_pTarget);
+    CCAssert(target, "CCHierarchiesFlipY only valid on CCHierarchiesSpriteBase class");
+    target->setFlipY(_flipY);
+}
+
+CCFiniteTimeAction* CCHierarchiesFlipY::reverse() {
+    return CCHierarchiesFlipY::create(!_flipY);
+}
+
+CCObject * CCHierarchiesFlipY::copyWithZone(CCZone* zone) {
+    CCZone* newZone = NULL;
+    CCHierarchiesFlipY* ret = NULL;
+    
+    if (zone && zone->m_pCopyObject) {
+        ret = (CCHierarchiesFlipY*) (zone->m_pCopyObject);
+    } else {
+        ret = new CCHierarchiesFlipY();
+        zone = newZone = new CCZone(ret);
+    }
+    
+    CCActionInstant::copyWithZone(zone);
+    ret->initWithFlipY(_flipY);
+    CC_SAFE_DELETE(newZone);
+    return ret;
 }
 
 NS_CC_EXT_END

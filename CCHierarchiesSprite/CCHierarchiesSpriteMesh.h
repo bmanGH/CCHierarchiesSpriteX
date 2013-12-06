@@ -57,20 +57,20 @@ typedef struct CC_DLL _CCHierarchiesSprite_V3F_C4B_T2F_Quad
 class CC_DLL CCHierarchiesSpriteMesh : public CCObject {
     
 protected:
-    GLushort*           m_pIndices;
+    GLushort*           _indices;
 #if CC_TEXTURE_ATLAS_USE_VAO
-    GLuint              m_uVAOname;
+    GLuint              _vaoName;
 #endif
-    GLuint              m_pBuffersVBO[2]; // 0: vertex  1: indices
-    bool                m_bDirty; // indicates whether or not the array buffer of the VBO needs to be updated
+    GLuint              _buffersVBO[2]; // 0: vertex  1: indices
+    bool                _isDirty; // indicates whether or not the array buffer of the VBO needs to be updated
     
     
     /** quantity of quads that are going to be drawn */
-    CC_PROPERTY_READONLY(unsigned int, m_uTotalQuads, TotalQuads)
+    CC_PROPERTY_READONLY(unsigned int, _totalQuads, TotalQuads)
     /** quantity of quads that can be stored with the current texture atlas size */
-    CC_PROPERTY_READONLY(unsigned int, m_uCapacity, Capacity)
+    CC_PROPERTY_READONLY(unsigned int, _capacity, Capacity)
     /** Quads that are going to be rendered */
-    CC_PROPERTY(CCHierarchiesSprite_V3F_C4B_T2F_Quad*, m_pQuads, Quads)
+    CC_PROPERTY(CCHierarchiesSprite_V3F_C4B_T2F_Quad*, _quads, Quads)
     
 public:
     static CCHierarchiesSpriteMesh* create(unsigned int capacity);
@@ -179,9 +179,9 @@ public:
     void listenBackToForeground(CCObject *obj);
     
     /** whether or not the array buffer of the VBO needs to be updated*/
-    inline bool isDirty(void) { return m_bDirty; }
+    inline bool isDirty(void) { return _isDirty; }
     /** specify if the array buffer of the VBO needs to be updated */
-    inline void setDirty(bool bDirty) { m_bDirty = bDirty; }
+    inline void setDirty(bool value) { _isDirty = value; }
     
     /** flush all quads data to VBO */
     void flushAllQuadsToBuffer ();

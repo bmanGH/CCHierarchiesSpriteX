@@ -13,20 +13,22 @@
 #include "ExtensionMacros.h"
 #include "CCHierarchiesSpriteConfig.h"
 #include <vector>
-#include "CCHierarchiesSprite.h"
+#include "CCHierarchiesSpriteBase.h"
 #include "CCHierarchiesSpriteMesh.h"
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
 
+
 NS_CC_EXT_BEGIN
 
+class CCHierarchiesSprite;
 
 class CC_DLL CCHierarchiesSpriteRuntime : CCObject {
 	
 public:
 	struct FrameCacheItem {
         unsigned int frameStartQuadIndex;
-        std::vector<CCHierarchiesSprite::DisplayElement> displayList;
+        std::vector<CCHierarchiesSpriteBase::DisplayElement> displayList;
 		CCRect bbox;
 		
 		FrameCacheItem () {}
@@ -67,24 +69,15 @@ public:
 	
 protected:
 	AnimationCacheHashItem* _animationCache;
-	
-public:
-	static CCHierarchiesSpriteRuntime* sharedHierarchiesSpriteRuntime ();
-	static void purgeHierarchiesSpriteRuntime ();
-	
-	virtual ~CCHierarchiesSpriteRuntime ();
-	bool init ();
-	
-	void insertHierarchiesSprite (CCHierarchiesSprite* sprite);
-	void removeHierarchiesSprite (CCHierarchiesSprite* sprite);
-    void removeUnusedHierarchiesSprite ();
     
-    AnimationCacheHashItem* getCacheItem (const char* itemName);
-	
-	const char* description ();
+    // static animation data cache
+    void cacheStaticAnimationData (CCHierarchiesSprite* sprite, const AvatarMapType& avatarMap);
+	void removeStaticAnimationData (CCHierarchiesSprite* sprite);
+    void removeUnusedStaticAnimationData ();
+    AnimationCacheHashItem* getCacheItem (CCHierarchiesSprite* sprite);
     
-    // processing all frame data to runtime cache data
-    void buildRuntimeAnimationData (bool isRoot,
+    // processing all frame data to static cache data
+    void buildStaticAnimationData (bool isRoot,
                                     CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
                                     int frameOffset,
                                     unsigned int frameIndex,
@@ -97,11 +90,23 @@ public:
                                     const float parent_alpha_percent, const int parent_alpha_amount,
                                     const float parent_red_percent, const int parent_red_amount,
                                     const float parent_green_percent, const int parent_green_amount,
-                                    const float parent_blue_percent, const int parent_blue_amount);
+                                    const float parent_blue_percent, const int parent_blue_amount,
+                                    const AvatarMapType& avatarMap);
+	
+public:
+	static CCHierarchiesSpriteRuntime* sharedHierarchiesSpriteRuntime ();
+	static void purgeHierarchiesSpriteRuntime ();
+	
+	virtual ~CCHierarchiesSpriteRuntime ();
+	bool init ();
+    
+	const char* description ();
         
     // resource manage
     void initializationRuntime ();
     void releaseUnusedResource ();
+    
+    friend class CCHierarchiesSprite;
 	
 };
 

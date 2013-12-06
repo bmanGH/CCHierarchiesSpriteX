@@ -9,242 +9,13 @@
 #include "CCHierarchiesSpriteRuntime.h"
 #include "CCHierarchiesSpriteAnimationCache.h"
 #include <sstream>
+#include <algorithm>
 #include "CCHierarchiesSpriteAnimationCache.h"
 #include "CCHierarchiesSpriteSheetCache.h"
 #include "CCHierarchiesSpriteShader.h"
+#include "CCHierarchiesSprite.h"
 
 NS_CC_EXT_BEGIN
-
-
-inline static void hierarchiesCalcMatrix (const CCHierarchiesSpriteAnimation::Symbol* symbol,
-                                          const CCHierarchiesSpriteSheet::Spr* spr,
-                                          const CCHierarchiesSpriteAnimation::Element* element,
-                                          CCAffineTransform* matrix) {
-    FMatrix2D m0;
-    FMatrix2D m1;
-    
-    m0.setAnchorX(element->anchorX - symbol->left);
-    m0.setAnchorY(element->anchorY - symbol->bottom);
-    
-    m1.setScaleX(element->scaleX);
-    m1.setScaleY(element->scaleY);
-    m1.setSkewX(element->skewX);
-    m1.setSkewY(element->skewY);
-    m1.setTransformX(element->x);
-    m1.setTransformY(element->y);
-    
-    FMatrix2D m = m0.concat(m1);
-    
-    *matrix = CCAffineTransformMake(m.a, -m.b, -m.c, m.d, m.tx, -m.ty);
-}
-
-inline static void hierarchiesCalcMatrixSocket (const CCHierarchiesSpriteAnimation::Element* element, CCAffineTransform* matrix) {
-    FMatrix2D m0;
-    FMatrix2D m1;
-    
-    m0.setAnchorX(element->anchorX);
-    m0.setAnchorY(element->anchorY);
-    
-    m1.setScaleX(element->scaleX);
-    m1.setScaleY(element->scaleY);
-    m1.setSkewX(element->skewX);
-    m1.setSkewY(element->skewY);
-    m1.setTransformX(element->x);
-    m1.setTransformY(element->y);
-    
-    FMatrix2D m = m0.concat(m1);
-    
-    *matrix = CCAffineTransformMake(m.a, -m.b, -m.c, m.d, m.tx, -m.ty);
-}
-
-inline static void hierarchiesUpdateQuadVertices (CCSize size, const CCAffineTransform* matrix, CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad, const float z, const bool isRotation) {
-    if (isRotation) {
-        float tmp = size.width;
-        size.width = size.height;
-        size.height = tmp;
-    }
-    
-    float x1 = 0;
-    float y1 = 0;
-    
-    float x2 = x1 + size.width;
-    float y2 = y1 + size.height;
-    float x = matrix->tx;
-    float y = matrix->ty;
-    
-    float cr = matrix->a;
-    float sr = matrix->b;
-    float cr2 = matrix->d;
-    float sr2 = -matrix->c;
-    float ax = x1 * cr - y1 * sr2 + x;
-    float ay = x1 * sr + y1 * cr2 + y;
-    
-    float bx = x2 * cr - y1 * sr2 + x;
-    float by = x2 * sr + y1 * cr2 + y;
-    
-    float cx = x2 * cr - y2 * sr2 + x;
-    float cy = x2 * sr + y2 * cr2 + y;
-    
-    float dx = x1 * cr - y2 * sr2 + x;
-    float dy = x1 * sr + y2 * cr2 + y;
-    
-	quad->bl.vertices = (ccVertex3F) { ax, ay, z };
-    quad->br.vertices = (ccVertex3F) { bx, by, z };
-    quad->tl.vertices = (ccVertex3F) { dx, dy, z };
-    quad->tr.vertices = (ccVertex3F) { cx, cy, z };
-}
-
-inline static void hierarchiesUpdateQuadTextureCoords (const CCRect rect, const float texWidth, const float texHeight, CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad, const bool isRotation) {
-    float left, right, top, bottom;
-    
-#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
-    left	= (2 * rect.origin.x + 1) / (2 * texWidth);
-    right	= left + (rect.size.width * 2 - 2) / (2 * texWidth);
-    top		= (2 * rect.origin.y + 1) / (2 * texHeight);
-    bottom	= top + (rect.size.height * 2 - 2) / (2 * texHeight);
-#else
-    left	= rect.origin.x / texWidth;
-    right	= left + rect.size.width / texWidth;
-    top		= rect.origin.y / texHeight;
-    bottom	= top + rect.size.height / texHeight;
-#endif
-    
-    if (!isRotation) {
-        quad->bl.texCoords.u = left;
-        quad->bl.texCoords.v = bottom;
-        quad->br.texCoords.u = right;
-        quad->br.texCoords.v = bottom;
-        quad->tl.texCoords.u = left;
-        quad->tl.texCoords.v = top;
-        quad->tr.texCoords.u = right;
-        quad->tr.texCoords.v = top;
-    }
-    else {
-        quad->bl.texCoords.u = left; // tl
-        quad->bl.texCoords.v = top; // tl
-        quad->br.texCoords.u = left; // bl
-        quad->br.texCoords.v = bottom; // bl
-        quad->tl.texCoords.u = right; // tr
-        quad->tl.texCoords.v = top; // tr
-        quad->tr.texCoords.u = right; // br
-        quad->tr.texCoords.v = bottom; // br
-    }
-}
-
-inline static void hierarchiesUpdateQuadTextureColorFromAnimation (const float alpha_percent, const int alpha_amount,
-                                                                   const float red_percent, const int red_amount,
-                                                                   const float green_percent, const int green_amount,
-                                                                   const float blue_percent, const int blue_amount,
-                                                                   CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad) {
-    int value;
-    
-    value = 255 * alpha_percent;
-    quad->bl.colorsMul.a = value;
-    quad->br.colorsMul.a = value;
-    quad->tl.colorsMul.a = value;
-    quad->tr.colorsMul.a = value;
-    quad->bl.colorsAdd.a = alpha_amount;
-    quad->br.colorsAdd.a = alpha_amount;
-    quad->tl.colorsAdd.a = alpha_amount;
-    quad->tr.colorsAdd.a = alpha_amount;
-    
-    value = 255 * red_percent;
-    quad->bl.colorsMul.r = value;
-    quad->br.colorsMul.r = value;
-    quad->tl.colorsMul.r = value;
-    quad->tr.colorsMul.r = value;
-    quad->bl.colorsAdd.r = red_amount;
-    quad->br.colorsAdd.r = red_amount;
-    quad->tl.colorsAdd.r = red_amount;
-    quad->tr.colorsAdd.r = red_amount;
-    
-    value = 255 * green_percent;
-    quad->bl.colorsMul.g = value;
-    quad->br.colorsMul.g = value;
-    quad->tl.colorsMul.g = value;
-    quad->tr.colorsMul.g = value;
-    quad->bl.colorsAdd.g = green_amount;
-    quad->br.colorsAdd.g = green_amount;
-    quad->tl.colorsAdd.g = green_amount;
-    quad->tr.colorsAdd.g = green_amount;
-    
-    value = 255 * blue_percent;
-    quad->bl.colorsMul.b = value;
-    quad->br.colorsMul.b = value;
-    quad->tl.colorsMul.b = value;
-    quad->tr.colorsMul.b = value;
-    quad->bl.colorsAdd.b = blue_amount;
-    quad->br.colorsAdd.b = blue_amount;
-    quad->tl.colorsAdd.b = blue_amount;
-    quad->tr.colorsAdd.b = blue_amount;
-}
-
-//inline static void hierarchiesUpdateQuadTextureColor (const bool opacityModifyRGB, const int opacity, const int color_r, const int color_g, const int color_b, CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad) {
-//	// If opacityModifyRGB is NO then opacity will be applied as: glColor(R,G,B,opacity);
-//	// If opacityModifyRGB is YES then oapcity will be applied as: glColor(opacity, opacity, opacity, opacity );
-//	if (opacityModifyRGB) {
-//		quad->bl.colorsMul.a = quad->bl.colorsMul.a * (opacity / 255.0f);
-//		quad->br.colorsMul.a = quad->br.colorsMul.a * (opacity / 255.0f);
-//		quad->tl.colorsMul.a = quad->tl.colorsMul.a * (opacity / 255.0f);
-//		quad->tr.colorsMul.a = quad->tr.colorsMul.a * (opacity / 255.0f);
-//		
-//		quad->bl.colorsMul.r = quad->bl.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.r = quad->br.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.r = quad->tl.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.r = quad->tr.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		
-//		quad->bl.colorsMul.g = quad->bl.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.g = quad->br.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.g = quad->tl.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.g = quad->tr.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		
-//		quad->bl.colorsMul.b = quad->bl.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.b = quad->br.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.b = quad->tl.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.b = quad->tr.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//	}
-//	else {
-//		quad->bl.colorsMul.a = quad->bl.colorsMul.a * (opacity / 255.0f);
-//		quad->br.colorsMul.a = quad->br.colorsMul.a * (opacity / 255.0f);
-//		quad->tl.colorsMul.a = quad->tl.colorsMul.a * (opacity / 255.0f);
-//		quad->tr.colorsMul.a = quad->tr.colorsMul.a * (opacity / 255.0f);
-//		
-//		quad->bl.colorsMul.r = quad->bl.colorsMul.r * (color_r / 255.0f);
-//		quad->br.colorsMul.r = quad->br.colorsMul.r * (color_r / 255.0f);
-//		quad->tl.colorsMul.r = quad->tl.colorsMul.r * (color_r / 255.0f);
-//		quad->tr.colorsMul.r = quad->tr.colorsMul.r * (color_r / 255.0f);
-//		
-//		quad->bl.colorsMul.g = quad->bl.colorsMul.g * (color_g / 255.0f);
-//		quad->br.colorsMul.g = quad->br.colorsMul.g * (color_g / 255.0f);
-//		quad->tl.colorsMul.g = quad->tl.colorsMul.g * (color_g / 255.0f);
-//		quad->tr.colorsMul.g = quad->tr.colorsMul.g * (color_g / 255.0f);
-//		
-//		quad->bl.colorsMul.b = quad->bl.colorsMul.b * (color_b / 255.0f);
-//		quad->br.colorsMul.b = quad->br.colorsMul.b * (color_b / 255.0f);
-//		quad->tl.colorsMul.b = quad->tl.colorsMul.b * (color_b / 255.0f);
-//		quad->tr.colorsMul.b = quad->tr.colorsMul.b * (color_b / 255.0f);
-//	}
-//}
-
-inline static void hierarchiesExpandRectByPoint (float* minX, float* maxX, float* minY, float* maxY, float* pX, float* pY) {
-    if (*pX < *minX) {
-        *minX = *pX;
-    }
-    if (*pX > *maxX) {
-        *maxX = *pX;
-    }
-    
-    if (*pY < *minY) {
-        *minY = *pY;
-    }
-    if (*pY > *maxY) {
-        *maxY = *pY;
-    }
-}
-
-inline static float float_round (float r) {
-    return (r > 0.0f) ? floorf(r + 0.5f) : ceilf(r - 0.5f);
-}
 
 
 static CCHierarchiesSpriteRuntime* g_sharedHierarchiesSpriteRuntime = NULL;
@@ -277,20 +48,32 @@ bool CCHierarchiesSpriteRuntime::init () {
 	return true;
 }
 
-void CCHierarchiesSpriteRuntime::insertHierarchiesSprite (CCHierarchiesSprite* sprite) {
+void CCHierarchiesSpriteRuntime::cacheStaticAnimationData (CCHierarchiesSprite* sprite,
+                                                           const AvatarMapType& avatarMap) {
+    std::string cacheKey = sprite->getAnimationName();
+    
+    // calc cache key by avatar map string hash code
+    // !!! avatar map string different order, surplus key-value will spawn duplicate cache
+    AvatarMapType::const_iterator avatarMapIter;
+    std::string avatarMapString;
+    for (avatarMapIter = avatarMap.cbegin(); avatarMapIter != avatarMap.cend(); avatarMapIter++) {
+        avatarMapString += avatarMapIter->second + ";";
+    }
+    cacheKey += "+" + std::to_string(std::hash<std::string>()(avatarMapString));
+    
 	AnimationCacheHashItem* hashItem = NULL;
-	HASH_FIND_STR(_animationCache, sprite->getAnimationName(), hashItem);
+	HASH_FIND_STR(_animationCache, cacheKey.c_str(), hashItem);
 	if (!hashItem) {
-		AnimationCacheHashItem* newCache = new AnimationCacheHashItem(sprite->getAnimation()->getFrameCount());
-		int keyLen = strlen(sprite->getAnimationName());
+		AnimationCacheHashItem* newCache = new AnimationCacheHashItem(sprite->getAnimation()->getFrameCount() * 20);
+		int keyLen = strlen(cacheKey.c_str());
 		newCache->name = (char*)calloc(keyLen + 1, sizeof(char)); // add 1 for char '\0'
-		strcpy(newCache->name, sprite->getAnimationName());
+		strcpy(newCache->name, cacheKey.c_str());
 		newCache->retainCount = 2; // + 1 for cache
 		HASH_ADD_KEYPTR(hh, _animationCache, newCache->name, keyLen, newCache);
         
         for (unsigned int frameIndex = 0; frameIndex < sprite->getAnimation()->getFrameCount(); frameIndex++) {
             float min_X = 10000, max_X = -10000, min_Y = 10000, max_Y = -10000;
-            this->buildRuntimeAnimationData(true,
+            this->buildStaticAnimationData(true,
                                             CCHierarchiesSpriteAnimation::kNoneLoopMode,
                                             0,
                                             frameIndex,
@@ -303,18 +86,21 @@ void CCHierarchiesSpriteRuntime::insertHierarchiesSprite (CCHierarchiesSprite* s
                                             1, 0,
                                             1, 0,
                                             1, 0,
-                                            1, 0);
+                                            1, 0,
+                                            avatarMap);
         }
         newCache->sharedMesh->flushAllQuadsToBuffer();
 	}
 	else {
 		hashItem->retainCount++;
 	}
+    
+    sprite->_cacheKey = cacheKey;
 }
 
-void CCHierarchiesSpriteRuntime::removeHierarchiesSprite (CCHierarchiesSprite* sprite) {
+void CCHierarchiesSpriteRuntime::removeStaticAnimationData (CCHierarchiesSprite* sprite) {
 	AnimationCacheHashItem* hashItem = NULL;
-    HASH_FIND_STR(_animationCache, sprite->getAnimationName(), hashItem);
+    HASH_FIND_STR(_animationCache, sprite->_cacheKey.c_str(), hashItem);
     if (hashItem) {
         hashItem->retainCount--;
         if (hashItem->retainCount <= 0) {
@@ -324,7 +110,7 @@ void CCHierarchiesSpriteRuntime::removeHierarchiesSprite (CCHierarchiesSprite* s
     }
 }
 
-void CCHierarchiesSpriteRuntime::removeUnusedHierarchiesSprite() {
+void CCHierarchiesSpriteRuntime::removeUnusedStaticAnimationData() {
     AnimationCacheHashItem* hashItem, *tmp;
     HASH_ITER(hh, _animationCache, hashItem, tmp) {
         if (hashItem->retainCount == 1) {
@@ -334,9 +120,9 @@ void CCHierarchiesSpriteRuntime::removeUnusedHierarchiesSprite() {
     }
 }
 
-CCHierarchiesSpriteRuntime::AnimationCacheHashItem* CCHierarchiesSpriteRuntime::getCacheItem (const char* itemName) {
+CCHierarchiesSpriteRuntime::AnimationCacheHashItem* CCHierarchiesSpriteRuntime::getCacheItem (CCHierarchiesSprite* sprite) {
     CCHierarchiesSpriteRuntime::AnimationCacheHashItem* ret = NULL;
-	HASH_FIND_STR(_animationCache, itemName, ret);
+	HASH_FIND_STR(_animationCache, sprite->_cacheKey.c_str(), ret);
     return ret;
 }
 
@@ -353,20 +139,21 @@ const char* CCHierarchiesSpriteRuntime::description () {
 	return CCString::create(info.str().c_str())->getCString();
 }
 
-void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
-                                                                     CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
-                                                                     int frameOffset,
-                                                                     unsigned int frameIndex,
-                                                                     const CCAffineTransform& parentMatrix,
-                                                                     AnimationCacheHashItem* cacheItem,
-                                                                     const CCHierarchiesSpriteSheet* sheet,
-                                                                     const CCHierarchiesSpriteAnimation* animation,
-                                                                     const char* animationFileNameBase,
-                                                                     float& min_X, float& max_X, float& min_Y, float& max_Y,
-                                                                     const float parent_alpha_percent, const int parent_alpha_amount,
-                                                                     const float parent_red_percent, const int parent_red_amount,
-                                                                     const float parent_green_percent, const int parent_green_amount,
-                                                                     const float parent_blue_percent, const int parent_blue_amount) {
+void CCHierarchiesSpriteRuntime::buildStaticAnimationData (bool isRoot,
+                                                            CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
+                                                            int frameOffset,
+                                                            unsigned int frameIndex,
+                                                            const CCAffineTransform& parentMatrix,
+                                                            AnimationCacheHashItem* cacheItem,
+                                                            const CCHierarchiesSpriteSheet* sheet,
+                                                            const CCHierarchiesSpriteAnimation* animation,
+                                                            const char* animationFileNameBase,
+                                                            float& min_X, float& max_X, float& min_Y, float& max_Y,
+                                                            const float parent_alpha_percent, const int parent_alpha_amount,
+                                                            const float parent_red_percent, const int parent_red_amount,
+                                                            const float parent_green_percent, const int parent_green_amount,
+                                                            const float parent_blue_percent, const int parent_blue_amount,
+                                                            const AvatarMapType& avatarMap) {
     CCHierarchiesSpriteAnimation::FrameElements frameElements;
     int eNum = animation->getFrameElementsAtFrameIndex(loopMode, frameOffset, frameIndex, frameElements); //!!! frameIndex will update with loop mode
     
@@ -394,16 +181,8 @@ void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
         assert(result);
         
         if (symbol.isSocket == false) { // simple element BEGIN
-            
-//                AvatarMapItem avatarMapItem;
-//                avatarMapItem = _avatarMap[symbol.name];
-//
-//                CCHierarchiesSpriteSheet::Spr spr;
-//                result = _sheet->getSpr(avatarMapItem.itemName, spr);
-//                assert(result);
-            
             CCHierarchiesSpriteSheet::Spr spr;
-            result = sheet->getSpr(symbol.name, spr);
+            result = sheet->getSpr(symbol.name.c_str(), spr);
             assert(result);
             
             // calc matrix
@@ -418,7 +197,6 @@ void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
                                           spr.isRotation);
             
             // update color from animation
-            //NEEDFIX: update quad color while each sprite OpacityModifyRGB property change
             float alpha_percent = parent_alpha_percent * elementIter->color_alpha_percent;
             int alpha_amount = parent_alpha_percent * elementIter->color_alpha_amount + parent_alpha_amount;
             float red_percent = parent_red_percent * elementIter->color_red_percent;
@@ -490,7 +268,12 @@ void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
             quads.clear();
             
             std::string subSpriteAnimationName(animationFileNameBase);
-            subSpriteAnimationName += symbol.name + ".hanims";
+            if (avatarMap.count(symbol.name) > 0) { // with avatar support
+                subSpriteAnimationName += avatarMap.at(symbol.name) + ".hanims";
+            }
+            else {
+                subSpriteAnimationName += symbol.name + ".hanims";
+            }
             CCHierarchiesSpriteAnimation* subAnimation = CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->addAnimation(subSpriteAnimationName.c_str());
             
             hierarchiesCalcMatrixSocket(&(*elementIter), &matrix);
@@ -504,7 +287,7 @@ void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
             int green_amount = parent_green_percent * elementIter->color_green_amount + parent_green_amount;
             float blue_percent = parent_blue_percent * elementIter->color_blue_percent;
             int blue_amount = parent_blue_percent * elementIter->color_blue_amount + parent_blue_amount;
-            this->buildRuntimeAnimationData(false,
+            this->buildStaticAnimationData(false,
                                             elementIter->loopMode,
                                             elementIter->frameOffset,
                                             frameIndex - elementIter->startDisplayFrameIndex,
@@ -517,7 +300,8 @@ void CCHierarchiesSpriteRuntime::buildRuntimeAnimationData (bool isRoot,
                                             alpha_percent, alpha_amount,
                                             red_percent, red_amount,
                                             green_percent, green_amount,
-                                            blue_percent, blue_amount);
+                                            blue_percent, blue_amount,
+                                            avatarMap);
         } // nesting sprite element END
         
         layerZOrder++;
@@ -612,7 +396,7 @@ void CCHierarchiesSpriteRuntime::initializationRuntime () {
 }
 
 void CCHierarchiesSpriteRuntime::releaseUnusedResource () {
-    this->removeUnusedHierarchiesSprite();
+    this->removeUnusedStaticAnimationData();
     CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->removeUnusedAnimation();
     CCHierarchiesSpriteSheetCache::sharedHierarchiesSpriteSheetCache()->removeUnusedSpriteSheet();
 }

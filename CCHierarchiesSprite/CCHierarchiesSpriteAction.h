@@ -14,6 +14,7 @@
 #include "CCHierarchiesSpriteConfig.h"
 #include <string>
 #include "CCHierarchiesSpriteAnimation.h"
+#include "CCHierarchiesSpriteBase.h"
 
 
 NS_CC_EXT_BEGIN
@@ -44,7 +45,76 @@ public:
     
     virtual void startWithTarget (CCNode *pTarget);
     virtual CCObject* copyWithZone (CCZone* pZone);
+    virtual CCActionInterval* reverse();
     virtual void update (float time);
+	
+};
+
+
+class CC_DLL CCHierarchiesFlipX : public CCActionInstant {
+    
+protected:
+    bool _flipX;
+	
+public:
+    static CCHierarchiesFlipX * create(bool x);
+    
+    CCHierarchiesFlipX ()
+    : _flipX(false)
+    {}
+    virtual ~CCHierarchiesFlipX () {}
+    
+    bool initWithFlipX (bool x);
+    
+    virtual void update (float time);
+    virtual CCFiniteTimeAction * reverse ();
+    virtual CCObject* copyWithZone (CCZone* zone);
+    
+};
+
+
+class CC_DLL CCHierarchiesFlipY : public CCActionInstant {
+	
+protected:
+    bool _flipY;
+	
+public:
+    static CCHierarchiesFlipY * create(bool y);
+    
+    CCHierarchiesFlipY ()
+    : _flipY(false)
+    {}
+    virtual ~CCHierarchiesFlipY () {}
+    
+    bool initWithFlipY (bool y);
+    
+    virtual void update (float time);
+    virtual CCFiniteTimeAction * reverse ();
+    virtual CCObject* copyWithZone (CCZone *pZone);
+	
+};
+
+class CC_DLL CCHierarchiesAvatarMapInsert : public CCActionInstant {
+	
+protected:
+	
+public:
+	
+};
+
+class CC_DLL CCHierarchiesAvatarMapReset : public CCActionInstant {
+	
+protected:
+	
+public:
+	
+};
+
+class CC_DLL CCHierarchiesAvatarMapSet : public CCActionInstant {
+	
+protected:
+	
+public:
 	
 };
 

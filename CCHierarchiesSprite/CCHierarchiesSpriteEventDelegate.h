@@ -15,14 +15,14 @@
 
 NS_CC_EXT_BEGIN
 
-class CCHierarchiesSprite;
+class CCHierarchiesSpriteBase;
 
 class CC_DLL CCHierarchiesSpriteEventDelegate {
 	
 public:
     virtual ~CCHierarchiesSpriteEventDelegate () {};
     
-	virtual void onEventContent (CCHierarchiesSprite* sprite, const char* eventContent) = 0;
+	virtual void onEventContent (CCHierarchiesSpriteBase* sprite, const char* eventContent) = 0;
 	
 };
 

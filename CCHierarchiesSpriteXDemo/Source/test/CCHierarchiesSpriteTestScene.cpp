@@ -1,41 +1,24 @@
 //
-// CCHierarchiesSprite功能性单元测试场景
+//  CCHierarchiesSprite动画单元测试场景
+//  CCHierarchiesSpriteXDemo
+//
+//  Created by bman <zx123xz321hm3@hotmail.com>.
+//  Copyright (c) 2013. All rights reserved.
+//
 //
 
-#include "CCHierarchiesSpriteFunctionalTestScene.h"
+#include "CCHierarchiesSpriteTestScene.h"
 #include "CCHierarchiesSpriteRuntime.h"
+#include "Utils.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#   include <mach/mach.h>
-#endif
 
-USING_NS_CC;
-USING_NS_CC_EXT;
-
-static void report_memory (void) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    struct task_basic_info info;
-    mach_msg_type_number_t size = sizeof(info);
-    kern_return_t kerr = task_info(mach_task_self(),
-                                   TASK_BASIC_INFO,
-                                   (task_info_t)&info,
-                                   &size);
-    if( kerr == KERN_SUCCESS ) {
-        CCLOG("Memory in use %u : %uKB : %uMB", info.resident_size, info.resident_size / 1024, info.resident_size / 1024 / 1024);
-        CCLOG("VM in use %u : %uKB : %uMB", info.virtual_size, info.virtual_size / 1024, info.virtual_size / 1024 / 1024);
-    } else {
-        CCLOG("Error with task_info(): %s", mach_error_string(kerr));
-    }
-#endif
-}
-
-CCScene* CCHierarchiesSpriteFunctionalTestScene::scene()
+CCScene* CCHierarchiesSpriteTestScene::scene()
 {
     // 'scene' is an autorelease object
     CCScene *scene = CCScene::create();
     
     // 'layer' is an autorelease object
-    CCHierarchiesSpriteFunctionalTestScene *layer = CCHierarchiesSpriteFunctionalTestScene::create();
+    CCHierarchiesSpriteTestScene *layer = CCHierarchiesSpriteTestScene::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -44,11 +27,11 @@ CCScene* CCHierarchiesSpriteFunctionalTestScene::scene()
     return scene;
 }
 
-CCHierarchiesSpriteFunctionalTestScene::~CCHierarchiesSpriteFunctionalTestScene () {
+CCHierarchiesSpriteTestScene::~CCHierarchiesSpriteTestScene () {
     CC_SAFE_RELEASE(_hSprites);
 }
 
-bool CCHierarchiesSpriteFunctionalTestScene::init()
+bool CCHierarchiesSpriteTestScene::init()
 {
     if ( !CCLayer::init() )
     {
@@ -64,7 +47,6 @@ bool CCHierarchiesSpriteFunctionalTestScene::init()
     _hSprites = new CCArray();
     _hSprites->init();
     
-    // CCHierarchiesSpriteFilter 测试
 //    CCDirector::sharedDirector()->getScheduler()->setTimeScale(0.5);
     
     CCLayerColor* bgLayer = CCLayerColor::create(ccc4(64, 64, 64, 255));
@@ -78,21 +60,21 @@ bool CCHierarchiesSpriteFunctionalTestScene::init()
 
 #pragma mark - Update
 
-void CCHierarchiesSpriteFunctionalTestScene::update (float delta) {
+void CCHierarchiesSpriteTestScene::update (float delta) {
     
 }
 
 
 #pragma mark - Draw
 
-void CCHierarchiesSpriteFunctionalTestScene::draw () {
+void CCHierarchiesSpriteTestScene::draw () {
     
 }
 
 
 #pragma mark - Touch callback
 
-void CCHierarchiesSpriteFunctionalTestScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
+void CCHierarchiesSpriteTestScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
     // 点击测试
 //    CCTouch* touch = (CCTouch*)pTouches->anyObject();
 //    CCPoint touchPoint = touch->getLocation();
@@ -128,43 +110,27 @@ void CCHierarchiesSpriteFunctionalTestScene::ccTouchesBegan(CCSet *pTouches, CCE
         this->loadSprites();
     }
     
-    // 运行中切换动画文件测试
-//    CCLOG("switch aimation file BEGIN");
-//    report_memory();
-//    
-//    CCObject* iter = NULL;
-//    CCARRAY_FOREACH(_hSprites, iter) {
-//        CCHierarchiesSprite* spr = dynamic_cast<CCHierarchiesSprite*>(iter);
-//        spr->cleanup();
-//        
-//        spr->setSpriteFile("test_new_anim/hanim_test_lvmeng/lumengquan.hsheet", "test_new_anim/hanim_test_lvmeng/lumengquan.hanims");
-//        
-//        CCAction* action = CCRepeatForever::create(CCHierarchiesAnimate::createWholeAnimation(spr->getAnimationName()));
-//        spr->runAction(action);
-//    }
-    
     report_memory();
-    CCLOG("switch animation file END");
 }
 
-void CCHierarchiesSpriteFunctionalTestScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
+void CCHierarchiesSpriteTestScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
 }
 
-void CCHierarchiesSpriteFunctionalTestScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
+void CCHierarchiesSpriteTestScene::ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent) {
 }
 
-void CCHierarchiesSpriteFunctionalTestScene::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent) {
+void CCHierarchiesSpriteTestScene::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent) {
 }
 
 #pragma mark - CCHierarchiesSpriteEventDelegate
 
-void CCHierarchiesSpriteFunctionalTestScene::onEventContent (CCHierarchiesSprite* sprite, const char* eventContent) {
+void CCHierarchiesSpriteTestScene::onEventContent (CCHierarchiesSpriteBase* sprite, const char* eventContent) {
     // 动画事件测试
     CCLOG("on event content [%s] [%s]", sprite->getAnimationName(), eventContent);
 }
 
 
-void CCHierarchiesSpriteFunctionalTestScene::loadSprites () {
+void CCHierarchiesSpriteTestScene::loadSprites () {
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     
     CCLOG("load sprites BEGIN");
@@ -181,9 +147,6 @@ void CCHierarchiesSpriteFunctionalTestScene::loadSprites () {
                     spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_lvmeng/lumengquan.hsheet",
                                                       "test_new_anim/hanim_test_lvmeng/lumengquan.hanims",
                                                       this);
-//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xuzhu/xuzhuquan.hsheet",
-//                                                      "test_new_anim/hanim_test_xuzhu/xuzhuquan.hanims",
-//                                                      this);
                     break;
                 }
                 case 1: {
@@ -213,12 +176,6 @@ void CCHierarchiesSpriteFunctionalTestScene::loadSprites () {
                     spr->setColor(ccRED);
                     break;
                 }
-//                case 4: {
-//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu/guanyuquan.hsheet",
-//                                                      "test_new_anim/hanim_test_guanyu/guanyuquan.hanims",
-//                                                      this);
-//                    break;
-//                }
             }
             
             spr->setPosition(ccp(winSize.width / (SPRITE_ARRAY_COL_COUNT + 1) * j, winSize.height / (SPRITE_ARRAY_ROW_COUNT + 1) * i));

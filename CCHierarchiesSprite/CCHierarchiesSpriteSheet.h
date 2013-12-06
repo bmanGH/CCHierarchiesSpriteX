@@ -72,7 +72,9 @@ public:
     const char* getImageName ();
     float getImageWidth () const;
     float getImageHeight () const;
-    bool getSpr (std::string name, Spr& out) const;
+    bool getSpr (const char* name, Spr& out) const;
+    const std::unordered_map<std::string, Spr>& getSprList ();
+    size_t getSprListCount ();
     
 };
 

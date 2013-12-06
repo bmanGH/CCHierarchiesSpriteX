@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062E5182184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 062E5180184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp */; };
 		064C5C5E181044A70070FBA9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C4D181044A70070FBA9 /* Default-568h@2x.png */; };
 		064C5C5F181044A70070FBA9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C4E181044A70070FBA9 /* Default.png */; };
 		064C5C60181044A70070FBA9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C4F181044A70070FBA9 /* Icon-72.png */; };
@@ -21,7 +22,7 @@
 		064C5C6A181044A70070FBA9 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C5D181044A70070FBA9 /* RootViewController.mm */; };
 		064C5C8C181061E10070FBA9 /* test_new_anim in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C8B181061E10070FBA9 /* test_new_anim */; };
 		064C5C911810623D0070FBA9 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C8D1810623D0070FBA9 /* AppDelegate.cpp */; };
-		064C5C921810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.cpp */; };
+		064C5C921810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp */; };
 		064C5CB4181064820070FBA9 /* CCHierarchiesSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C9A181064820070FBA9 /* CCHierarchiesSprite.cpp */; };
 		064C5CB5181064820070FBA9 /* CCHierarchiesSpriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C9C181064820070FBA9 /* CCHierarchiesSpriteAction.cpp */; };
 		064C5CB6181064820070FBA9 /* CCHierarchiesSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5C9E181064820070FBA9 /* CCHierarchiesSpriteAnimation.cpp */; };
@@ -34,8 +35,13 @@
 		064C5CBE181064820070FBA9 /* CCHierarchiesSpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5CB0181064820070FBA9 /* CCHierarchiesSpriteSheet.cpp */; };
 		064C5CBF181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 064C5CB2181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp */; };
 		064C5CCD181069940070FBA9 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064C5C98181062850070FBA9 /* libcocos2dx.a */; };
+		0664F35F184DB4110067A563 /* CCHierarchiesSpriteBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0664F35D184DB4110067A563 /* CCHierarchiesSpriteBase.cpp */; };
 		06D241F618140811006EF478 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D241F018140811006EF478 /* license.txt */; };
 		06D241F718140811006EF478 /* manual.html in Resources */ = {isa = PBXBuildFile; fileRef = 06D241F118140811006EF478 /* manual.html */; };
+		06EA224918516DE500BC47F8 /* avatar_data in Resources */ = {isa = PBXBuildFile; fileRef = 06EA224818516DE500BC47F8 /* avatar_data */; };
+		06EA225218516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */; };
+		06EA2255185170E100BC47F8 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA2253185170E100BC47F8 /* Utils.cpp */; };
+		06EA2258185172ED00BC47F8 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA2256185172ED00BC47F8 /* MainMenu.cpp */; };
 		D46906111797CE1100CCAFD3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA87178BE7AB00A0A776 /* QuartzCore.framework */; };
 		D46906121797CE1100CCAFD3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA89178BE7AB00A0A776 /* OpenGLES.framework */; };
 		D46906131797CE1100CCAFD3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA8B178BE7AB00A0A776 /* OpenAL.framework */; };
@@ -64,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062E5180184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteDynamic.cpp; sourceTree = "<group>"; };
+		062E5181184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteDynamic.h; sourceTree = "<group>"; };
 		064C5C4D181044A70070FBA9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		064C5C4E181044A70070FBA9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		064C5C4F181044A70070FBA9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -82,8 +90,8 @@
 		064C5C8B181061E10070FBA9 /* test_new_anim */ = {isa = PBXFileReference; lastKnownFileType = folder; name = test_new_anim; path = Resource/test_new_anim; sourceTree = "<group>"; };
 		064C5C8D1810623D0070FBA9 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		064C5C8E1810623D0070FBA9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteFunctionalTestScene.cpp; sourceTree = "<group>"; };
-		064C5C901810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteFunctionalTestScene.h; sourceTree = "<group>"; };
+		064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteTestScene.cpp; sourceTree = "<group>"; };
+		064C5C901810623D0070FBA9 /* CCHierarchiesSpriteTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteTestScene.h; sourceTree = "<group>"; };
 		064C5C93181062850070FBA9 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = "../../cocos2d-x/cocos2dx/proj.ios/cocos2dx.xcodeproj"; sourceTree = "<group>"; };
 		064C5C9A181064820070FBA9 /* CCHierarchiesSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSprite.cpp; sourceTree = "<group>"; };
 		064C5C9B181064820070FBA9 /* CCHierarchiesSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSprite.h; sourceTree = "<group>"; };
@@ -117,12 +125,21 @@
 		064C5CD918106E470070FBA9 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		064C5CDB18106E5B0070FBA9 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		064C5CE1181070530070FBA9 /* libc++.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.1.dylib"; path = "usr/lib/libc++.1.dylib"; sourceTree = SDKROOT; };
+		0664F35D184DB4110067A563 /* CCHierarchiesSpriteBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteBase.cpp; sourceTree = "<group>"; };
+		0664F35E184DB4110067A563 /* CCHierarchiesSpriteBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteBase.h; sourceTree = "<group>"; };
 		06D241F018140811006EF478 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		06D241F118140811006EF478 /* manual.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = manual.html; sourceTree = "<group>"; };
 		06D241F218140811006EF478 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
 		06D241F318140811006EF478 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
 		06D241F418140811006EF478 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
 		06D241F518140811006EF478 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
+		06EA224818516DE500BC47F8 /* avatar_data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = avatar_data; path = Resource/avatar_data; sourceTree = "<group>"; };
+		06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteAvatarTestScene.cpp; sourceTree = "<group>"; };
+		06EA225118516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteAvatarTestScene.h; sourceTree = "<group>"; };
+		06EA2253185170E100BC47F8 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		06EA2254185170E100BC47F8 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		06EA2256185172ED00BC47F8 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenu.cpp; sourceTree = "<group>"; };
+		06EA2257185172ED00BC47F8 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		D469062D1797CE1100CCAFD3 /* DemoTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D477CA87178BE7AB00A0A776 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D477CA89178BE7AB00A0A776 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -198,8 +215,14 @@
 			children = (
 				064C5C8D1810623D0070FBA9 /* AppDelegate.cpp */,
 				064C5C8E1810623D0070FBA9 /* AppDelegate.h */,
-				064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.cpp */,
-				064C5C901810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.h */,
+				06EA2253185170E100BC47F8 /* Utils.cpp */,
+				06EA2254185170E100BC47F8 /* Utils.h */,
+				06EA2256185172ED00BC47F8 /* MainMenu.cpp */,
+				06EA2257185172ED00BC47F8 /* MainMenu.h */,
+				064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp */,
+				064C5C901810623D0070FBA9 /* CCHierarchiesSpriteTestScene.h */,
+				06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */,
+				06EA225118516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.h */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -207,6 +230,7 @@
 		064C5C8A181061C40070FBA9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				06EA224818516DE500BC47F8 /* avatar_data */,
 				064C5C8B181061E10070FBA9 /* test_new_anim */,
 			);
 			name = Resource;
@@ -223,8 +247,12 @@
 		064C5C99181064820070FBA9 /* CCHierarchiesSprite */ = {
 			isa = PBXGroup;
 			children = (
+				0664F35D184DB4110067A563 /* CCHierarchiesSpriteBase.cpp */,
+				0664F35E184DB4110067A563 /* CCHierarchiesSpriteBase.h */,
 				064C5C9A181064820070FBA9 /* CCHierarchiesSprite.cpp */,
 				064C5C9B181064820070FBA9 /* CCHierarchiesSprite.h */,
+				062E5180184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp */,
+				062E5181184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.h */,
 				064C5C9C181064820070FBA9 /* CCHierarchiesSpriteAction.cpp */,
 				064C5C9D181064820070FBA9 /* CCHierarchiesSpriteAction.h */,
 				064C5C9E181064820070FBA9 /* CCHierarchiesSpriteAnimation.cpp */,
@@ -334,6 +362,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D469062A1797CE1100CCAFD3 /* Build configuration list for PBXNativeTarget "DemoTest" */;
 			buildPhases = (
+				06EA225D185185C600BC47F8 /* Run Script */,
 				D469060E1797CE1100CCAFD3 /* Frameworks */,
 				D46905B31797CE1100CCAFD3 /* Sources */,
 				D469061C1797CE1100CCAFD3 /* Resources */,
@@ -411,28 +440,51 @@
 				064C5C62181044A70070FBA9 /* Icon-Small.png in Resources */,
 				064C5C64181044A70070FBA9 /* Icon.png in Resources */,
 				064C5C60181044A70070FBA9 /* Icon-72.png in Resources */,
+				06EA224918516DE500BC47F8 /* avatar_data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06EA225D185185C600BC47F8 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find ${SRCROOT}/../Resource/ -exec touch -cm {} \\;";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D46905B31797CE1100CCAFD3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				062E5182184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp in Sources */,
 				064C5CBB181064820070FBA9 /* CCHierarchiesSpriteMesh.cpp in Sources */,
 				064C5C911810623D0070FBA9 /* AppDelegate.cpp in Sources */,
 				064C5CB5181064820070FBA9 /* CCHierarchiesSpriteAction.cpp in Sources */,
 				064C5CB6181064820070FBA9 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				064C5CBF181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp in Sources */,
+				06EA2258185172ED00BC47F8 /* MainMenu.cpp in Sources */,
 				064C5CB7181064820070FBA9 /* CCHierarchiesSpriteAnimationCache.cpp in Sources */,
 				064C5C69181044A70070FBA9 /* main.m in Sources */,
 				064C5CB9181064820070FBA9 /* CCHierarchiesSpriteFilter.cpp in Sources */,
-				064C5C921810623D0070FBA9 /* CCHierarchiesSpriteFunctionalTestScene.cpp in Sources */,
+				064C5C921810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp in Sources */,
 				064C5CBA181064820070FBA9 /* CCHierarchiesSpriteGrabber.cpp in Sources */,
+				06EA225218516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp in Sources */,
 				064C5CBE181064820070FBA9 /* CCHierarchiesSpriteSheet.cpp in Sources */,
 				064C5CBD181064820070FBA9 /* CCHierarchiesSpriteShader.cpp in Sources */,
+				0664F35F184DB4110067A563 /* CCHierarchiesSpriteBase.cpp in Sources */,
+				06EA2255185170E100BC47F8 /* Utils.cpp in Sources */,
 				064C5C6A181044A70070FBA9 /* RootViewController.mm in Sources */,
 				064C5CBC181064820070FBA9 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
 				064C5CB4181064820070FBA9 /* CCHierarchiesSprite.cpp in Sources */,
@@ -470,7 +522,15 @@
 					CC_TARGET_OS_IPHONE,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../Source",
+					"$(SRCROOT)/CCHierarchiesSpriteXDemo/src",
+					"$(SRCROOT)/../Libraries",
+					"$(SRCROOT)/../../rapidxml",
+					"$(SRCROOT)/../../CCHierarchiesSprite",
+					"$(SRCROOT)/../Libraries/jsoncpp",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -481,7 +541,7 @@
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = DemoTest;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../../rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -503,7 +563,15 @@
 					CC_TARGET_OS_IPHONE,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				HEADER_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../Source",
+					"$(SRCROOT)/CCHierarchiesSpriteXDemo/src",
+					"$(SRCROOT)/../Libraries",
+					"$(SRCROOT)/../../rapidxml",
+					"$(SRCROOT)/../../CCHierarchiesSprite",
+					"$(SRCROOT)/../Libraries/jsoncpp",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -514,7 +582,7 @@
 					"-lsqlite3",
 				);
 				PRODUCT_NAME = DemoTest;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Source $(SRCROOT)/CCHierarchiesSpriteXDemo/src $(SRCROOT)/../Libraries $(SRCROOT)/../../rapidxml $(SRCROOT)/../../CCHierarchiesSprite";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

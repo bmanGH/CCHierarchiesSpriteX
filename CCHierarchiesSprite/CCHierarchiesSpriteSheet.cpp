@@ -140,13 +140,21 @@ float CCHierarchiesSpriteSheet::getImageHeight() const {
     return _imageHeight;
 }
 
-bool CCHierarchiesSpriteSheet::getSpr (std::string name, Spr& out) const {
+bool CCHierarchiesSpriteSheet::getSpr (const char* name, Spr& out) const {
     std::unordered_map<std::string, Spr>::const_iterator iter = _sprList.find(name);
     if (iter != _sprList.end()) {
         out = iter->second;
         return true;
     }
     return false;
+}
+
+const std::unordered_map<std::string, CCHierarchiesSpriteSheet::Spr>& CCHierarchiesSpriteSheet::getSprList () {
+    return _sprList;
+}
+
+size_t CCHierarchiesSpriteSheet::getSprListCount () {
+    return _sprList.size();
 }
 
 NS_CC_EXT_END
