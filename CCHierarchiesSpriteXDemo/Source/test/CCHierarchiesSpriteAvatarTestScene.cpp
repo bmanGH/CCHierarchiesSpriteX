@@ -184,21 +184,21 @@ void CCHierarchiesSpriteAvatarTestScene::loadSprites () {
     
 #define SPRITE_ARRAY_COL_COUNT (2)
     for (int j = 1; j <= SPRITE_ARRAY_COL_COUNT; j++) {
-        CCHierarchiesSprite* spr = NULL;
+        CCHierarchiesSpriteBase* spr = NULL;
         
         switch (j % 2) {
             case 0: {
                 spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
                                                   "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
                                                   this,
-                                                  _avatarMap["dadao_avatar"]);
+                                                  _avatarMap["caidao_avatar"]);
                 break;
             }
             case 1: {
-                spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
+                spr = CCHierarchiesSpriteDynamic::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
                                                   "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
-                                                  this,
-                                                  _avatarMap["caidao_avatar"]);
+                                                  this);
+                
                 break;
             }
         }

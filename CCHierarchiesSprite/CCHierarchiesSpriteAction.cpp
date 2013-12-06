@@ -104,10 +104,10 @@ const char* CCHierarchiesAnimate::getSpriteAnimationName () {
 }
 
 void CCHierarchiesAnimate::startWithTarget (CCNode* pTarget) {
-    CCHierarchiesSprite* target = dynamic_cast<CCHierarchiesSprite*>(pTarget);
-    CCAssert(target != NULL, "CCHierarchiesAnimate can only effect on CCHierarchiesSprite");
+    CCHierarchiesSpriteBase* target = dynamic_cast<CCHierarchiesSpriteBase*>(pTarget);
+    CCAssert(target != NULL, "CCHierarchiesAnimate can only valid on CCHierarchiesSpriteBase class");
     
-    CCAssert(_spriteAnimationName.compare(target->getAnimationName()) == 0, "CCHierarchiesAnimate effect on a invalid CCHierarchiesSprite instance");
+    CCAssert(_spriteAnimationName.compare(target->getAnimationName()) == 0, "CCHierarchiesAnimate effect on a invalid CCHierarchiesSpriteBase instance");
     
     CCActionInterval::startWithTarget(pTarget);
     
@@ -159,7 +159,7 @@ CCObject* CCHierarchiesAnimate::copyWithZone (CCZone* pZone) {
 }
 
 void CCHierarchiesAnimate::update (float time) {
-    CCHierarchiesSprite* target = dynamic_cast<CCHierarchiesSprite*>(m_pTarget);
+    CCHierarchiesSpriteBase* target = dynamic_cast<CCHierarchiesSpriteBase*>(m_pTarget);
     if (_currentAnimation.endFrameIndex >= _currentAnimation.startFrameIndex) {
         unsigned int curFrameIndex = _currentAnimation.startFrameIndex + time * (_currentAnimation.endFrameIndex - _currentAnimation.startFrameIndex);
         
@@ -277,5 +277,19 @@ CCObject * CCHierarchiesFlipY::copyWithZone(CCZone* zone) {
     CC_SAFE_DELETE(newZone);
     return ret;
 }
+
+
+#pragma mark - CCHierarchiesAvatarMapInsert
+//TODO
+
+
+#pragma mark - CCHierarchiesAvatarMapReset
+//TODO
+
+
+#pragma mark - CCHierarchiesAvatarMapSet
+//TODO
+
+
 
 NS_CC_EXT_END
