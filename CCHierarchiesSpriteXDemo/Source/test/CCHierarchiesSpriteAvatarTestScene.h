@@ -14,6 +14,7 @@
 #include "cocos-ext.h"
 #include "CCHierarchiesSprite.h"
 #include "CCHierarchiesSpriteDynamic.h"
+#include <map>
 
 USING_NS_CC;
 USING_NS_CC_EXT;
@@ -22,7 +23,7 @@ class CCHierarchiesSpriteAvatarTestScene : public CCLayer, public CCHierarchiesS
 {
 private:
     CCArray* _hSprites;
-    AvatarMapType _avatarMap;
+    std::map<std::string, AvatarMapType> _avatarMap;
     
 public:
     virtual ~CCHierarchiesSpriteAvatarTestScene ();

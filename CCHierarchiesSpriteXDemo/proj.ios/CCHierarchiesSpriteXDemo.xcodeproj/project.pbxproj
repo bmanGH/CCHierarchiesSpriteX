@@ -42,6 +42,7 @@
 		06EA225218516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */; };
 		06EA2255185170E100BC47F8 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA2253185170E100BC47F8 /* Utils.cpp */; };
 		06EA2258185172ED00BC47F8 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA2256185172ED00BC47F8 /* MainMenu.cpp */; };
+		06EA226E1851E43500BC47F8 /* jsoncpp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06EA226D1851E43500BC47F8 /* jsoncpp.cpp */; };
 		D46906111797CE1100CCAFD3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA87178BE7AB00A0A776 /* QuartzCore.framework */; };
 		D46906121797CE1100CCAFD3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA89178BE7AB00A0A776 /* OpenGLES.framework */; };
 		D46906131797CE1100CCAFD3 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D477CA8B178BE7AB00A0A776 /* OpenAL.framework */; };
@@ -140,6 +141,9 @@
 		06EA2254185170E100BC47F8 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		06EA2256185172ED00BC47F8 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenu.cpp; sourceTree = "<group>"; };
 		06EA2257185172ED00BC47F8 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		06EA226B1851E43500BC47F8 /* json-forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "json-forwards.h"; sourceTree = "<group>"; };
+		06EA226C1851E43500BC47F8 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
+		06EA226D1851E43500BC47F8 /* jsoncpp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsoncpp.cpp; sourceTree = "<group>"; };
 		D469062D1797CE1100CCAFD3 /* DemoTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D477CA87178BE7AB00A0A776 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D477CA89178BE7AB00A0A776 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -283,6 +287,7 @@
 		064C5CC1181067F40070FBA9 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				06EA22691851E43500BC47F8 /* jsoncpp */,
 				06D241EF18140811006EF478 /* rapidxml */,
 			);
 			path = Libraries;
@@ -300,6 +305,24 @@
 			);
 			name = rapidxml;
 			path = ../../rapidxml;
+			sourceTree = "<group>";
+		};
+		06EA22691851E43500BC47F8 /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				06EA226A1851E43500BC47F8 /* json */,
+				06EA226D1851E43500BC47F8 /* jsoncpp.cpp */,
+			);
+			path = jsoncpp;
+			sourceTree = "<group>";
+		};
+		06EA226A1851E43500BC47F8 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				06EA226B1851E43500BC47F8 /* json-forwards.h */,
+				06EA226C1851E43500BC47F8 /* json.h */,
+			);
+			path = json;
 			sourceTree = "<group>";
 		};
 		D477CA7B178BE7AB00A0A776 = {
@@ -475,6 +498,7 @@
 				064C5CB6181064820070FBA9 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				064C5CBF181064820070FBA9 /* CCHierarchiesSpriteSheetCache.cpp in Sources */,
 				06EA2258185172ED00BC47F8 /* MainMenu.cpp in Sources */,
+				06EA226E1851E43500BC47F8 /* jsoncpp.cpp in Sources */,
 				064C5CB7181064820070FBA9 /* CCHierarchiesSpriteAnimationCache.cpp in Sources */,
 				064C5C69181044A70070FBA9 /* main.m in Sources */,
 				064C5CB9181064820070FBA9 /* CCHierarchiesSpriteFilter.cpp in Sources */,
@@ -520,6 +544,7 @@
 					"COCOS2D_DEBUG=1",
 					USE_FILE32API,
 					CC_TARGET_OS_IPHONE,
+					JSON_IS_AMALGAMATION,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = (
@@ -561,6 +586,7 @@
 					NDEBUG,
 					USE_FILE32API,
 					CC_TARGET_OS_IPHONE,
+					JSON_IS_AMALGAMATION,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = (

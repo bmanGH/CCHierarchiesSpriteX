@@ -9,7 +9,7 @@
 
 #include "CCHierarchiesSpriteAvatarTestScene.h"
 #include "CCHierarchiesSpriteRuntime.h"
-#include <json/json.h>
+#include "json/json.h"
 #include <fstream>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -76,18 +76,40 @@ bool CCHierarchiesSpriteAvatarTestScene::init()
     CCLayerColor* bgLayer = CCLayerColor::create(ccc4(64, 64, 64, 255));
     this->addChild(bgLayer, -1000);
     
-//    // load avatar map config data
-//    CSJson:: Json::Reader reader;
-//    std::ifstream jsonFile;
-//    Json::Value data;
-//    
-//    jsonFile.open(CCFileUtils::sharedFileUtils()->fullPathForFilename("data/story_levels.json"));
-//    if (!jsonFile.is_open() ||
-//        !reader.parse(jsonFile, data, false))
-//    {
-//        CCAssert(false, "load avatar map config data error");
-//    }
-//    jsonFile.close();
+    // load avatar map config data
+    Json::Reader reader;
+    std::ifstream jsonFile;
+    Json::Value data;
+    
+    jsonFile.open(CCFileUtils::sharedFileUtils()->fullPathForFilename("avatar_data/guanyu-avatar.json"));
+    if (!jsonFile.is_open() ||
+        !reader.parse(jsonFile, data, false))
+    {
+        CCAssert(false, "load avatar map config data error");
+    }
+    jsonFile.close();
+    
+    // JSON:
+    //    {
+    //        "avatar name" : {
+    //            "item name" : "maped item name",
+    //            ...
+    //        },
+    //        ...
+    //    }
+    Json::Value::Members::const_iterator avatarNameIter;
+    Json::Value::Members avatarNames = data.getMemberNames();
+    for (avatarNameIter = avatarNames.cbegin(); avatarNameIter != avatarNames.cend(); avatarNameIter++) {
+        
+        Json::Value::Members::const_iterator itemNameIter;
+        Json::Value::Members itemNames = data[*avatarNameIter].getMemberNames();
+        AvatarMapType avatarMap;
+        for (itemNameIter = itemNames.cbegin(); itemNameIter != itemNames.cend(); itemNameIter++) {
+            avatarMap[*itemNameIter] = data[*avatarNameIter][*itemNameIter].asString();
+        }
+        
+        _avatarMap[*avatarNameIter] = avatarMap;
+    }
     
     this->loadSprites();
     
@@ -168,18 +190,15 @@ void CCHierarchiesSpriteAvatarTestScene::loadSprites () {
             case 0: {
                 spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
                                                   "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
-                                                  this);
+                                                  this,
+                                                  _avatarMap["dadao_avatar"]);
                 break;
             }
             case 1: {
-                AvatarMapType avatarMap;
-                avatarMap["laodedadao/dadao-1"] = "xindedadao/caidao-1";
-                avatarMap["laodedadao/dadao-2"] = "xindedadao/caidao-2";
-                avatarMap["laodedadao/daoduang-3"] = "xindedadao/caidao-3";
                 spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
                                                   "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
                                                   this,
-                                                  avatarMap);
+                                                  _avatarMap["caidao_avatar"]);
                 break;
             }
         }
