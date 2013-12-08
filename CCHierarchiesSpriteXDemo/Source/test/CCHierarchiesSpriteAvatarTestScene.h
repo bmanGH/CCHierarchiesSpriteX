@@ -19,11 +19,12 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-class CCHierarchiesSpriteAvatarTestScene : public CCLayer, public CCHierarchiesSpriteEventDelegate
+class CCHierarchiesSpriteAvatarTestScene : public CCLayer
 {
 private:
     CCArray* _hSprites;
     std::map<std::string, AvatarMapType> _avatarMap;
+    int _clickNumber;
     
 public:
     virtual ~CCHierarchiesSpriteAvatarTestScene ();
@@ -48,9 +49,6 @@ public:
     virtual void ccTouchesMoved (CCSet *pTouches, CCEvent *pEvent);
     virtual void ccTouchesEnded (CCSet *pTouches, CCEvent *pEvent);
     virtual void ccTouchesCancelled (CCSet *pTouches, CCEvent *pEvent);
-    
-    // CCHierarchiesSpriteEventDelegate
-    virtual void onEventContent (CCHierarchiesSpriteBase* sprite, const char* eventContent);
     
     
     void loadSprites ();

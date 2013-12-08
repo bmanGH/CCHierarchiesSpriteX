@@ -224,17 +224,17 @@ void CCHierarchiesSprite::draw () {
             };
             ccDrawPoly(vertices, 4, true);
             
-#elif HIERARCHIES_DEBUG_DRAW == 2
-            // draw nesting bounding box
-            ccDrawColor4B(0, 255, 255, 255);
-            CCRect bbox = this->nestingBoundingBoxInner();
-            CCPoint vertices2[4] = {
-                ccp(bbox.origin.x, bbox.origin.y),
-                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y),
-                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y + bbox.size.height),
-                ccp(bbox.origin.x, bbox.origin.y + bbox.size.height),
-            };
-            ccDrawPoly(vertices2, 4, true);
+//#elif HIERARCHIES_DEBUG_DRAW == 2
+//            // draw nesting bounding box
+//            ccDrawColor4B(0, 255, 255, 255);
+//            CCRect bbox = this->nestingBoundingBoxInner();
+//            CCPoint vertices2[4] = {
+//                ccp(bbox.origin.x, bbox.origin.y),
+//                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y),
+//                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y + bbox.size.height),
+//                ccp(bbox.origin.x, bbox.origin.y + bbox.size.height),
+//            };
+//            ccDrawPoly(vertices2, 4, true);
 
 #elif HIERARCHIES_DEBUG_DRAW == 3
             // draw quads

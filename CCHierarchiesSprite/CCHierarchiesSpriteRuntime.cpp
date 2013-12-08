@@ -164,8 +164,6 @@ void CCHierarchiesSpriteRuntime::buildStaticAnimationData (bool isRoot,
     quads.clear();
     std::vector<CCHierarchiesSprite::DisplayElement> displayList;
     
-//    float min_X = 10000, max_X = -10000, min_Y = 10000, max_Y = -10000;
-    
     CCAffineTransform matrix;
     CCHierarchiesSprite_V3F_C4B_T2F_Quad quad;
     CCHierarchiesSpriteAnimation::FrameElements::const_iterator layerIter;

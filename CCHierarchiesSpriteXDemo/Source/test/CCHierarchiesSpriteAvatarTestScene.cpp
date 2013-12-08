@@ -133,30 +133,69 @@ void CCHierarchiesSpriteAvatarTestScene::draw () {
 
 #pragma mark - Touch callback
 
-void CCHierarchiesSpriteAvatarTestScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {    
-    // 资源管理测试
-    if (_hSprites->count() > 0) {
-        CCLOG("release unused resource BEGIN");
-        report_memory();
-        
-        CCObject* iter = NULL;
-        CCARRAY_FOREACH(_hSprites, iter) {
-            CCHierarchiesSprite* spr = dynamic_cast<CCHierarchiesSprite*>(iter);
-            spr->removeFromParent();
-        }
-        _hSprites->removeAllObjects();
-        
-        CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->releaseUnusedResource();
-        CCTextureCache::sharedTextureCache()->removeUnusedTextures();
-        
-        report_memory();
-        CCLOG("release unused resource END");
-    }
-    else {
-        this->loadSprites();
-    }
+void CCHierarchiesSpriteAvatarTestScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
+//    // 资源管理测试
+//    if (_hSprites->count() > 0) {
+//        CCLOG("release unused resource BEGIN");
+//        report_memory();
+//        
+//        CCObject* iter = NULL;
+//        CCARRAY_FOREACH(_hSprites, iter) {
+//            CCHierarchiesSpriteBase* spr = dynamic_cast<CCHierarchiesSpriteBase*>(iter);
+//            spr->removeFromParent();
+//        }
+//        _hSprites->removeAllObjects();
+//        
+//        CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->releaseUnusedResource();
+//        CCTextureCache::sharedTextureCache()->removeUnusedTextures();
+//        
+//        report_memory();
+//        CCLOG("release unused resource END");
+//    }
+//    else {
+//        this->loadSprites();
+//    }
+//    
+//    report_memory();
     
-    report_memory();
+    // 运行时换装测试
+    CCObject* iter = NULL;
+    CCARRAY_FOREACH(_hSprites, iter) {
+        CCHierarchiesSpriteDynamic* spr = dynamic_cast<CCHierarchiesSpriteDynamic*>(iter);
+        if (spr) {
+            switch (_clickNumber) {
+                case 0: {
+                    spr->resetAvatarMap();
+                    break;
+                }
+                case 1: {
+                    spr->setAvatarMap("laodedadao/dadao-1", "xindedadao/caidao-1");
+                    std::string avatarMapName;
+                    spr->getAvatarMap("laodedadao/dadao-1", avatarMapName);
+                    CCLOG("avatar map name: laodedadao/dadao-1 -> %s", avatarMapName.c_str());
+                    break;
+                }
+                case 2: {
+                    spr->setAvatarMap("laodedadao/dadao-2", "xindedadao/caidao-2");
+                    std::string avatarMapName;
+                    spr->getAvatarMap("laodedadao/dadao-2", avatarMapName);
+                    CCLOG("avatar map name: laodedadao/dadao-2 -> %s", avatarMapName.c_str());
+                    break;
+                }
+                case 3: {
+                    spr->setAvatarMap("laodedadao/daoduang-3", "xindedadao/caidao-3");
+                    std::string avatarMapName;
+                    spr->getAvatarMap("laodedadao/daoduang-3", avatarMapName);
+                    CCLOG("avatar map name: laodedadao/daoduang-3 -> %s", avatarMapName.c_str());
+                    _clickNumber = -1;
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+    _clickNumber++;
 }
 
 void CCHierarchiesSpriteAvatarTestScene::ccTouchesMoved(CCSet *pTouches, CCEvent *pEvent) {
@@ -166,13 +205,6 @@ void CCHierarchiesSpriteAvatarTestScene::ccTouchesEnded(CCSet *pTouches, CCEvent
 }
 
 void CCHierarchiesSpriteAvatarTestScene::ccTouchesCancelled(CCSet *pTouches, CCEvent *pEvent) {
-}
-
-#pragma mark - CCHierarchiesSpriteEventDelegate
-
-void CCHierarchiesSpriteAvatarTestScene::onEventContent (CCHierarchiesSpriteBase* sprite, const char* eventContent) {
-    // 动画事件测试
-    CCLOG("on event content [%s] [%s]", sprite->getAnimationName(), eventContent);
 }
 
 
@@ -190,14 +222,15 @@ void CCHierarchiesSpriteAvatarTestScene::loadSprites () {
             case 0: {
                 spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
                                                   "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
-                                                  this,
+                                                  NULL,
                                                   _avatarMap["caidao_avatar"]);
                 break;
             }
             case 1: {
                 spr = CCHierarchiesSpriteDynamic::create("test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hsheet",
-                                                  "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
-                                                  this);
+                                                         "test_new_anim/hanim_test_guanyu-avatar/guanyuquan-avatar.hanims",
+                                                         NULL,
+                                                         _avatarMap["caidao_avatar"]);
                 
                 break;
             }

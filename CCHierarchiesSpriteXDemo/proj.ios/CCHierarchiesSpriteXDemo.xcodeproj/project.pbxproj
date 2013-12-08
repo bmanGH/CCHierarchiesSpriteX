@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0611762E1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0611762C1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp */; };
+		061176311851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0611762F1851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp */; };
 		062E5182184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 062E5180184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp */; };
 		064C5C5E181044A70070FBA9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C4D181044A70070FBA9 /* Default-568h@2x.png */; };
 		064C5C5F181044A70070FBA9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 064C5C4E181044A70070FBA9 /* Default.png */; };
@@ -71,6 +73,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0611762C1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteDynamicTestScene.cpp; sourceTree = "<group>"; };
+		0611762D1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteDynamicTestScene.h; sourceTree = "<group>"; };
+		0611762F1851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteActionTestScene.cpp; sourceTree = "<group>"; };
+		061176301851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteActionTestScene.h; sourceTree = "<group>"; };
 		062E5180184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteDynamic.cpp; sourceTree = "<group>"; };
 		062E5181184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteDynamic.h; sourceTree = "<group>"; };
 		064C5C4D181044A70070FBA9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -227,6 +233,10 @@
 				064C5C901810623D0070FBA9 /* CCHierarchiesSpriteTestScene.h */,
 				06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */,
 				06EA225118516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.h */,
+				0611762C1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp */,
+				0611762D1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.h */,
+				0611762F1851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp */,
+				061176301851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.h */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -251,6 +261,7 @@
 		064C5C99181064820070FBA9 /* CCHierarchiesSprite */ = {
 			isa = PBXGroup;
 			children = (
+				064C5CA4181064820070FBA9 /* CCHierarchiesSpriteConfig.h */,
 				0664F35D184DB4110067A563 /* CCHierarchiesSpriteBase.cpp */,
 				0664F35E184DB4110067A563 /* CCHierarchiesSpriteBase.h */,
 				064C5C9A181064820070FBA9 /* CCHierarchiesSprite.cpp */,
@@ -263,7 +274,6 @@
 				064C5C9F181064820070FBA9 /* CCHierarchiesSpriteAnimation.h */,
 				064C5CA0181064820070FBA9 /* CCHierarchiesSpriteAnimationCache.cpp */,
 				064C5CA1181064820070FBA9 /* CCHierarchiesSpriteAnimationCache.h */,
-				064C5CA4181064820070FBA9 /* CCHierarchiesSpriteConfig.h */,
 				064C5CA5181064820070FBA9 /* CCHierarchiesSpriteEventDelegate.h */,
 				064C5CA6181064820070FBA9 /* CCHierarchiesSpriteFilter.cpp */,
 				064C5CA7181064820070FBA9 /* CCHierarchiesSpriteFilter.h */,
@@ -491,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0611762E1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp in Sources */,
 				062E5182184C86CC00A8C98B /* CCHierarchiesSpriteDynamic.cpp in Sources */,
 				064C5CBB181064820070FBA9 /* CCHierarchiesSpriteMesh.cpp in Sources */,
 				064C5C911810623D0070FBA9 /* AppDelegate.cpp in Sources */,
@@ -513,6 +524,7 @@
 				064C5CBC181064820070FBA9 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
 				064C5CB4181064820070FBA9 /* CCHierarchiesSprite.cpp in Sources */,
 				064C5C68181044A70070FBA9 /* AppController.mm in Sources */,
+				061176311851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,18 @@ class CC_DLL CCHierarchiesSpriteDynamic : public CCHierarchiesSpriteBase {
 protected:
     AvatarMapType _avatarMap;
     std::vector<CCHierarchiesSprite_V3F_C4B_T2F_Quad> _quads;
+    std::vector<GLushort> _indices;
+    
+    void buildDynamicAnimationData (CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
+                                   int frameOffset,
+                                   unsigned int frameIndex,
+                                   const CCAffineTransform& parentMatrix,
+                                   const CCHierarchiesSpriteAnimation* animation,
+                                   float& min_X, float& max_X, float& min_Y, float& max_Y,
+                                   const float parent_alpha_percent, const int parent_alpha_amount,
+                                   const float parent_red_percent, const int parent_red_amount,
+                                   const float parent_green_percent, const int parent_green_amount,
+                                   const float parent_blue_percent, const int parent_blue_amount);
     
 public:
     CCHierarchiesSpriteDynamic ();
