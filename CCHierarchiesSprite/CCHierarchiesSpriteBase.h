@@ -61,7 +61,6 @@
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
 #include "CCHierarchiesSpriteEventDelegate.h"
-#include "CCHierarchiesSpriteAction.h"
 #include "CCHierarchiesSpriteShader.h"
 #include "CCHierarchiesSpriteFilter.h"
 #include "CCHierarchiesSpriteMesh.h"

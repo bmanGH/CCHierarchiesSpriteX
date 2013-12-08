@@ -8,6 +8,7 @@
 //
 
 #include "CCHierarchiesSpriteTestScene.h"
+#include "CCHierarchiesSpriteAction.h"
 #include "CCHierarchiesSpriteRuntime.h"
 #include "Utils.h"
 

@@ -7,6 +7,12 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 ![Demo Vedio 2](http://cl.ly/image/1z1M2t1d3x3v/CCHierarchiesSpriteXDemo_Video_2_optimized.gif)
 
 
+分类
+-------------------
+   * CCHierarchiesSprite类更注重动画播放性能，通过缓存动画数据获得更高的运行速度，但不支持动态换装，只能在创建时设置换装
+   * CCHierarchiesSpriteDynamic类支持动态换装，但性能一般，不适合同屏大量使用
+
+
 功能
 -------------------
    * 支持Flash的经典插值(Motion)动画
@@ -20,6 +26,7 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
    * 支持Flash中MovieClip的嵌套
    * 支持Graphics的所有循环播放模式
    * 支持自定义动画事件
+   * 支持动画Avatar
 
 
 局限
@@ -34,17 +41,16 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 
 开发计划
 -------------------
-   * 合并同一个fla导出的所有.hanims数据到一个文件
-   * 改善Mesh的数据结构，更有效的使用vertex index
-   * 支持动画Avatar
+   * 支持内嵌声音播放数据
    * 支持滤镜
    * 支持骨骼的CCNode插接
-   * 支持内嵌声音播放数据
+   * ~~合并同一个fla导出的所有.hanims数据到一个文件~~
+   * ~~改善Mesh的数据结构，更有效的使用vertex index~~
 
 
 依赖
 -------------------
-   * cocos2d-x v2.1 以上
+   * cocos2d-x v2.1.4 以上
    * rapidxml v1.13 以上
 
 
@@ -68,6 +74,8 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 ```c++
 // CCHierarchiesSprite
 #include "CCHierarchiesSprite/CCHierarchiesSprite.h"
+#include "CCHierarchiesSprite/CCHierarchiesSpriteDynamic.h"
+#include "CCHierarchiesSprite/CCHierarchiesSpriteAction.h"
 #include "CCHierarchiesSprite/CCHierarchiesSpriteSheetCache.h"
 #include "CCHierarchiesSprite/CCHierarchiesSpriteAnimationCache.h"
 #include "CChierarchiesSprite/CCHierarchiesSpriteRuntime.h"
@@ -88,4 +96,4 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 
 FLA动画资源
 ------------------
-   * 感谢肥熊-谁主三国项目提供的动画资源
+   * 感谢肥熊工作室提供的动画资源

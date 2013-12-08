@@ -8,6 +8,7 @@
 //
 
 #include "CCHierarchiesSpriteAvatarTestScene.h"
+#include "CCHierarchiesSpriteAction.h"
 #include "CCHierarchiesSpriteRuntime.h"
 #include "json/json.h"
 #include <fstream>
