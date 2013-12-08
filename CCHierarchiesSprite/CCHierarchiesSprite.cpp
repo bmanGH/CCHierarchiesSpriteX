@@ -134,8 +134,6 @@ bool CCHierarchiesSprite::displayFrameAtIndex (unsigned int frameIndex) {
     // if animation data is cached than read cached data
     CCHierarchiesSpriteRuntime::AnimationCacheHashItem* cacheItem = CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->getCacheItem(this);
 	if (cacheItem) {
-        _curFrameIndex = frameIndex;
-        
         CCHierarchiesSpriteRuntime::FrameCacheItem& frameCacheItem = cacheItem->frameCache.at(frameIndex);
         
         // update bounding box, content size and anchor point

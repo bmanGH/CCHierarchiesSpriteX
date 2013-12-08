@@ -142,7 +142,7 @@ void CCHierarchiesSpriteDynamic::resetAvatarMap () {
 
 bool CCHierarchiesSpriteDynamic::displayFrameAtIndex (unsigned int frameIndex) {
     CCHierarchiesSpriteBase::displayFrameAtIndex(frameIndex);
-	
+    
     // calc quads
     CC_PROFILER_START_CATEGORY(HIERARCHIES_SPRITE_PROFILER, "CCHierarchiesSpriteDynamic - animation");
     
@@ -150,7 +150,7 @@ bool CCHierarchiesSpriteDynamic::displayFrameAtIndex (unsigned int frameIndex) {
     float min_X = 10000, max_X = -10000, min_Y = 10000, max_Y = -10000;
     this->buildDynamicAnimationData(CCHierarchiesSpriteAnimation::kNoneLoopMode,
                                     0,
-                                    frameIndex,
+                                    _curFrameIndex,
                                     CCAffineTransformIdentity,
                                     _animation,
                                     min_X, max_X, min_Y, max_Y,

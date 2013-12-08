@@ -471,6 +471,8 @@ bool CCHierarchiesSpriteBase::displayFrameAtIndex (unsigned int frameIndex) {
     
     _needFresh = true;
     
+    _curFrameIndex = frameIndex;
+    
     return true;
 }
 
