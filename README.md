@@ -7,11 +7,17 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 ![Demo Vedio 2](http://cl.ly/image/1z1M2t1d3x3v/CCHierarchiesSpriteXDemo_Video_2_optimized.gif)
 
 
-分类
+Sprite类
 -------------------
    * CCHierarchiesSprite类更注重动画播放性能，通过缓存动画数据获得更高的运行速度，但不支持动态换装，只能在创建时设置换装
    * CCHierarchiesSpriteDynamic类支持动态换装，但性能一般，不适合同屏大量使用
 
+
+Action类
+----------------
+   * CCHierarchiesAnimate类用于播放动画
+   * CCHierarchiesFlipX, CCHierarchiesFlipY用于翻转
+   * CCHierarchiesAvatarMapReset, CCHierarchiesAvatarMapInsert, CCHierarchiesAvatarMapSet用于换装操作(只能用于CCHierarchiesSpriteDynamic)
 
 功能
 -------------------
@@ -88,7 +94,10 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
 -----------------
    * 在程序启动时调用`CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->initializationRuntime();`
    * 通过`CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->releaseUnusedResource();`释放缓存的数据
-   * 具体播放动画的使用方法见demo的测试代码
+   * 具体播放动画和Action的使用方法见demo的测试代码
+   * 制作Flash FLA动画资源时，可换装部位的动画需要用Movie Clip来制作
+   * 通过在创建CCHierarchiesSprite, CCHierarchiesSpriteDynamic时使用带有AvatarMapType参数的构造函数，或者通过CCHierarchiesSpriteDynamic的setAvatarMap函数来设置换装部位名字映射(AvatarMapType类型用于设置换装部位名字的映射，实质是std::unordered_map<std::string, std::string>类型)
+   * 注意由于CCHierarchiesSprite使用了动画数据缓存，所以如果多个对象即使是同一个动画但使用了不同换装配置的话，会缓存多份动画数据消耗更多的内存，相同换装配置会共用一份缓存
 
 
 工具
