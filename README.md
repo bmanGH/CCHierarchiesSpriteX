@@ -44,6 +44,8 @@ render flash animation in cocos2d-x, a animation sprite extension for cocos2d-x,
    * 支持内嵌声音播放数据
    * 支持滤镜
    * 支持骨骼的CCNode插接
+   * 支持button
+   * 支持action script version 1
    * ~~合并同一个fla导出的所有.hanims数据到一个文件~~
    * ~~改善Mesh的数据结构，更有效的使用vertex index~~
 

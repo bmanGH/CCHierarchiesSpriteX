@@ -231,10 +231,10 @@
 				06EA2257185172ED00BC47F8 /* MainMenu.h */,
 				064C5C8F1810623D0070FBA9 /* CCHierarchiesSpriteTestScene.cpp */,
 				064C5C901810623D0070FBA9 /* CCHierarchiesSpriteTestScene.h */,
-				06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */,
-				06EA225118516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.h */,
 				0611762C1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.cpp */,
 				0611762D1851FA90009D3216 /* CCHierarchiesSpriteDynamicTestScene.h */,
+				06EA225018516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.cpp */,
+				06EA225118516F5900BC47F8 /* CCHierarchiesSpriteAvatarTestScene.h */,
 				0611762F1851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.cpp */,
 				061176301851FAA4009D3216 /* CCHierarchiesSpriteActionTestScene.h */,
 			);

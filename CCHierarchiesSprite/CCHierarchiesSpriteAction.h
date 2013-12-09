@@ -116,8 +116,7 @@ public:
     bool init (const char* avatarMapFrom, const char* avatarMapTo);
     
     virtual void update (float time);
-    virtual CCFiniteTimeAction * reverse ();
-    virtual CCObject* copyWithZone (CCZone *pZone);
+    virtual CCObject* copyWithZone (CCZone *zone);
 	
 };
 
@@ -130,9 +129,10 @@ public:
     CCHierarchiesAvatarMapReset () {}
     virtual ~CCHierarchiesAvatarMapReset () {}
     
+    bool init ();
+    
     virtual void update (float time);
-    virtual CCFiniteTimeAction * reverse ();
-    virtual CCObject* copyWithZone (CCZone *pZone);
+    virtual CCObject* copyWithZone (CCZone *zone);
 	
 };
 
@@ -151,8 +151,7 @@ public:
     bool init (const AvatarMapType& avatarMap);
     
     virtual void update (float time);
-    virtual CCFiniteTimeAction * reverse ();
-    virtual CCObject* copyWithZone (CCZone *pZone);
+    virtual CCObject* copyWithZone (CCZone *zone);
 	
 };
 

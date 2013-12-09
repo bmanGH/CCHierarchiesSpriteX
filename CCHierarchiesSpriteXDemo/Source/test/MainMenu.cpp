@@ -9,6 +9,8 @@
 
 #include "MainMenu.h"
 #include "CCHierarchiesSpriteTestScene.h"
+#include "CCHierarchiesSpriteDynamicTestScene.h"
+#include "CCHierarchiesSpriteActionTestScene.h"
 #include "CCHierarchiesSpriteAvatarTestScene.h"
 
 CCScene* MainMenu::scene()
@@ -40,11 +42,19 @@ bool MainMenu::init()
     CCMenuItemLabel* menuItem1 = CCMenuItemLabel::create(menuLabel1, this, menu_selector(MainMenu::onMenuItemClick));
     menuItem1->setTag(101);
     
-    CCLabelTTF* menuLabel2 = CCLabelTTF::create("CCHierarchiesSprite Avatar Test", "Arial", 24);
+    CCLabelTTF* menuLabel2 = CCLabelTTF::create("CCHierarchiesSpriteDynamic Animation Test", "Arial", 24);
     CCMenuItemLabel* menuItem2 = CCMenuItemLabel::create(menuLabel2, this, menu_selector(MainMenu::onMenuItemClick));
     menuItem2->setTag(102);
     
-    CCMenu* menu = CCMenu::create(menuItem1, menuItem2, NULL);
+    CCLabelTTF* menuLabel3 = CCLabelTTF::create("CCHierarchiesSprite Avatar Test", "Arial", 24);
+    CCMenuItemLabel* menuItem3 = CCMenuItemLabel::create(menuLabel3, this, menu_selector(MainMenu::onMenuItemClick));
+    menuItem3->setTag(103);
+    
+    CCLabelTTF* menuLabel4 = CCLabelTTF::create("CCHierarchiesSprite Action Test", "Arial", 24);
+    CCMenuItemLabel* menuItem4 = CCMenuItemLabel::create(menuLabel4, this, menu_selector(MainMenu::onMenuItemClick));
+    menuItem4->setTag(104);
+    
+    CCMenu* menu = CCMenu::create(menuItem1, menuItem2, menuItem3, menuItem4, NULL);
     menu->alignItemsVerticallyWithPadding(40);
     menu->setPosition(ccp(winSize.width / 2, winSize.height / 2));
     this->addChild(menu);
@@ -61,7 +71,17 @@ void MainMenu::onMenuItemClick (CCObject* sender) {
             break;
         }
         case 102: {
+            CCScene* scene = CCHierarchiesSpriteDynamicTestScene::scene();
+            CCDirector::sharedDirector()->pushScene(scene);
+            break;
+        }
+        case 103: {
             CCScene* scene = CCHierarchiesSpriteAvatarTestScene::scene();
+            CCDirector::sharedDirector()->pushScene(scene);
+            break;
+        }
+        case 104: {
+            CCScene* scene = CCHierarchiesSpriteActionTestScene::scene();
             CCDirector::sharedDirector()->pushScene(scene);
             break;
         }

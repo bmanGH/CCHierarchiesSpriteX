@@ -39,8 +39,6 @@ bool CCHierarchiesSpriteTestScene::init()
         return false;
     }
     
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    
     this->setTouchEnabled(true);
     
     this->scheduleUpdate();
@@ -77,17 +75,17 @@ void CCHierarchiesSpriteTestScene::draw () {
 
 void CCHierarchiesSpriteTestScene::ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent) {
     // 点击测试
-//    CCTouch* touch = (CCTouch*)pTouches->anyObject();
-//    CCPoint touchPoint = touch->getLocation();
-//    CCLOG("hit at %f, %f", touchPoint.x, touchPoint.y);
-//    
-//    CCObject* iter = NULL;
-//    CCARRAY_FOREACH(_hSprites, iter) {
-//        CCHierarchiesSprite* spr = dynamic_cast<CCHierarchiesSprite*>(iter);
-//        if (spr && spr->boundingBox().containsPoint(touchPoint)) {
-//            CCLOG("hit %s with %u * fxattack", spr->getAnimationName(), spr->getEventContentCount("fxattack"));
-//        }
-//    }
+    CCTouch* touch = (CCTouch*)pTouches->anyObject();
+    CCPoint touchPoint = touch->getLocation();
+    CCLOG("hit at %f, %f", touchPoint.x, touchPoint.y);
+    
+    CCObject* iter = NULL;
+    CCARRAY_FOREACH(_hSprites, iter) {
+        CCHierarchiesSprite* spr = dynamic_cast<CCHierarchiesSprite*>(iter);
+        if (spr && spr->boundingBox().containsPoint(touchPoint)) {
+            CCLOG("hit %s with %u * fxattack", spr->getAnimationName(), spr->getEventContentCount("fxattack"));
+        }
+    }
     
     // 资源管理测试
     if (_hSprites->count() > 0) {
@@ -158,19 +156,13 @@ void CCHierarchiesSpriteTestScene::loadSprites () {
                     break;
                 }
                 case 2: {
-                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_zhangfei/zhangfeiquan.hsheet",
-                                                      "test_new_anim/hanim_test_zhangfei/zhangfeiquan.hanims",
+                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hsheet",
+                                                      "test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hanims",
                                                       this);
-//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hsheet",
-//                                                      "test_new_anim/hanim_test_xiahouyuan/xiahouyuanquan.hanims",
-//                                                      this);
                     spr->setFlipX(true);
                     break;
                 }
                 case 3: {
-//                    spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_baoxiang/chest_fx.hsheet",
-//                                                      "test_new_anim/hanim_test_baoxiang/chest_fx.hanims",
-//                                                      this);
                     spr = CCHierarchiesSprite::create("test_new_anim/hanim_test_zhangjiao/zhangjiaoquan.hsheet",
                                                       "test_new_anim/hanim_test_zhangjiao/zhangjiaoquan.hanims",
                                                       this);
@@ -182,7 +174,6 @@ void CCHierarchiesSpriteTestScene::loadSprites () {
             spr->setPosition(ccp(winSize.width / (SPRITE_ARRAY_COL_COUNT + 1) * j, winSize.height / (SPRITE_ARRAY_ROW_COUNT + 1) * i));
             
             CCAction* action = NULL;
-//            action = CCHierarchiesAnimate::createWholeAnimation(spr->getAnimationName());
             action = CCRepeatForever::create(CCHierarchiesAnimate::createWholeAnimation(spr->getAnimationName()));
             spr->runAction(action);
             

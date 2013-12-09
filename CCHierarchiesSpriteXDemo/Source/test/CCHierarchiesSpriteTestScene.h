@@ -13,7 +13,6 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include "CCHierarchiesSprite.h"
-#include "CCHierarchiesSpriteDynamic.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;

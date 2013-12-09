@@ -12,30 +12,8 @@
 #include "CCHierarchiesSpriteRuntime.h"
 #include "json/json.h"
 #include <fstream>
+#include "Utils.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#   include <mach/mach.h>
-#endif
-
-USING_NS_CC;
-USING_NS_CC_EXT;
-
-static void report_memory (void) {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    struct task_basic_info info;
-    mach_msg_type_number_t size = sizeof(info);
-    kern_return_t kerr = task_info(mach_task_self(),
-                                   TASK_BASIC_INFO,
-                                   (task_info_t)&info,
-                                   &size);
-    if( kerr == KERN_SUCCESS ) {
-        CCLOG("Memory in use %u : %uKB : %uMB", info.resident_size, info.resident_size / 1024, info.resident_size / 1024 / 1024);
-        CCLOG("VM in use %u : %uKB : %uMB", info.virtual_size, info.virtual_size / 1024, info.virtual_size / 1024 / 1024);
-    } else {
-        CCLOG("Error with task_info(): %s", mach_error_string(kerr));
-    }
-#endif
-}
 
 CCScene* CCHierarchiesSpriteAvatarTestScene::scene()
 {
@@ -62,8 +40,6 @@ bool CCHierarchiesSpriteAvatarTestScene::init()
     {
         return false;
     }
-    
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     
     this->setTouchEnabled(true);
     
@@ -240,8 +216,7 @@ void CCHierarchiesSpriteAvatarTestScene::loadSprites () {
         spr->setPosition(ccp(winSize.width / (SPRITE_ARRAY_COL_COUNT + 1) * j, winSize.height / 2));
         
         CCAction* action = NULL;
-        CCHierarchiesAnimate* animate = CCHierarchiesAnimate::createWholeAnimation(spr->getAnimationName());
-        action = CCRepeatForever::create(CCSequence::create(animate, animate->reverse(), NULL));
+        action = CCRepeatForever::create(CCHierarchiesAnimate::createWholeAnimation(spr->getAnimationName()));
         spr->runAction(action);
         
         spr->setZOrder(SPRITE_ARRAY_COL_COUNT + j);
