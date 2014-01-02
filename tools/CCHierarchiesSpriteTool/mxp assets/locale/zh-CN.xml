@@ -5,4 +5,5 @@
 	<string key="skip_export_bitmap_checkbox"><![CDATA[不导出位图]]></string>
 	<string key="skip_export_filter_checkbox"><![CDATA[不导出滤镜]]></string>
 	<string key="pack_image_sheet_checkbox"><![CDATA[打包排序图片]]></string>
+	<string key="skip_break_apart_bitmap_checkbox"><![CDATA[不打散位图]]></string>
 </locale>

@@ -50,7 +50,7 @@ var ITEMS_ATLAS_MAX_WIDTH = 2048;								// export sprite sheet image width
 var ITEMS_SPACING = 4;											// export sprite sheet iamge spacing
 var IGNORE_ITEM_NAME_PREFIX = "IGNORE__";						// ignore item name prefix
 
-var SKIP_EXPORT_BITMAP = false;									// don't export bitmap if 'true'
+var SKIP_EXPORT_BITMAP = true;									// don't export bitmap if 'true'
 var SKIP_EXPORT_FILTER = true;									// don't export filter if 'true'
 var EXPORT_PACK_IMAGE_SHEET = true;							// export packed image sheet if 'true'
 
@@ -585,6 +585,7 @@ function buildKeyFrame (doc, timeline, layer, j, spriteData, lastKeyFrame) {
 
 			if (SKIP_EXPORT_BITMAP && 
 				frame.elements[k].instanceType == "bitmap") {
+				//NEEDFIX: wrong position when using transform
 				fl.trace("WARNING: " + layer.name + "[" + j + "][" + k + "] is a bitmap instance");
 				alert("WARNING: " + layer.name + "[" + j + "][" + k + "] is a bitmap instance");
 			}

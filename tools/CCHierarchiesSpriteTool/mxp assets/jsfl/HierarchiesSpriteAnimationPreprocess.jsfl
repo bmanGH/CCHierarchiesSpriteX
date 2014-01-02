@@ -14,6 +14,7 @@ var GRAPHIC_ITEM_NAME_PREFIX = "GRAPHIC__";				// graphic item name prefix
 var IGNORE_ITEM_NAME_PREFIX = "IGNORE__"; 				// ignore item name prefix
 
 var SKIP_ConvertGuidedFramesToKeyframes = true;		// skip convert guided frames to key frames if 'true'
+var SKIP_BreakApartBitmap = false;					// skip break apart bitmap if 'true'
 
 //------------------------------------
 
@@ -215,6 +216,46 @@ function convertShapeToGraphic (doc, timeline, layer, frame_index) {
 
 //------------- Preprocesser -----------------
 
+function preprocessSprite_breakApartBitmap (doc, spriteItem) {
+	var timeline = spriteItem.timeline;
+
+	// iterates layer data
+	for (var i = 0; i < timeline.layers.length; i++) {
+		if (timeline.layers[i].layerType == "guide") {
+			continue;
+		}
+		else if (timeline.layers[i].layerType == "mask") {
+			continue;
+		}
+		else if (timeline.layers[i].layerType == "masked") {
+			continue;
+		}
+		else if (timeline.layers[i].layerType == "folder") {
+			continue;
+		}
+
+		var layer = timeline.layers[i];
+		for (var j = 0; j < layer.frames.length; j++) {
+			// preprocess key frame data
+			if (layer.frames[j].startFrame == j) { // is key frame
+				// break apart bitmap in key frame
+				for (var k = 0; k < layer.frames[j].elements.length; k++) {
+					if (layer.frames[j].elements[k].elementType == "instance" &&
+						layer.frames[j].elements[k].instanceType == "bitmap") {
+						fl.trace("  break apart bitmap at layer[" + layer.name + "] frame[" + j + "] element[" + k + "]");
+						doc.selection = [layer.frames[j].elements[k]];
+						doc.breakApart();
+						doc.selectNone();
+					}
+				} // preprocess elements END
+			}
+		} // preprocess key frame END
+
+	} // preprocess layer data END
+
+	return true;
+}
+
 function preprocessSprite_convertShapeToGraphic (doc, spriteItem) {
 	var timeline = spriteItem.timeline;
 
@@ -342,8 +383,9 @@ function preprocessSprite_convertGuidedFramesToKeyframes (doc, spriteItem) {
 
 //------------- Main -----------------
 
-function main (skip_convert_guided_frames_key_frames) {
+function main (skip_convert_guided_frames_key_frames, skip_break_apart_bitmap) {
 	SKIP_ConvertGuidedFramesToKeyframes = skip_convert_guided_frames_key_frames;
+	SKIP_BreakApartBitmap = skip_break_apart_bitmap;
 
 	// init
 	var doc = fl.getDocumentDOM(); // current document
@@ -351,6 +393,23 @@ function main (skip_convert_guided_frames_key_frames) {
 	var lib = doc.library; // library of current document
 
 	//!!! the order of converter is important
+	if (!SKIP_BreakApartBitmap) {
+		fl.trace("break apart bitmap start");
+		for (var iii = 0; iii < lib.items.length; iii++) {
+			var item = lib.items[iii];
+			var customItemType = getCustomItemType(item);
+			if (customItemType == "sprite") {
+				var msg = "=============== preprocess sprite: " + item.name;
+				fl.trace(msg);
+				lib.editItem(item.name);
+				doc.selectNone();
+				preprocessSprite_breakApartBitmap(doc, item);
+				fl.trace("============================\n");
+			}
+		}
+		fl.trace("break apart bitmap end");
+	}
+
 	fl.trace("convert shape to graphic start");
 	preprocessItems = {};
 
@@ -483,4 +542,5 @@ function main (skip_convert_guided_frames_key_frames) {
 
 //-------------------------------------
 
-// main (SKIP_ConvertGuidedFramesToKeyframes);
+// main (SKIP_ConvertGuidedFramesToKeyframes,
+// 		SKIP_BreakApartBitmap);
