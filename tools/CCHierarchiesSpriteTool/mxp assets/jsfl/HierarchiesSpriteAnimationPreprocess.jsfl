@@ -243,6 +243,8 @@ function preprocessSprite_breakApartBitmap (doc, spriteItem) {
 					if (layer.frames[j].elements[k].elementType == "instance" &&
 						layer.frames[j].elements[k].instanceType == "bitmap") {
 						fl.trace("  break apart bitmap at layer[" + layer.name + "] frame[" + j + "] element[" + k + "]");
+						timeline.currentLayer = i;
+						timeline.currentFrame = j;
 						doc.selection = [layer.frames[j].elements[k]];
 						doc.breakApart();
 						doc.selectNone();
