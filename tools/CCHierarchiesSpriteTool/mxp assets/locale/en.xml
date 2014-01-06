@@ -5,5 +5,5 @@
 	<string key="skip_export_bitmap_checkbox"><![CDATA[skip export bitmap]]></string>
 	<string key="skip_export_filter_checkbox"><![CDATA[skip export filter]]></string>
 	<string key="pack_image_sheet_checkbox"><![CDATA[pack image sheet]]></string>
-	<string key="skip_break_apart_bitmap_checkbox"><![CDATA[skip break apart bitmap checkbox]]></string>
+	<string key="skip_break_apart_bitmap_checkbox"><![CDATA[skip break apart bitmap]]></string>
 </locale>
