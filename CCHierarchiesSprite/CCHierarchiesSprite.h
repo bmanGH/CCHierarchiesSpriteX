@@ -19,9 +19,7 @@ class CCHierarchiesSpriteRuntime;
 class CC_DLL CCHierarchiesSprite : public CCHierarchiesSpriteBase {
     
 protected:
-    std::string _cacheKey;
-    
-    virtual void setup ();
+    std::string _cacheKey; // key for mesh data cache (use in CCHierarchiesSpriteRuntime)
 	
 public:
     CCHierarchiesSprite ();

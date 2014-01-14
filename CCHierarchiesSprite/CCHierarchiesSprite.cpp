@@ -117,14 +117,6 @@ bool CCHierarchiesSprite::initWithFileAndAvatar (const char* sheetFileName,
     return false;
 }
 
-void CCHierarchiesSprite::setup () {
-    CCHierarchiesSpriteBase::setup();
-    
-    CCHierarchiesSpriteRuntime::AnimationCacheHashItem* cacheItem = CCHierarchiesSpriteRuntime::sharedHierarchiesSpriteRuntime()->getCacheItem(this);
-    _mesh = cacheItem->sharedMesh;
-    CC_SAFE_RETAIN(_mesh);
-}
-
 
 #pragma mark - Animation
 

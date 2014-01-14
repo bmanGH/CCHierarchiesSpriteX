@@ -44,6 +44,7 @@
 //  version 0.43x   12/3/2013   remove setSpriteFile functions
 //  version 0.50x   12/3/2013   add dynamic sprite type to calculate quads in runtime, add avatar support
 //  version 0.51x   12/6/2013   add reverse animation play, flip, avatar actions
+//  version 0.52x   1/14/2014   merge setup & shutdown to constructor & destructor
 //
 //  Created by bman <zx123xz321hm3@hotmail.com>.
 //  Copyright (c) 2013. All rights reserved.
@@ -186,8 +187,6 @@ protected:
 	virtual void updateBlendFunc ();
 //    virtual void updateSocketElements ();
 //    virtual void updateSocketFilters ();
-    virtual void setup ();
-    virtual void shutdown ();
     
     CCHierarchiesSpriteBase ();
     virtual ~CCHierarchiesSpriteBase ();
@@ -209,9 +208,6 @@ public:
                                         const char* animationFileNameSub,
                                         CCHierarchiesSpriteEventDelegate* delegate,
                                         const AvatarMapType& avatarMap);
-    
-    virtual void onEnter ();
-    virtual void onExit ();
 	
 	const char* getSheetName ();
 	const char* getAnimationName ();

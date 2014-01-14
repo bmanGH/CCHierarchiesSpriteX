@@ -90,12 +90,16 @@ void CCHierarchiesSpriteRuntime::cacheStaticAnimationData (CCHierarchiesSprite* 
                                             avatarMap);
         }
         newCache->sharedMesh->flushAllQuadsToBuffer();
+        hashItem = newCache;
 	}
 	else {
 		hashItem->retainCount++;
 	}
     
     sprite->_cacheKey = cacheKey;
+    CC_SAFE_RELEASE(sprite->_mesh);
+    sprite->_mesh = hashItem->sharedMesh;
+    CC_SAFE_RETAIN(sprite->_mesh);
 }
 
 void CCHierarchiesSpriteRuntime::removeStaticAnimationData (CCHierarchiesSprite* sprite) {

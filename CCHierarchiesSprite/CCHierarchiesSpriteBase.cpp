@@ -274,6 +274,18 @@ _flipX(false), _flipY(false), _bbox(CCRectZero), _uniformColorLocation(0) {
 }
 
 CCHierarchiesSpriteBase::~CCHierarchiesSpriteBase () {
+    CC_SAFE_RELEASE_NULL(_texture);
+    CC_SAFE_RELEASE_NULL(_mesh);
+    
+//    // clear sub sprites
+//    std::unordered_map<int, SubSpriteSocket>::iterator subSpritesIter;
+//    for (subSpritesIter = _subSprites.begin(); subSpritesIter != _subSprites.end(); subSpritesIter++) {
+//        subSpritesIter->second.subSprite->shutdown();
+//        subSpritesIter->second.subSprite->release();
+//        subSpritesIter->second.subSprite = NULL;
+//    }
+//    _subSprites.clear();
+    
     CCHierarchiesSpriteSheetCache::sharedHierarchiesSpriteSheetCache()->removeSpriteSheet(_sheetName.c_str());
     CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->removeAnimation(_animationName.c_str());
 }
@@ -357,6 +369,18 @@ bool CCHierarchiesSpriteBase::initWithFileAndAvatar (const char* sheetFileName,
         _sheet = CCHierarchiesSpriteSheetCache::sharedHierarchiesSpriteSheetCache()->addSpriteSheet(sheetFileName);
         _animation = CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->addAnimation(_animationName.c_str());
         
+        // image should load from the same directory with spritesheet file
+        std::string imageName(_sheet->getImageName());
+        size_t found = _sheetName.find_last_of(HIERARCHIES_SPRITE_PATH_SEPARATOR);
+        if (found != std::string::npos)
+            imageName = _sheetName.substr(0, found + 1) + imageName;
+        
+        _texture = CCTextureCache::sharedTextureCache()->addImage(imageName.c_str());
+        CC_SAFE_RETAIN(_texture);
+        
+        this->updateBlendFunc();
+        this->updateOpacityModifyRGB();
+        
         return true;
     }
     return false;
@@ -405,48 +429,6 @@ bool CCHierarchiesSpriteBase::getFlipY () {
 void CCHierarchiesSpriteBase::setFlipY (bool value) {
     _flipY = value;
     m_bTransformDirty = m_bInverseDirty = true;
-}
-
-
-#pragma mark - Setup and shutdown
-
-void CCHierarchiesSpriteBase::onEnter () {
-    CCNode::onEnter();
-    this->setup();
-    this->freshCurrentFrame();
-}
-
-void CCHierarchiesSpriteBase::onExit () {
-    CCNode::onExit();
-    this->shutdown();
-}
-
-void CCHierarchiesSpriteBase::setup () {
-    // image should load from the same directory with spritesheet file
-    std::string imageName(_sheet->getImageName());
-    size_t found = _sheetName.find_last_of(HIERARCHIES_SPRITE_PATH_SEPARATOR);
-    if (found != std::string::npos)
-        imageName = _sheetName.substr(0, found + 1) + imageName;
-    
-    _texture = CCTextureCache::sharedTextureCache()->addImage(imageName.c_str());
-    CC_SAFE_RETAIN(_texture);
-    
-	this->updateBlendFunc();
-	this->updateOpacityModifyRGB();
-}
-
-void CCHierarchiesSpriteBase::shutdown() {
-    CC_SAFE_RELEASE_NULL(_texture);
-    CC_SAFE_RELEASE_NULL(_mesh);
-    
-//    // clear sub sprites
-//    std::unordered_map<int, SubSpriteSocket>::iterator subSpritesIter;
-//    for (subSpritesIter = _subSprites.begin(); subSpritesIter != _subSprites.end(); subSpritesIter++) {
-//        subSpritesIter->second.subSprite->shutdown();
-//        subSpritesIter->second.subSprite->release();
-//        subSpritesIter->second.subSprite = NULL;
-//    }
-//    _subSprites.clear();
 }
 
 
