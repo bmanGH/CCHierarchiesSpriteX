@@ -178,7 +178,7 @@ function convertGuidedFramesToKeyframes (timeline, layer_index) {
 	}
 }
 
-function convertShapeToGraphic (doc, timeline, layer, frame_index) {
+function convertShapeToGraphic (doc, timeline, layer, layer_index, frame_index) {
 	for (var k = 0; k < layer.frames[frame_index].elements.length; k++) {
 		if (layer.frames[frame_index].elements[k].elementType == "shape" || 
 			layer.frames[frame_index].elements[k].elementType == "shapeObj") {
@@ -186,9 +186,8 @@ function convertShapeToGraphic (doc, timeline, layer, frame_index) {
 			var origDepth = layer.frames[frame_index].elements[k].depth;
 
 			//!!! here must select item, layer, frame and element for conver to symbol to work correct
-			var layer_index = timeline.findLayerIndex(layer.name);
-			timeline.currentLayer = layer_index;
-			timeline.currentFrame = frame_index;
+			timeline.setSelectedLayers(layer_index, true);
+			timeline.setSelectedFrames(frame_index, frame_index, true);
 			doc.selection = [timeline.layers[layer_index].frames[frame_index].elements[k]];
 			var convertedSymbolItem = doc.convertToSymbol("graphic", GRAPHIC_ITEM_NAME_PREFIX + graphicItemNumber, "center");
 			graphicItemNumber++;
@@ -243,8 +242,8 @@ function preprocessSprite_breakApartBitmap (doc, spriteItem) {
 					if (layer.frames[j].elements[k].elementType == "instance" &&
 						layer.frames[j].elements[k].instanceType == "bitmap") {
 						fl.trace("  break apart bitmap at layer[" + layer.name + "] frame[" + j + "] element[" + k + "]");
-						timeline.currentLayer = i;
-						timeline.currentFrame = j;
+						timeline.setSelectedLayers(i, true);
+						timeline.setSelectedFrames(j, j, true);
 						doc.selection = [layer.frames[j].elements[k]];
 						doc.breakApart();
 						doc.selectNone();
@@ -283,7 +282,7 @@ function preprocessSprite_convertShapeToGraphic (doc, spriteItem) {
 			// preprocess key frame data
 			if (layer.frames[j].startFrame == j) { // is key frame
 				// convert shape to symbol in key frame
-				if (convertShapeToGraphic(doc, timeline, layer, j) == false)
+				if (convertShapeToGraphic(doc, timeline, layer, i, j) == false)
 					return false;
 			}
 		} // preprocess key frame END
