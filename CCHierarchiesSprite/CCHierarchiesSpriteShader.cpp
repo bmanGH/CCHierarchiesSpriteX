@@ -11,6 +11,9 @@
 #define STRINGIZE(x) #x
 #define SHADER_STRING(x) STRINGIZE(x)
 
+#ifdef GL_ES_VERSION_2_0
+#define GL_ES
+#endif
 
 #pragma mark - Non-Filter vertex shader
 
