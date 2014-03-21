@@ -59,7 +59,11 @@ void CCHierarchiesSpriteRuntime::cacheStaticAnimationData (CCHierarchiesSprite* 
     for (avatarMapIter = avatarMap.cbegin(); avatarMapIter != avatarMap.cend(); avatarMapIter++) {
         avatarMapString += avatarMapIter->second + ";";
     }
-    cacheKey += "+" + std::to_string(std::hash<std::string>()(avatarMapString));
+    // std::to_string is not supported on android, using std::stringstream instead.
+    std::stringstream ss;
+    ss << std::hash<std::string>()(avatarMapString);
+    cacheKey += "+" + ss.str();
+//    cacheKey += "+" + std::to_string(std::hash<std::string>()(avatarMapString));
     
 	AnimationCacheHashItem* hashItem = NULL;
 	HASH_FIND_STR(_animationCache, cacheKey.c_str(), hashItem);

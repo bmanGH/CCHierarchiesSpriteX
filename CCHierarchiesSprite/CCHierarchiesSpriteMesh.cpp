@@ -101,7 +101,7 @@ bool CCHierarchiesSpriteMesh::initWithCapacity(unsigned int capacity)
     // listen the event when app go to background
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
                                                                   callfuncO_selector(CCHierarchiesSpriteMesh::listenBackToForeground),
-                                                                  EVNET_COME_TO_FOREGROUND,
+                                                                  EVENT_COME_TO_FOREGROUND,
                                                                   NULL);
 #endif
     
