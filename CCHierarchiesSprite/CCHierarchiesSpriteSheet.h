@@ -1,17 +1,16 @@
 //
 //  CCHierarchiesSpriteSheet.h
-//  CCHierarchiesSprite
+//  HierarchiesSpriteDemo
 //
-//  Created by bman <zx123xz321hm3@hotmail.com>.
-//  Copyright (c) 2013. All rights reserved.
+//  Created by xuxiaocheng on 10/23/14.
+//
 //
 
-#ifndef _CCHierarchiesSpriteSheet_H_
-#define _CCHierarchiesSpriteSheet_H_
+#ifndef __HierarchiesSpriteDemo__CCHierarchiesSpriteSheet__
+#define __HierarchiesSpriteDemo__CCHierarchiesSpriteSheet__
 
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
-#include "CCHierarchiesSpriteConfig.h"
 #include <string>
 #include <unordered_map>
 #include "rapidxml.hpp"
@@ -80,4 +79,4 @@ public:
 
 NS_CC_EXT_END
 
-#endif
+#endif /* defined(__HierarchiesSpriteDemo__CCHierarchiesSpriteSheet__) */

@@ -17,6 +17,7 @@
 		A07A52BF1783AF210073F6A7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07A52B91783AE900073F6A7 /* OpenGLES.framework */; };
 		A07A52C01783AF250073F6A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07A52B71783AE6D0073F6A7 /* UIKit.framework */; };
 		A07A52C31783B02C0073F6A7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07A52C11783B01F0073F6A7 /* AVFoundation.framework */; };
+		D41B6B8F19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */; };
 		D43AC3E519F7A69C00A3AA0C /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = D43AC3E419F7A69C00A3AA0C /* Resource */; };
 		D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D43AC3EA19F7A6E000A3AA0C /* AppController.mm */; };
 		D43AC3EF19F7A6E000A3AA0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AC3EB19F7A6E000A3AA0C /* main.m */; };
@@ -40,6 +41,14 @@
 		D43AC41719F7A99200A3AA0C /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D43AC41519F7A99200A3AA0C /* AppDelegate.cpp */; };
 		D43AC41A19F7AE2300A3AA0C /* DemoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D43AC41819F7AE2300A3AA0C /* DemoScene.cpp */; };
 		D43AC41C19F7B11D00A3AA0C /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43AC3E219F7A65100A3AA0C /* libcocos2d iOS.a */; };
+		D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630619F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp */; };
+		D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630919F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp */; };
+		D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */; };
+		D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */; };
+		D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */; };
+		D464632619F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */; };
+		D464632919F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */; };
+		D464632C19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */; };
 		D60AE43417F7FFE100757E4B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60AE43317F7FFE100757E4B /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +125,8 @@
 		A07A52B91783AE900073F6A7 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		A07A52BB1783AEB80073F6A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		A07A52C11783B01F0073F6A7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteShader.cpp; sourceTree = "<group>"; };
+		D41B6B8E19F8D86100E2970A /* CCHierarchiesSpriteShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteShader.h; sourceTree = "<group>"; };
 		D43AC3DA19F7A65000A3AA0C /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = "../../cocos2d-x/build/cocos2d_libs.xcodeproj"; sourceTree = "<group>"; };
 		D43AC3E419F7A69C00A3AA0C /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resource; path = ../Resource; sourceTree = "<group>"; };
 		D43AC3E919F7A6E000A3AA0C /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
@@ -144,6 +155,27 @@
 		D43AC41819F7AE2300A3AA0C /* DemoScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DemoScene.cpp; sourceTree = "<group>"; };
 		D43AC41919F7AE2300A3AA0C /* DemoScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoScene.h; sourceTree = "<group>"; };
 		D43AC41B19F7AFC500A3AA0C /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		D464630619F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteAnimation.cpp; sourceTree = "<group>"; };
+		D464630719F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteAnimation.h; sourceTree = "<group>"; };
+		D464630919F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteSheet.cpp; sourceTree = "<group>"; };
+		D464630A19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteSheet.h; sourceTree = "<group>"; };
+		D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteRuntime.cpp; sourceTree = "<group>"; };
+		D464630D19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteRuntime.h; sourceTree = "<group>"; };
+		D464631519F8B45F001CDA91 /* rapidxml.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml.hpp; sourceTree = "<group>"; };
+		D464631619F8B45F001CDA91 /* rapidxml_iterators.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_iterators.hpp; sourceTree = "<group>"; };
+		D464631719F8B45F001CDA91 /* rapidxml_print.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_print.hpp; sourceTree = "<group>"; };
+		D464631819F8B45F001CDA91 /* rapidxml_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rapidxml_utils.hpp; sourceTree = "<group>"; };
+		D464631C19F8B905001CDA91 /* CCHierarchiesSpriteMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteMath.h; sourceTree = "<group>"; };
+		D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteReader.cpp; sourceTree = "<group>"; };
+		D464631F19F8C387001CDA91 /* CCHierarchiesSpriteReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteReader.h; sourceTree = "<group>"; };
+		D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteAction.cpp; sourceTree = "<group>"; };
+		D464632219F8C427001CDA91 /* CCHierarchiesSpriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteAction.h; sourceTree = "<group>"; };
+		D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteBase.cpp; sourceTree = "<group>"; };
+		D464632519F8D6C1001CDA91 /* CCHierarchiesSpriteBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteBase.h; sourceTree = "<group>"; };
+		D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteStatic.cpp; sourceTree = "<group>"; };
+		D464632819F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteStatic.h; sourceTree = "<group>"; };
+		D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteDynamic.cpp; sourceTree = "<group>"; };
+		D464632B19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteDynamic.h; sourceTree = "<group>"; };
 		D60AE43317F7FFE100757E4B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		EDCC747E17C455FD007B692C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -195,6 +227,8 @@
 				D43AC3DA19F7A65000A3AA0C /* cocos2d_libs.xcodeproj */,
 				D43AC3E319F7A66600A3AA0C /* ios */,
 				D43AC3E619F7A6A400A3AA0C /* Source */,
+				D464630419F8B078001CDA91 /* CCHierarchiesSprite */,
+				D464631219F8B45F001CDA91 /* rapidxml */,
 				D43AC3E419F7A69C00A3AA0C /* Resource */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -322,6 +356,45 @@
 			name = res;
 			sourceTree = "<group>";
 		};
+		D464630419F8B078001CDA91 /* CCHierarchiesSprite */ = {
+			isa = PBXGroup;
+			children = (
+				D464631C19F8B905001CDA91 /* CCHierarchiesSpriteMath.h */,
+				D464630619F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp */,
+				D464630719F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.h */,
+				D464630919F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp */,
+				D464630A19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.h */,
+				D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */,
+				D464631F19F8C387001CDA91 /* CCHierarchiesSpriteReader.h */,
+				D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */,
+				D464630D19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.h */,
+				D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */,
+				D464632519F8D6C1001CDA91 /* CCHierarchiesSpriteBase.h */,
+				D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */,
+				D464632819F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.h */,
+				D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */,
+				D464632B19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.h */,
+				D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */,
+				D464632219F8C427001CDA91 /* CCHierarchiesSpriteAction.h */,
+				D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */,
+				D41B6B8E19F8D86100E2970A /* CCHierarchiesSpriteShader.h */,
+			);
+			name = CCHierarchiesSprite;
+			path = ../../CCHierarchiesSprite;
+			sourceTree = "<group>";
+		};
+		D464631219F8B45F001CDA91 /* rapidxml */ = {
+			isa = PBXGroup;
+			children = (
+				D464631519F8B45F001CDA91 /* rapidxml.hpp */,
+				D464631619F8B45F001CDA91 /* rapidxml_iterators.hpp */,
+				D464631719F8B45F001CDA91 /* rapidxml_print.hpp */,
+				D464631819F8B45F001CDA91 /* rapidxml_utils.hpp */,
+			);
+			name = rapidxml;
+			path = ../../rapidxml;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -428,10 +501,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				D43AC41A19F7AE2300A3AA0C /* DemoScene.cpp in Sources */,
+				D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */,
+				D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */,
 				D43AC41719F7A99200A3AA0C /* AppDelegate.cpp in Sources */,
 				D43AC3EF19F7A6E000A3AA0C /* main.m in Sources */,
+				D41B6B8F19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp in Sources */,
+				D464632619F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp in Sources */,
+				D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */,
 				D43AC3F019F7A6E000A3AA0C /* RootViewController.mm in Sources */,
+				D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */,
+				D464632C19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp in Sources */,
+				D464632919F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp in Sources */,
+				D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +546,7 @@
 				SDKROOT = iphoneos;
 				STRIP_STYLE = all;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios/Simulation $(SRCROOT)/../../rapidxml";
 				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Debug;
@@ -487,7 +569,7 @@
 				SDKROOT = iphoneos;
 				STRIP_STYLE = all;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios/Simulation";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../../cocos2d-x/cocos/platform/ios $(SRCROOT)/../../cocos2d-x/cocos/platform/ios/Simulation $(SRCROOT)/../../rapidxml";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 arm64";
 			};

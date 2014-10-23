@@ -1,0 +1,48 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Test/TestElement1" itemID="544876c0-0000026b" lastModified="1414035237">
+  <timeline>
+    <DOMTimeline name="TestElement1">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" selected="true" symbolType="graphic" centerPoint3DX="-278" centerPoint3DY="-13" loop="loop">
+                  <matrix>
+                    <Matrix d="1.50001525878906" tx="-301" ty="15.55"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="23" y="-19.05"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" symbolType="graphic" centerPoint3DX="60" centerPoint3DY="-13" loop="loop">
+                  <matrix>
+                    <Matrix a="0.865997314453125" b="0.5" c="-0.5" d="0.865997314453125" tx="30.45" ty="-7.95"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="23.05" y="-19.15"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" symbolType="graphic" centerPoint3DX="457.95" centerPoint3DY="-13" loop="loop">
+                  <matrix>
+                    <Matrix c="-0.707107543945312" d="0.707107543945312" tx="421.5" ty="0.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="22.95" y="-19.1"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix tx="-623.95" ty="6.05"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="23" y="-19.05"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

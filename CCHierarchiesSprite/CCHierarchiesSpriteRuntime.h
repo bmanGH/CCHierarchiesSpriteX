@@ -1,20 +1,18 @@
 //
 //  CCHierarchiesSpriteRuntime.h
-//  CCHierarchiesSprite
+//  HierarchiesSpriteDemo
 //
-//  Created by bman <zx123xz321hm3@hotmail.com>.
-//  Copyright (c) 2013. All rights reserved.
+//  Created by xuxiaocheng on 10/23/14.
+//
 //
 
-#ifndef _CCHierarchiesSpriteRuntime_H_
-#define _CCHierarchiesSpriteRuntime_H_
+#ifndef __HierarchiesSpriteDemo__CCHierarchiesSpriteRuntime__
+#define __HierarchiesSpriteDemo__CCHierarchiesSpriteRuntime__
 
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
-#include "CCHierarchiesSpriteConfig.h"
 #include <vector>
 #include "CCHierarchiesSpriteBase.h"
-#include "CCHierarchiesSpriteMesh.h"
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
 
@@ -23,13 +21,13 @@ NS_CC_EXT_BEGIN
 
 class CCHierarchiesSprite;
 
-class CC_DLL CCHierarchiesSpriteRuntime : CCObject {
+class CC_DLL CCHierarchiesSpriteRuntime : Ref {
 	
 public:
 	struct FrameCacheItem {
         unsigned int frameStartQuadIndex;
         std::vector<CCHierarchiesSpriteBase::DisplayElement> displayList;
-		CCRect bbox;
+		Rect bbox;
 		
 		FrameCacheItem () {}
         
@@ -53,7 +51,7 @@ public:
 		UT_hash_handle hh;
 		
 		AnimationCacheHashItem () : name(NULL), retainCount(0), sharedMesh(NULL) {}
-
+        
 		AnimationCacheHashItem (size_t n)
 		: frameCache(n), name(NULL), retainCount(0) {
             sharedMesh = new CCHierarchiesSpriteMesh();
@@ -78,20 +76,20 @@ protected:
     
     // processing all frame data to static cache data
     void buildStaticAnimationData (bool isRoot,
-                                    CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
-                                    int frameOffset,
-                                    unsigned int frameIndex,
-                                    const CCAffineTransform& parentMatrix,
-                                    AnimationCacheHashItem* cacheItem,
-                                    const CCHierarchiesSpriteSheet* sheet,
-                                    const CCHierarchiesSpriteAnimation* animation,
-                                    const char* animationFileNameBase,
-                                    float& min_X, float& max_X, float& min_Y, float& max_Y,
-                                    const float parent_alpha_percent, const int parent_alpha_amount,
-                                    const float parent_red_percent, const int parent_red_amount,
-                                    const float parent_green_percent, const int parent_green_amount,
-                                    const float parent_blue_percent, const int parent_blue_amount,
-                                    const AvatarMapType& avatarMap);
+                                   CCHierarchiesSpriteAnimation::ElementLoopMode loopMode,
+                                   int frameOffset,
+                                   unsigned int frameIndex,
+                                   const CCAffineTransform& parentMatrix,
+                                   AnimationCacheHashItem* cacheItem,
+                                   const CCHierarchiesSpriteSheet* sheet,
+                                   const CCHierarchiesSpriteAnimation* animation,
+                                   const char* animationFileNameBase,
+                                   float& min_X, float& max_X, float& min_Y, float& max_Y,
+                                   const float parent_alpha_percent, const int parent_alpha_amount,
+                                   const float parent_red_percent, const int parent_red_amount,
+                                   const float parent_green_percent, const int parent_green_amount,
+                                   const float parent_blue_percent, const int parent_blue_amount,
+                                   const AvatarMapType& avatarMap);
 	
 public:
 	static CCHierarchiesSpriteRuntime* sharedHierarchiesSpriteRuntime ();
@@ -101,7 +99,7 @@ public:
 	bool init ();
     
 	const char* description ();
-        
+    
     // resource manage
     void initializationRuntime ();
     void releaseUnusedResource ();
@@ -112,4 +110,4 @@ public:
 
 NS_CC_EXT_END
 
-#endif
+#endif /* defined(__HierarchiesSpriteDemo__CCHierarchiesSpriteRuntime__) */

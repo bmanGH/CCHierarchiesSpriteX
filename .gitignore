@@ -120,3 +120,6 @@ tests/*/publish/
 
 # Ignore cocos2d-x
 cocos2d-x/
+
+# Ignore Flash XFL bin data
+FLA/*/bin/*.dat
