@@ -37,7 +37,7 @@ float HierarchiesSpriteSheet::getImageHeight() const {
 
 bool HierarchiesSpriteSheet::getSpr (const char* name, Spr& out) const {
     std::unordered_map<std::string, Spr>::const_iterator iter = _sprList.find(name);
-    if (iter != _sprList.end()) {
+    if (iter != _sprList.cend()) {
         out = iter->second;
         return true;
     }

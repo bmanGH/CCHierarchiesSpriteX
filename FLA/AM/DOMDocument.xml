@@ -15,7 +15,7 @@
           <DOMBitmapItem name="Image/aaaaa5.png" itemID="5445f302-00000025" sourceExternalFilepath="../AM/LIBRARY/Image/aaaaa5.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="2251098981" externalFileSize="4276" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/aaaaa5.png" bitmapDataHRef="M 6 1413870338.dat" frameRight="2140" frameBottom="1220"/>
           <DOMBitmapItem name="Image/adsgasdga.png" itemID="5445f302-0000002a" sourceExternalFilepath="../AM/LIBRARY/Image/adsgasdga.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="1378304467" externalFileSize="18579" allowSmoothing="true" originalCompressionType="lossless" quality="50" href="Image/adsgasdga.png" bitmapDataHRef="M 7 1413870338.dat" frameRight="2880" frameBottom="2300"/>
           <DOMBitmapItem name="Image/afdsfdsfr.png" itemID="5445f302-0000002f" sourceExternalFilepath="../AM/LIBRARY/Image/afdsfdsfr.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="2644192359" externalFileSize="6226" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/afdsfdsfr.png" bitmapDataHRef="M 8 1413870338.dat" frameRight="1300" frameBottom="1360"/>
-          <DOMBitmapItem name="Image/daoguang1.png" itemID="5448766c-00000260" sourceExternalFilepath="/Users/xuxiaocheng/Desktop/project/CCHierarchiesSpriteX/FLA/AM/LIBRARY/Image/daoguang1.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="948465917" externalFileSize="2962" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/daoguang1.png" bitmapDataHRef="M 9 1413870338.dat" frameRight="1660" frameBottom="940"/>
+          <DOMBitmapItem name="Image/daoguang1.png" itemID="5448766c-00000260" sourceExternalFilepath="../AM/LIBRARY/Image/daoguang1.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="948465917" externalFileSize="2962" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/daoguang1.png" bitmapDataHRef="M 9 1413870338.dat" frameRight="1660" frameBottom="940"/>
           <DOMBitmapItem name="Image/daoguang2.png" itemID="5445f302-00000039" sourceExternalFilepath="../AM/LIBRARY/Image/daoguang2.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="1369403777" externalFileSize="2539" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/daoguang2.png" bitmapDataHRef="M 10 1413870338.dat" frameRight="1720" frameBottom="500"/>
           <DOMBitmapItem name="Image/daoguang3.png" itemID="5445f302-0000003e" sourceExternalFilepath="../AM/LIBRARY/Image/daoguang3.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="3881508567" externalFileSize="2416" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/daoguang3.png" bitmapDataHRef="M 11 1413870338.dat" frameRight="1820" frameBottom="380"/>
           <DOMBitmapItem name="Image/daoguang4.png" itemID="5445f302-00000043" sourceExternalFilepath="../AM/LIBRARY/Image/daoguang4.png" sourceLastImported="1413869809" sourcePlatform="macintosh" externalFileCRC32="1121345891" externalFileSize="1933" allowSmoothing="true" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Image/daoguang4.png" bitmapDataHRef="M 12 1413870338.dat" frameRight="1160" frameBottom="400"/>
@@ -72,7 +72,7 @@
           <DOMBitmapItem name="Image/x5.png" itemID="5445f302-00000142" sourceExternalFilepath="../AM/LIBRARY/Image/x5.png" sourceLastImported="1413869810" sourcePlatform="macintosh" externalFileCRC32="2449967581" externalFileSize="12783" allowSmoothing="true" originalCompressionType="lossless" quality="50" href="Image/x5.png" bitmapDataHRef="M 63 1413870338.dat" frameRight="5320" frameBottom="1260"/>
      </media>
      <symbols>
-          <Include href="Animation/atk.xml" loadImmediate="false" itemID="5445f339-00000857" lastModified="1413870667"/>
+          <Include href="Animation/atk.xml" loadImmediate="false" itemID="5445f339-00000857" lastModified="1414125555"/>
           <Include href="Animation/atk2.xml" loadImmediate="false" itemID="5445f345-00000938" lastModified="1413870421"/>
           <Include href="Animation/atk3.xml" loadImmediate="false" itemID="5445f355-00000a41" lastModified="1413870674"/>
           <Include href="Animation/Cheer.xml" loadImmediate="false" itemID="5445f335-0000079e" lastModified="1413870686"/>
@@ -81,10 +81,10 @@
           <Include href="Animation/Idle.xml" loadImmediate="false" itemID="5445f304-000004ea" lastModified="1413870704"/>
           <Include href="Animation/Move.xml" loadImmediate="false" itemID="5445f310-0000063c" lastModified="1413870708"/>
           <Include href="Animation/ult.xml" loadImmediate="false" itemID="5445f367-00000bfa" lastModified="1413870661"/>
-          <Include href="Bone/6t767.xml" loadImmediate="false" itemID="5445f303-000002bf" lastModified="1413870339"/>
-          <Include href="Bone/aaaaa1.xml" loadImmediate="false" itemID="5445f303-0000034e" lastModified="1413870339"/>
+          <Include href="Bone/6t767.xml" loadImmediate="false" itemID="5445f303-000002bf" lastModified="1414125417"/>
+          <Include href="Bone/aaaaa1.xml" loadImmediate="false" itemID="5445f303-0000034e" lastModified="1414125419"/>
           <Include href="Bone/aaaaa2.xml" loadImmediate="false" itemID="5445f303-0000036f" lastModified="1413870339"/>
-          <Include href="Bone/aaaaa3.xml" loadImmediate="false" itemID="5445f303-00000385" lastModified="1413870339"/>
+          <Include href="Bone/aaaaa3.xml" loadImmediate="false" itemID="5445f303-00000385" lastModified="1414125421"/>
           <Include href="Bone/aaaaa4.xml" loadImmediate="false" itemID="5445f304-00000461" lastModified="1413870340"/>
           <Include href="Bone/aaaaa5.xml" loadImmediate="false" itemID="5445f304-00000477" lastModified="1413870340"/>
           <Include href="Bone/adsgasdga.xml" loadImmediate="false" itemID="5445f304-000004c4" lastModified="1413870340"/>
@@ -161,15 +161,15 @@
           <Include href="Bone/TorsoTop.xml" loadImmediate="false" itemID="5445f303-0000018b" lastModified="1413870339"/>
           <Include href="Bone/TorsoTop-2.xml" loadImmediate="false" itemID="5445f304-000003dd" lastModified="1413870340"/>
           <Include href="Bone/weaponx2.xml" loadImmediate="false" itemID="5445f303-00000338" lastModified="1413870339"/>
-          <Include href="Bone/weaponx2-2.xml" loadImmediate="false" itemID="5445f303-00000343" lastModified="1413870339"/>
+          <Include href="Bone/weaponx2-2.xml" loadImmediate="false" itemID="5445f303-00000343" lastModified="1414125429"/>
           <Include href="Bone/weaponx3.xml" loadImmediate="false" itemID="5445f303-00000364" lastModified="1413870339"/>
           <Include href="Bone/weaponx3-2.xml" loadImmediate="false" itemID="5445f304-000003bc" lastModified="1413870340"/>
           <Include href="Bone/werwr.xml" loadImmediate="false" itemID="5445f303-000002f6" lastModified="1413870339"/>
           <Include href="Bone/x5.xml" loadImmediate="false" itemID="5445f304-000004e5" lastModified="1413870340"/>
-          <Include href="Test/TestAnim1.xml" loadImmediate="false" itemID="54486cf6-000000c9" lastModified="1414035141"/>
-          <Include href="Test/TestElement1.xml" loadImmediate="false" itemID="544876c0-0000026b" lastModified="1414035237"/>
-          <Include href="Test/TestGraphic1.xml" itemIcon="1" loadImmediate="false" itemID="54486aab-000000bc" lastModified="1414035120"/>
-          <Include href="Test/TestSymbol.xml" loadImmediate="false" itemID="54486736-000000b4" lastModified="1414032063"/>
+          <Include href="Test/TestAnim1.xml" loadImmediate="false" itemID="54486cf6-000000c9" lastModified="1414131034"/>
+          <Include href="Test/TestElement1.xml" loadImmediate="false" itemID="544876c0-0000026b" lastModified="1414125683"/>
+          <Include href="Test/TestGraphic1.xml" itemIcon="1" loadImmediate="false" itemID="54486aab-000000bc" lastModified="1414125632"/>
+          <Include href="Test/TestSymbol.xml" loadImmediate="false" itemID="54486736-000000b4" lastModified="1414125570"/>
      </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">

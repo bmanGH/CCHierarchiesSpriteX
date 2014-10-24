@@ -505,13 +505,13 @@ bool HierarchiesSpriteSheetReader::parse (HierarchiesSpriteSheet& out) {
         return false;
     }
     
-    xml_attribute<>* img_version = imgNode->first_attribute("version");
-    if (NULL == img_version) {
-        CCLOG("parse <img> Node <version> Attr error");
-        free(xml);
-        return false;
-    }
-    out._version = img_version->value();
+//    xml_attribute<>* img_version = imgNode->first_attribute("version");
+//    if (NULL == img_version) {
+//        CCLOG("parse <img> Node <version> Attr error");
+//        free(xml);
+//        return false;
+//    }
+//    out._version = img_version->value();
     
     xml_attribute<>* img_name = imgNode->first_attribute("name");
     if (NULL == img_name) {

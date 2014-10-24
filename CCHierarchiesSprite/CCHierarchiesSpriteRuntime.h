@@ -16,8 +16,10 @@
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
 
-
 NS_CC_EXT_BEGIN
+
+
+#define HIERARCHIES_SPRITE_RUNTIME_VERSION "2.0"
 
 class CCHierarchiesSprite;
 
@@ -107,6 +109,7 @@ public:
     friend class CCHierarchiesSprite;
 	
 };
+
 
 NS_CC_EXT_END
 

@@ -1,26 +1,15 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Test/TestAnim1" itemID="54486cf6-000000c9" lastModified="1414035141" lastUniqueIdentifier="1">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Test/TestAnim1" itemID="54486cf6-000000c9" lastModified="1414131034" lastUniqueIdentifier="1">
   <timeline>
     <DOMTimeline name="TestAnim1">
       <layers>
-        <DOMLayer name="Layer 2" color="#9933CC" current="true" isSelected="true">
+        <DOMLayer name="Layer 2" color="#9933CC" current="true" isSelected="true" animationType="motion object">
           <frames>
-            <DOMFrame index="0" duration="24" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+            <DOMFrame index="0" duration="24" tweenType="motion object" motionTweenRotate="none" motionTweenScale="false" isMotionObject="true" visibleAnimationKeyframes="2097151" keyMode="8195">
+              <motionObjectXML><AnimationCore TimeScale="24000" Version="1" duration="24000"><TimeMap strength="0" type="Quadratic"/><metadata><names><name langID="en_US" value=""/></names><Settings orientToPath="0" xformPtXOffsetPct="0.499557" xformPtYOffsetPct="0.498829" xformPtZOffsetPixels="0"/></metadata><PropertyContainer id="headContainer"><PropertyContainer id="Basic_Motion"><Property enabled="1" id="Motion_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="1998,20.15" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,219" next="581,219.407" previous="-1997,93.15" roving="0" timevalue="6000"/><Keyframe anchor="0,222.9" next="954,223.044" previous="-581,222.2" roving="1" timevalue="7743"/><Keyframe anchor="0,240.2" next="1395,243.895" previous="-954,229.25" roving="1" timevalue="10606"/><Keyframe anchor="0,302.15" next="1403,332.5" previous="-1395,271.75" roving="1" timevalue="14791"/><Keyframe anchor="0,391" next="0,391" previous="-1403,379.617" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Motion_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="1998,-103.45" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,-188.9" next="581,-187.005" previous="-1997,-166.4" roving="0" timevalue="6000"/><Keyframe anchor="0,-150.25" next="954,-146.245" previous="-581,-167.15" roving="1" timevalue="7743"/><Keyframe anchor="0,-89" next="1395,-80.8136" previous="-954,-113.2" roving="1" timevalue="10606"/><Keyframe anchor="0,-20" next="1403,1.85" previous="-1395,-41.85" roving="1" timevalue="14791"/><Keyframe anchor="0,5.05" next="0,5.05" previous="-1403,7.0819" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Rotation_Z" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Transformation"><Property enabled="1" id="Skew_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Skew_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Colors"/><PropertyContainer id="Filters"/></PropertyContainer></AnimationCore></motionObjectXML>
               <elements>
                 <DOMSymbolInstance libraryItemName="Test/TestSymbol" selected="true">
                   <matrix>
-                    <Matrix tx="151.45" ty="124.45"/>
-                  </matrix>
-                  <transformationPoint>
-                    <Point x="126.3" y="20.2"/>
-                  </transformationPoint>
-                </DOMSymbolInstance>
-              </elements>
-            </DOMFrame>
-            <DOMFrame index="24" keyMode="9728">
-              <elements>
-                <DOMSymbolInstance libraryItemName="Test/TestSymbol" centerPoint3DX="-124" centerPoint3DY="150.9">
-                  <matrix>
-                    <Matrix tx="-250.55" ty="130.45"/>
+                    <Matrix tx="222.45" ty="-20.5"/>
                   </matrix>
                   <transformationPoint>
                     <Point x="126.3" y="20.2"/>
@@ -34,7 +23,7 @@
           <frames>
             <DOMFrame index="0" duration="24" tweenType="motion" motionTweenSnap="true" keyMode="22017">
               <elements>
-                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" symbolType="graphic" loop="loop">
+                <DOMSymbolInstance libraryItemName="Test/TestGraphic1" symbolType="graphic" loop="play once">
                   <matrix>
                     <Matrix tx="-289" ty="-90.95"/>
                   </matrix>

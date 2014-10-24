@@ -19,11 +19,7 @@
 #include "CCHierarchiesSpriteShader.h"
 #include "CCHierarchiesSpriteMesh.h"
 
-
 NS_CC_EXT_BEGIN
-
-#define HIERARCHIES_SPRITE_FILE_FORMAT_VERSION "2.0"
-#define HIERARCHIES_SPRITE_RUNTIME_VERSION "2.0"
 
 
 // Math
