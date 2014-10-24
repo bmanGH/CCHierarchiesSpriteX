@@ -17,8 +17,7 @@ NS_CC_EXT_BEGIN
 
 HierarchiesSpriteAnimationReader::HierarchiesSpriteAnimationReader (const std::string& fileName)
 : _fileName(fileName)
-, _euidCount(0)
-{
+, _euidCount(0) {
 }
 
 HierarchiesSpriteAnimation::~HierarchiesSpriteAnimation () {
@@ -26,8 +25,8 @@ HierarchiesSpriteAnimation::~HierarchiesSpriteAnimation () {
 
 bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {
 	// load file
-    std::string filePath = FileUtils::getInstance()->fullPathForFilename(_fileName);
-    Data&& data = FileUtils::getInstance()->getDataFromFile(filePath);
+    _filePath = FileUtils::getInstance()->fullPathForFilename(_fileName);
+    Data&& data = FileUtils::getInstance()->getDataFromFile(_filePath);
     if (data.getSize() == 0)
         return false;
     
@@ -81,7 +80,10 @@ bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {
     
     // parse Symbol
 	if (parseSymbols(out, symbolsNode) == false)
+    {
+        free(xml);
         return false;
+    }
     
     // <anims>
 	xml_node<>* animsNode = spriteNode->first_node("anims");
@@ -93,7 +95,10 @@ bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {
     
     // parse Animation
 	if (parseAnimations(out, animsNode) == false)
+    {
+        free(xml);
         return false;
+    }
     
     // <events>
 	xml_node<>* eventsNode = spriteNode->first_node("events");
@@ -105,7 +110,10 @@ bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {
     
     // parse Event
 	if (parseEvents(out, eventsNode) == false)
+    {
+        free(xml);
         return false;
+    }
     
     // <layers>
 	xml_node<>* layersNode = spriteNode->first_node("layers");
@@ -117,7 +125,10 @@ bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {
     
     // parse Layer, KeyFrame and Element
     if (parseLayers(out, layersNode) == false)
+    {
+        free(xml);
         return false;
+    }
     
     // parse xml end
 	free(xml);
@@ -450,13 +461,152 @@ bool HierarchiesSpriteAnimationReader::parseElements (HierarchiesSpriteAnimation
                         Element_scaleX, Element_scaleY, Element_skewX, Element_skewY,
                         Element_color_alpha_percent, Element_color_alpha_amount, Element_color_red_percent, Element_color_red_amount,
                         Element_color_green_percent, Element_color_green_amount, Element_color_blue_percent, Element_color_blue_amount,
-                        Element_loopMode, Element_frameOffset, _euidCount, frame.id);
+                        Element_loopMode, Element_frameOffset, _euidCount, frame.index);
         _euidCount++;
 		
 		frame.elements.push_back(element);
 		
 		elementNode = elementNode->next_sibling("E");
 	}
+    
+    return true;
+}
+
+
+#pragma mark - HierarchiesSpriteSheetReader
+
+HierarchiesSpriteSheetReader::HierarchiesSpriteSheetReader (const std::string& fileName)
+: _fileName(fileName) {
+}
+
+HierarchiesSpriteSheetReader::~HierarchiesSpriteSheetReader () {
+}
+
+bool HierarchiesSpriteSheetReader::parse (HierarchiesSpriteSheet& out) {
+    // load file
+    _filePath = FileUtils::getInstance()->fullPathForFilename(_fileName);
+    Data&& data = FileUtils::getInstance()->getDataFromFile(_filePath);
+    if (data.getSize() == 0)
+        return false;
+    
+    char* xml = (char*)malloc(data.getSize() + 1);
+	memcpy(xml, data.getBytes(), data.getSize());
+	xml[data.getSize()] = '\0';
+    
+    // parse xml
+    xml_document<> doc;
+	doc.parse<0>(xml);
+    
+    // <img version=S name=S w=N h=N>
+    xml_node<>* imgNode = doc.first_node("img");
+    if (NULL == imgNode) {
+        CCLOG("parse <img> Node error");
+        free(xml);
+        return false;
+    }
+    
+    xml_attribute<>* img_version = imgNode->first_attribute("version");
+    if (NULL == img_version) {
+        CCLOG("parse <img> Node <version> Attr error");
+        free(xml);
+        return false;
+    }
+    out._version = img_version->value();
+    
+    xml_attribute<>* img_name = imgNode->first_attribute("name");
+    if (NULL == img_name) {
+        CCLOG("parse <img> Node <name> Attr error");
+        free(xml);
+        return false;
+    }
+    out._imageName = img_name->value();
+    
+    xml_attribute<>* img_w = imgNode->first_attribute("w");
+    if (NULL == img_w) {
+        CCLOG("parse <img> Node <w> Attr error");
+        free(xml);
+        return false;
+    }
+    out._imageWidth = atof(img_w->value());
+    
+    xml_attribute<>* img_h = imgNode->first_attribute("h");
+    if (NULL == img_h) {
+        CCLOG("parse <img> Node <h> Attr error");
+        free(xml);
+        return false;
+    }
+    out._imageHeight = atof(img_h->value());
+    
+    // parse dir and spr
+    if (parseSprNode(out, imgNode) == false)
+    {
+        free(xml);
+        return false;
+    }
+    
+    // parse xml end
+    free(xml);
+    
+    return true;
+}
+
+bool HierarchiesSpriteSheetReader::parseSprNode (HierarchiesSpriteSheet& out, rapidxml::xml_node<>* imgNode) {
+    xml_node<>* sprNode = imgNode->first_node();
+    while (sprNode) {
+        // <spr name=S x=F y=F w=F h=F ?rot=B>
+        xml_attribute<>* attribute = NULL;
+        
+        attribute = sprNode->first_attribute("name");
+        if (NULL == attribute) {
+            CCLOG("parse <spr> Node <name> Attr error");
+            return false;
+        }
+        std::string spr_name(attribute->value());
+        
+        attribute = sprNode->first_attribute("x");
+        if (NULL == attribute) {
+            CCLOG("parse <spr> Node <x> Attr error");
+            return false;
+        }
+        float spr_x = atof(attribute->value());
+        
+        attribute = sprNode->first_attribute("y");
+        if (NULL == attribute) {
+            CCLOG("parse <spr> Node <y> Attr error");
+            return false;
+        }
+        float spr_y = atof(attribute->value());
+        
+        attribute = sprNode->first_attribute("w");
+        if (NULL == attribute) {
+            CCLOG("parse <spr> Node <w> Attr error");
+            return false;
+        }
+        float spr_w = atof(attribute->value());
+        
+        attribute = sprNode->first_attribute("h");
+        if (NULL == attribute) {
+            CCLOG("parse <spr> Node <h> Attr error");
+            return false;
+        }
+        float spr_h = atof(attribute->value());
+        
+        attribute = sprNode->first_attribute("rot");
+        bool spr_isRotation = false;
+        if (NULL != attribute) {
+            if (strcmp(attribute->value(), "true") == 0) {
+                spr_isRotation = true;
+            }
+            else {
+                spr_isRotation = false;
+            }
+        }
+        
+        std::pair<std::string, HierarchiesSpriteSheet::Spr> item(spr_name, HierarchiesSpriteSheet::Spr(spr_name, spr_x, spr_y, spr_w, spr_h, spr_isRotation));
+        out._sprList.insert(item);
+        
+        sprNode = sprNode->next_sibling();
+    }
     
     return true;
 }

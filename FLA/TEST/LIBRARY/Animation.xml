@@ -1,0 +1,132 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Animation" itemID="5449ee57-000000cd" lastModified="1414139069">
+  <timeline>
+    <DOMTimeline name="Animation" currentFrame="20">
+      <layers>
+        <DOMLayer name="Layer 4" color="#FF800A" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="20" tweenType="motion" motionTweenRotate="none" useSingleEaseCurve="false" motionTweenSnap="true" hasCustomEase="true" keyMode="20993" acceleration="-60">
+              <tweens>
+                <CustomEase target="position">
+                  <Point/>
+                  <Point x="0.073" y="0.073"/>
+                  <Point x="0.0817" y="0.3416"/>
+                  <Point x="0.1814" y="0.4597"/>
+                  <Point x="0.3" y="0.6"/>
+                  <Point x="0.55" y="0.1263"/>
+                  <Point x="0.65" y="0.2263"/>
+                  <Point x="0.7513" y="0.3276"/>
+                  <Point x="0.7373" y="0.4449"/>
+                  <Point x="0.8" y="0.7316"/>
+                  <Point x="0.8348" y="0.8908"/>
+                  <Point x="0.9438" y="0.9438"/>
+                  <Point x="1" y="1"/>
+                </CustomEase>
+              </tweens>
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 3" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix tx="-288.95" ty="200.9"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <color>
+                    <Color tintMultiplier="0.5" tintColor="#993300"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="20" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 4" symbolType="graphic" centerPoint3DX="238" centerPoint3DY="226.9" loop="loop">
+                  <matrix>
+                    <Matrix tx="238" ty="226.9"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                  <color>
+                    <Color tintMultiplier="0.5" tintColor="#FFFF00"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 3" color="#FF800A" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="20" tweenType="motion" motionTweenRotate="none" motionTweenSnap="true" keyMode="20993" acceleration="-60">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 3" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix tx="-288.95" ty="200.9"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="20" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 4" symbolType="graphic" centerPoint3DX="238" centerPoint3DY="226.9" loop="loop">
+                  <matrix>
+                    <Matrix tx="238" ty="226.9"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 2" color="#9933CC" animationType="motion object">
+          <frames>
+            <DOMFrame index="0" duration="21" tweenType="motion object" motionTweenRotate="none" motionTweenScale="false" isMotionObject="true" visibleAnimationKeyframes="2097151" keyMode="8195">
+              <motionObjectXML><AnimationCore TimeScale="24000" Version="1" duration="21000"><TimeMap strength="0" type="Quadratic"/><metadata><names><name langID="en_US" value=""/></names><Settings orientToPath="0" xformPtXOffsetPct="0.500457" xformPtYOffsetPct="0.499272" xformPtZOffsetPixels="0"/></metadata><PropertyContainer id="headContainer"><PropertyContainer id="Basic_Motion"><Property enabled="1" id="Motion_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,143" next="2664,162.75" previous="0,143" roving="0" timevalue="7000"/><Keyframe anchor="0,286" next="227,286" previous="-2663,210.45" roving="0" timevalue="15000"/><Keyframe anchor="0,287.7" next="443,295.465" previous="-227,287.7" roving="1" timevalue="15682"/><Keyframe anchor="0,338.65" next="997,380.1" previous="-443,325.7" roving="1" timevalue="17010"/><Keyframe anchor="0,448" next="0,448" previous="-997,435.833" roving="0" timevalue="20000"/></Property><Property enabled="1" id="Motion_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,-85" next="2664,-17.25" previous="0,-85" roving="0" timevalue="7000"/><Keyframe anchor="0,4" next="227,4" previous="-2663,12.4" roving="0" timevalue="15000"/><Keyframe anchor="0,-22.7" next="443,-21.9437" previous="-227,-22.7" roving="1" timevalue="15682"/><Keyframe anchor="0,-30.85" next="997,-54.8" previous="-443,-23.35" roving="1" timevalue="17010"/><Keyframe anchor="0,-72" next="0,-72" previous="-997,-70.646" roving="0" timevalue="20000"/></Property><Property enabled="1" id="Rotation_Z" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Transformation"><Property enabled="1" id="Skew_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Skew_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,28.6636" next="0,28.6636" previous="0,28.6636" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,28.6636" next="0,28.6636" previous="0,28.6636" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Colors"/><PropertyContainer id="Filters"/></PropertyContainer></AnimationCore></motionObjectXML>
+              <elements>
+                <DOMSymbolInstance libraryItemName="Graphic" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.28662109375" d="0.28662109375" tx="-46.8" ty="-133.6"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="46.25" y="-9.25"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 1" color="#4F80FF">
+          <frames>
+            <DOMFrame index="0" duration="20" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 3" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix tx="-279" ty="32"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="20" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Tween 4" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix tx="263" ty="105"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

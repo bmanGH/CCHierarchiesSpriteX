@@ -1,0 +1,29 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="MovieClip" itemID="5449edf3-000000c1" lastModified="1414136223">
+  <timeline>
+    <DOMTimeline name="MovieClip">
+      <layers>
+        <DOMLayer name="Layer 1" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Graphic" selected="true" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.429306030273438" d="0.429306030273438" tx="-218.6" ty="-12.25"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="46.25" y="-9.3"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMBitmapInstance selected="true" libraryItemName="Image.png">
+                  <matrix>
+                    <Matrix a="0.52630615234375" b="-0.85028076171875" c="1.55047607421875" d="-0.604904174804688" tx="64.6" ty="38.4"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

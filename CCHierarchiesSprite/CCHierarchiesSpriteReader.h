@@ -12,6 +12,7 @@
 #include "cocos2d.h"
 #include "ExtensionMacros.h"
 #include "CCHierarchiesSpriteAnimation.h"
+#include "CCHierarchiesSpriteSheet.h"
 #include "rapidxml.hpp"
 
 NS_CC_EXT_BEGIN
@@ -22,9 +23,9 @@ class CC_DLL HierarchiesSpriteAnimationReader {
     
 protected:
     std::string _fileName;
+    std::string _filePath;
     int _euidCount;
     
-protected:
     bool parseItems (HierarchiesSpriteAnimation& out, rapidxml::xml_node<>* itemsNode);
     bool parseSymbols (HierarchiesSpriteAnimation& out, rapidxml::xml_node<>* symbolsNode);
     bool parseAnimations (HierarchiesSpriteAnimation& out, rapidxml::xml_node<>* animationsNode);
@@ -37,7 +38,33 @@ public:
     HierarchiesSpriteAnimationReader (const std::string& fileName);
     virtual ~HierarchiesSpriteAnimationReader ();
     
+    std::string getFilePath () {
+        return _filePath;
+    }
+    
     bool parse (HierarchiesSpriteAnimation& out);
+    
+};
+
+
+// HierarchiesSpriteSheetReader
+class CC_DLL HierarchiesSpriteSheetReader {
+    
+protected:
+    std::string _fileName;
+    std::string _filePath;
+    
+	bool parseSprNode (HierarchiesSpriteSheet& out, rapidxml::xml_node<>* imgNode);
+    
+public:
+    HierarchiesSpriteSheetReader (const std::string& fileName);
+    virtual ~HierarchiesSpriteSheetReader ();
+    
+    std::string getFilePath () {
+        return _filePath;
+    }
+    
+    bool parse (HierarchiesSpriteSheet& out);
     
 };
 

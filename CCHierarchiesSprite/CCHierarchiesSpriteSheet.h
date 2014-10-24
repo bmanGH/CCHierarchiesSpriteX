@@ -13,12 +13,13 @@
 #include "ExtensionMacros.h"
 #include <string>
 #include <unordered_map>
-#include "rapidxml.hpp"
 
 
 NS_CC_EXT_BEGIN
 
-class CC_DLL CCHierarchiesSpriteSheet {
+class CC_DLL HierarchiesSpriteSheet {
+    
+    friend class HierarchiesSpriteSheetReader;
     
 public:
     struct Spr {
@@ -56,19 +57,18 @@ public:
     };
     
 protected:
+    std::string _version;
     std::string _imageName;
     float _imageWidth;
     float _imageHeight;
     std::unordered_map<std::string, Spr> _sprList;
     
-protected:
-	void parseSprNode (rapidxml::xml_node<>* imgNode);
-    
 public:
-    CCHierarchiesSpriteSheet (std::string xmlFile);
-    virtual ~CCHierarchiesSpriteSheet ();
+    HierarchiesSpriteSheet ();
+    virtual ~HierarchiesSpriteSheet ();
     
-    const char* getImageName ();
+    std::string getVersion ();
+    std::string getImageName ();
     float getImageWidth () const;
     float getImageHeight () const;
     bool getSpr (const char* name, Spr& out) const;

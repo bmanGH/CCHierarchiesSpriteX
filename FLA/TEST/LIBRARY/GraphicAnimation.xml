@@ -1,0 +1,53 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="GraphicAnimation" itemID="5449f5a4-00000138" symbolType="graphic" lastModified="1414136227">
+  <timeline>
+    <DOMTimeline name="GraphicAnimation" currentFrame="9">
+      <layers>
+        <DOMLayer name="Layer 2" color="#9933CC" animationType="motion object">
+          <frames>
+            <DOMFrame index="0" duration="20" tweenType="motion object" motionTweenRotate="none" motionTweenScale="false" isMotionObject="true" visibleAnimationKeyframes="2097151" keyMode="8195">
+              <motionObjectXML><AnimationCore TimeScale="24000" Version="1" duration="20000"><TimeMap strength="0" type="Quadratic"/><metadata><names><name langID="en_US" value=""/></names><Settings orientToPath="0" xformPtXOffsetPct="0.5" xformPtYOffsetPct="0.5" xformPtZOffsetPixels="0"/></metadata><PropertyContainer id="headContainer"><PropertyContainer id="Basic_Motion"><Property enabled="1" id="Motion_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,93" next="0,93" previous="0,93" roving="0" timevalue="8000"/><Keyframe anchor="0,212" next="0,212" previous="0,212" roving="0" timevalue="14000"/><Keyframe anchor="0,382" next="0,382" previous="0,382" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Motion_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,-86" next="0,-86" previous="0,-86" roving="0" timevalue="8000"/><Keyframe anchor="0,59.95" next="0,59.95" previous="0,59.95" roving="0" timevalue="14000"/><Keyframe anchor="0,-11" next="0,-11" previous="0,-11" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Rotation_Z" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,158.928" next="0,158.928" previous="0,158.928" roving="0" timevalue="8000"/><Keyframe anchor="0,86.9892" next="0,86.9892" previous="0,86.9892" roving="0" timevalue="19000"/></Property></PropertyContainer><PropertyContainer id="Transformation"><Property enabled="1" id="Skew_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,19.6734" next="0,19.6734" previous="0,19.6734" roving="0" timevalue="8000"/><Keyframe anchor="0,-0.00349426" next="0,-0.00349426" previous="0,-0.00349426" roving="0" timevalue="14000"/><Keyframe anchor="0,-0.00262451" next="0,-0.00262451" previous="0,-0.00262451" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Skew_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,19.0298" next="0,19.0298" previous="0,19.0298" roving="0" timevalue="8000"/><Keyframe anchor="0,33.3311" next="0,33.3311" previous="0,33.3311" roving="0" timevalue="14000"/><Keyframe anchor="0,-30.4327" next="0,-30.4327" previous="0,-30.4327" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Scale_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/><Keyframe anchor="0,113.158" next="0,113.158" previous="0,113.158" roving="0" timevalue="8000"/><Keyframe anchor="0,123.445" next="0,123.445" previous="0,123.445" roving="0" timevalue="14000"/><Keyframe anchor="0,115.956" next="0,115.956" previous="0,115.956" roving="0" timevalue="19000"/></Property><Property enabled="1" id="Scale_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/><Keyframe anchor="0,94.3634" next="0,94.3634" previous="0,94.3634" roving="0" timevalue="8000"/><Keyframe anchor="0,99.8611" next="0,99.8611" previous="0,99.8611" roving="0" timevalue="14000"/><Keyframe anchor="0,99.9847" next="0,99.9847" previous="0,99.9847" roving="0" timevalue="19000"/></Property></PropertyContainer><PropertyContainer id="Colors"/><PropertyContainer id="Filters"/></PropertyContainer></AnimationCore></motionObjectXML>
+              <elements>
+                <DOMSymbolInstance libraryItemName="Symbol 1">
+                  <matrix>
+                    <Matrix tx="-271" ty="-8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="46" y="28.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" duration="19" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Graphic" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.6368408203125" c="0.460494995117188" d="0.6368408203125" tx="347.05" ty="-48.35"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="46.2" y="-9.25"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="19" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Graphic" symbolType="graphic" loop="loop">
+                  <matrix>
+                    <Matrix a="0.53887939453125" d="0.28662109375" tx="-303.65" ty="-211.6"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="46.2" y="-9.25"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

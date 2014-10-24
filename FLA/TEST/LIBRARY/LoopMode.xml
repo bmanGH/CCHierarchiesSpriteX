@@ -1,0 +1,40 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="LoopMode" itemID="5449f524-00000128" lastModified="1414138132">
+  <timeline>
+    <DOMTimeline name="LoopMode">
+      <layers>
+        <DOMLayer name="Layer 2" color="#9933CC">
+          <frames>
+            <DOMFrame index="0" duration="29" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="GraphicAnimation" symbolType="graphic" firstFrame="9" loop="play once">
+                  <matrix>
+                    <Matrix tx="-34.25" ty="251.95"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="52.1" y="-69.45"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="29" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Animation" selected="true">
+                  <matrix>
+                    <Matrix tx="157.1" ty="-114"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="44.7" y="-73.9"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

@@ -190,7 +190,7 @@ public:
     };
     
     struct KeyFrame {
-        unsigned int id;
+        unsigned int index;
         unsigned int duration;
         std::vector<Element> elements;
         bool isMotion;
@@ -198,19 +198,19 @@ public:
         KeyFrame () {
         }
         
-        KeyFrame (unsigned int id, unsigned int duration, bool isMotion)
-        : id(id), duration(duration), isMotion(isMotion) {
+        KeyFrame (unsigned int index, unsigned int duration, bool isMotion)
+        : index(index), duration(duration), isMotion(isMotion) {
         }
         
         KeyFrame (const KeyFrame& copy) {
-            this->id = copy.id;
+            this->index = copy.index;
             this->duration = copy.duration;
             this->elements = copy.elements;
             this->isMotion = copy.isMotion;
         }
         
         KeyFrame& operator= (const KeyFrame& rhs) {
-            this->id = rhs.id;
+            this->index = rhs.index;
             this->duration = rhs.duration;
             this->elements = rhs.elements;
             this->isMotion = rhs.isMotion;
@@ -314,7 +314,6 @@ public:
     unsigned int getFrameRate () const;
     size_t getAnimationCount () const;
     size_t getFrameCount () const;
-    int getEUIDCount ();
     const std::vector<Layer>& getLayers ();
     const std::vector<Symbol>& getSymbols ();
     const std::vector<Event>& getEvents ();

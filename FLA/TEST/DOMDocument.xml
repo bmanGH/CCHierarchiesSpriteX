@@ -1,0 +1,30 @@
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" currentTimeline="1" xflVersion="2.3" creatorInfo="Adobe Flash Professional CC" platform="Macintosh" versionInfo="Saved by Adobe Flash Macintosh 13.0 build 759" majorVersion="13" buildNumber="759" objectsSnapTo="false" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+     <media>
+          <DOMBitmapItem name="Image.png" itemID="5449eec9-000000d7" sourceExternalFilepath="../TEST/LIBRARY/weapon.png" sourceLastImported="1414131401" sourcePlatform="macintosh" externalFileSize="7889" allowSmoothing="true" originalCompressionType="lossless" quality="50" href="Image.png" bitmapDataHRef="M 1 1414131350.dat" frameRight="1840" frameBottom="1140"/>
+     </media>
+     <symbols>
+          <Include href="Animation.xml" loadImmediate="false" itemID="5449ee57-000000cd" lastModified="1414139069"/>
+          <Include href="Graphic.xml" itemIcon="1" loadImmediate="false" itemID="5449ede8-000000be" lastModified="1414132918"/>
+          <Include href="GraphicAnimation.xml" itemIcon="1" loadImmediate="false" itemID="5449f5a4-00000138" lastModified="1414136227"/>
+          <Include href="LoopMode.xml" loadImmediate="false" itemID="5449f524-00000128" lastModified="1414138132"/>
+          <Include href="MovieClip.xml" loadImmediate="false" itemID="5449edf3-000000c1" lastModified="1414136223"/>
+          <Include href="Symbol 1.xml" loadImmediate="false" itemID="5449f604-00000148" lastModified="1414133252"/>
+          <Include href="Tween 3.xml" itemIcon="1" loadImmediate="false" itemID="5449f296-00000101" lastModified="1414132374"/>
+          <Include href="Tween 4.xml" itemIcon="1" loadImmediate="false" itemID="5449f296-00000106" lastModified="1414132374"/>
+     </symbols>
+     <timelines>
+          <DOMTimeline name="Scene 1">
+               <layers>
+                    <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+                         <frames>
+                              <DOMFrame index="0" duration="59" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+               </layers>
+          </DOMTimeline>
+     </timelines>
+     <PrinterSettings platform="macintosh"/>
+     <publishHistory/>
+</DOMDocument>
