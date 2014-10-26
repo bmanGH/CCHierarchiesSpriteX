@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0629633819FCE119000406FD /* CCHierarchiesSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0629633619FCE119000406FD /* CCHierarchiesSprite.cpp */; };
+		06FF8D4C19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06FF8D4A19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp */; };
 		3EA0FB66191B933000B170C8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA0FB65191B933000B170C8 /* MediaPlayer.framework */; };
 		A07A521E1783A1D20073F6A7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C6482E165F399D007D4F18 /* libz.dylib */; };
 		A07A521F1783A1D20073F6A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
@@ -77,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0629633619FCE119000406FD /* CCHierarchiesSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSprite.cpp; sourceTree = "<group>"; };
+		0629633719FCE119000406FD /* CCHierarchiesSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSprite.h; sourceTree = "<group>"; };
+		06FF8D4A19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteMesh.cpp; sourceTree = "<group>"; };
+		06FF8D4B19FCC56500F83A3F /* CCHierarchiesSpriteMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteMesh.h; sourceTree = "<group>"; };
 		15C64822165F391E007D4F18 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		15C64824165F3934007D4F18 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		15C64826165F394E007D4F18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -368,6 +374,10 @@
 				D464631F19F8C387001CDA91 /* CCHierarchiesSpriteReader.h */,
 				D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */,
 				D464630D19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.h */,
+				06FF8D4A19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp */,
+				06FF8D4B19FCC56500F83A3F /* CCHierarchiesSpriteMesh.h */,
+				0629633619FCE119000406FD /* CCHierarchiesSprite.cpp */,
+				0629633719FCE119000406FD /* CCHierarchiesSprite.h */,
 				D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */,
 				D464632519F8D6C1001CDA91 /* CCHierarchiesSpriteBase.h */,
 				D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */,
@@ -511,6 +521,8 @@
 				D43AC3F019F7A6E000A3AA0C /* RootViewController.mm in Sources */,
 				D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */,
+				06FF8D4C19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp in Sources */,
+				0629633819FCE119000406FD /* CCHierarchiesSprite.cpp in Sources */,
 				D464632C19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp in Sources */,
 				D464632919F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp in Sources */,
 				D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */,

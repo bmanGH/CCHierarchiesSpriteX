@@ -8,10 +8,12 @@
 
 #include "DemoScene.h"
 
-DemoScene::DemoScene()
+DemoScene::DemoScene ()
 {
+    
 }
 
 DemoScene::~DemoScene ()
 {
+    
 }

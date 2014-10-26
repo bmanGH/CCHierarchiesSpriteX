@@ -19,7 +19,7 @@
 NS_CC_EXT_BEGIN
 
 
-class CC_DLL HierarchiesSpriteAnimation {
+class CC_DLL HierarchiesSpriteAnimation : Ref {
     
     friend class HierarchiesSpriteAnimationReader;
     
