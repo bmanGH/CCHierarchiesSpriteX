@@ -20,7 +20,7 @@ HierarchiesSpriteAnimationReader::HierarchiesSpriteAnimationReader (const std::s
 , _euidCount(0) {
 }
 
-HierarchiesSpriteAnimation::~HierarchiesSpriteAnimation () {
+HierarchiesSpriteAnimationReader::~HierarchiesSpriteAnimationReader () {
 }
 
 bool HierarchiesSpriteAnimationReader::parse (HierarchiesSpriteAnimation& out) {

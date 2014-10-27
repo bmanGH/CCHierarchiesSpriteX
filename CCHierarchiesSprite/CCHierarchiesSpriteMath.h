@@ -151,8 +151,8 @@ struct CC_DLL FMatrix2D {
         setIdentity();
     }
     
-    FMatrix2D (int a_, int b_, int c_, int d_, int tx_, int ty_)
-    : a(a_), b(b_), c(c_), d(d_), tx(tx_), ty(ty_) {
+    FMatrix2D (int a, int b, int c, int d, int tx, int ty)
+    : a(a), b(b), c(c), d(d), tx(tx), ty(ty) {
     }
     
     // property

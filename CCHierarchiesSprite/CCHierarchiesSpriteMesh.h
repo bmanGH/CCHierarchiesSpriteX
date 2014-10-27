@@ -18,36 +18,34 @@ NS_CC_EXT_BEGIN
 
 
 /**
- * CCHierarchiesSprite vertex data structure
+ * HierarchiesSprite vertex data structure
  */
-typedef struct CC_DLL _CCHierarchiesSprite_V3F_C4B_T2F
+struct CC_DLL HierarchiesSprite_V3F_C4B_T2F
 {
     // vertices (3F)
-    ccVertex3F          vertices;               // 12 bytes
+    Vec3                vertices;               // 12 bytes
     // colors multiplication (4B)
-    ccColor4B           colorsMul;              // 4 bytes
+    Color4B             colorsMul;              // 4 bytes
     // colors addition (4B)
-    ccColor4B           colorsAdd;              // 4 bytes
+    Color4B             colorsAdd;              // 4 bytes
     // tex coords (2F)
-    ccTex2F             texCoords;              // 8 bytes
-    //    // socket matrix index (1I)
-    //    GLint               socketMatrixIndex;      // 4 bytes
-} CCHierarchiesSprite_V3F_C4B_T2F;
+    Vec2                texCoords;              // 8 bytes
+};
 
 /**
- * CCHierarchiesSprite quad data structure
+ * HierarchiesSprite quad data structure
  */
-typedef struct CC_DLL _CCHierarchiesSprite_V3F_C4B_T2F_Quad
+struct CC_DLL HierarchiesSprite_V3F_C4B_T2F_Quad
 {
     // top left
-    CCHierarchiesSprite_V3F_C4B_T2F    tl;
+    HierarchiesSprite_V3F_C4B_T2F    tl;
     // bottom left
-    CCHierarchiesSprite_V3F_C4B_T2F    bl;
+    HierarchiesSprite_V3F_C4B_T2F    bl;
     // top right
-    CCHierarchiesSprite_V3F_C4B_T2F    tr;
+    HierarchiesSprite_V3F_C4B_T2F    tr;
     // bottom right
-    CCHierarchiesSprite_V3F_C4B_T2F    br;
-} CCHierarchiesSprite_V3F_C4B_T2F_Quad;
+    HierarchiesSprite_V3F_C4B_T2F    br;
+};
 
 /**
  * CCHierarchiesSprite texture atlas

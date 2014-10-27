@@ -13,30 +13,29 @@
 #include "ExtensionMacros.h"
 
 
-// shader program cache key
-#define kCCShader_HierarchiesSprite "Shader_HierarchiesSprite"
-#define kCCShader_HierarchiesSprite_Premultiplied "Shader_HierarchiesSprite_Premultiplied"
+// shader program name
+#define kShader_Name_HierarchiesSprite "Shader_Name_HierarchiesSprite"
+#define kShader_Name_HierarchiesSprite_Premultiplied "Shader_Name_HierarchiesSprite_Premultiplied"
 
 
-// shader vertex attribute index
+// shader vertex attribute names and index
+extern const char* kHierarchiesSprite_Attribute_Name_ColorMul;
+extern const char* kHierarchiesSprite_Attribute_Name_ColorAdd;
 enum {
-    kCCHierarchiesSprite_VertexAttrib_Color_Mul = cocos2d::kCCVertexAttrib_Color,
-    kCCHierarchiesSprite_VertexAttrib_Color_Add = cocos2d::kCCVertexAttrib_MAX,
+    kHierarchiesSprite_Attribute_ColorMul = cocos2d::GLProgram::VERTEX_ATTRIB_COLOR,
+    kHierarchiesSprite_Attribute_ColorAdd = cocos2d::GLProgram::VERTEX_ATTRIB_MAX,
 };
 
 
 // vertex shader
-#define kCCShader_HierarchiesSprite_Vert "kCCShader_HierarchiesSprite_Vert"
 extern CC_DLL const GLchar* ccShader_HierarchiesSprite_vert;
 
 
 // fragment shader (only color transform)
-#define kCCShader_HierarchiesSprite_Frag "kCCShader_HierarchiesSprite_Frag"
 extern CC_DLL const GLchar* ccShader_HierarchiesSprite_frag;
 
 
 // fragment shader with pre-multiplied alpha texture (only color transform)
-#define kCCShader_HierarchiesSprite_PremultipliedAlpha_Frag "kCCShader_HierarchiesSprite_PremultipliedAlpha_Frag"
 extern CC_DLL const GLchar* ccShader_HierarchiesSprite_PremultipliedAlpha_frag;
 
 

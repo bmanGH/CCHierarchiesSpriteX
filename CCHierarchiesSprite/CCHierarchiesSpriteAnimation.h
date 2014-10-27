@@ -19,7 +19,7 @@
 NS_CC_EXT_BEGIN
 
 
-class CC_DLL HierarchiesSpriteAnimation : Ref {
+class CC_DLL HierarchiesSpriteAnimation {
     
     friend class HierarchiesSpriteAnimationReader;
     
@@ -274,23 +274,23 @@ public:
     
     struct Event {
         unsigned int frameId;
-        std::string content;
+        std::string name;
         
         Event () {
         }
         
         Event (unsigned int frameId, std::string content)
-        : frameId(frameId), content(content) {
+        : frameId(frameId), name(name) {
         }
         
         Event (const Event& copy) {
             this->frameId = copy.frameId;
-            this->content = copy.content;
+            this->name = copy.name;
         }
         
         Event& operator= (const Event& rhs) {
             this->frameId = rhs.frameId;
-            this->content = rhs.content;
+            this->name = rhs.name;
             return *this;
         }
     };

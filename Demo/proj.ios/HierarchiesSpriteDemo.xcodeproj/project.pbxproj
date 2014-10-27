@@ -48,9 +48,6 @@
 		D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */; };
 		D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */; };
 		D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */; };
-		D464632619F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */; };
-		D464632919F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */; };
-		D464632C19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */; };
 		D60AE43417F7FFE100757E4B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60AE43317F7FFE100757E4B /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
@@ -176,12 +173,6 @@
 		D464631F19F8C387001CDA91 /* CCHierarchiesSpriteReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteReader.h; sourceTree = "<group>"; };
 		D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteAction.cpp; sourceTree = "<group>"; };
 		D464632219F8C427001CDA91 /* CCHierarchiesSpriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteAction.h; sourceTree = "<group>"; };
-		D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteBase.cpp; sourceTree = "<group>"; };
-		D464632519F8D6C1001CDA91 /* CCHierarchiesSpriteBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteBase.h; sourceTree = "<group>"; };
-		D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteStatic.cpp; sourceTree = "<group>"; };
-		D464632819F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteStatic.h; sourceTree = "<group>"; };
-		D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteDynamic.cpp; sourceTree = "<group>"; };
-		D464632B19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteDynamic.h; sourceTree = "<group>"; };
 		D60AE43317F7FFE100757E4B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		EDCC747E17C455FD007B692C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -378,12 +369,6 @@
 				06FF8D4B19FCC56500F83A3F /* CCHierarchiesSpriteMesh.h */,
 				0629633619FCE119000406FD /* CCHierarchiesSprite.cpp */,
 				0629633719FCE119000406FD /* CCHierarchiesSprite.h */,
-				D464632419F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp */,
-				D464632519F8D6C1001CDA91 /* CCHierarchiesSpriteBase.h */,
-				D464632719F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp */,
-				D464632819F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.h */,
-				D464632A19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp */,
-				D464632B19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.h */,
 				D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */,
 				D464632219F8C427001CDA91 /* CCHierarchiesSpriteAction.h */,
 				D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */,
@@ -516,15 +501,12 @@
 				D43AC41719F7A99200A3AA0C /* AppDelegate.cpp in Sources */,
 				D43AC3EF19F7A6E000A3AA0C /* main.m in Sources */,
 				D41B6B8F19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp in Sources */,
-				D464632619F8D6C1001CDA91 /* CCHierarchiesSpriteBase.cpp in Sources */,
 				D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */,
 				D43AC3F019F7A6E000A3AA0C /* RootViewController.mm in Sources */,
 				D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */,
 				06FF8D4C19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp in Sources */,
 				0629633819FCE119000406FD /* CCHierarchiesSprite.cpp in Sources */,
-				D464632C19F8D6FD001CDA91 /* CCHierarchiesSpriteDynamic.cpp in Sources */,
-				D464632919F8D6E6001CDA91 /* CCHierarchiesSpriteStatic.cpp in Sources */,
 				D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,7 @@
 
 NS_CC_EXT_BEGIN
 
-class CC_DLL HierarchiesSpriteSheet : Ref {
+class CC_DLL HierarchiesSpriteSheet {
     
     friend class HierarchiesSpriteSheetReader;
     

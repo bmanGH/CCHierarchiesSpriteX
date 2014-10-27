@@ -8,20 +8,21 @@
 
 #include "CCHierarchiesSpriteShader.h"
 
+
+const char* kHierarchiesSprite_Attribute_Name_ColorMul = "a_colorMul";
+const char* kHierarchiesSprite_Attribute_Name_ColorAdd = "a_colorAdd";
+
+
 #define STRINGIZE(x) #x
 #define SHADER_STRING(x) STRINGIZE(x)
-
-#ifdef GL_ES_VERSION_2_0
-#define GL_ES
-#endif
 
 #pragma mark - Non-Filter vertex shader
 
 const GLchar* ccShader_HierarchiesSprite_vert = SHADER_STRING
 (
-#ifdef GL_ES
+\n#ifdef GL_ES\n
 precision highp float;
-#endif
+\n#endif\n
  
 attribute vec4 a_position;
 attribute vec4 a_colorMul;
@@ -46,9 +47,9 @@ void main()
 
 const GLchar* ccShader_HierarchiesSprite_frag = SHADER_STRING
 (
-#ifdef GL_ES
+\n#ifdef GL_ES\n
 precision lowp float;
-#endif
+\n#endif\n
  
 uniform	vec4 u_color;
  
@@ -69,9 +70,9 @@ void main()
 
 const GLchar* ccShader_HierarchiesSprite_PremultipliedAlpha_frag = SHADER_STRING
 (
-#ifdef GL_ES
+\n#ifdef GL_ES\n
 precision lowp float;
-#endif
+\n#endif\n
  
 uniform	vec4 u_color;
  
