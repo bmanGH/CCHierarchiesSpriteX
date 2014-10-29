@@ -29,7 +29,7 @@ struct CC_DLL HierarchiesSprite_V3F_C4B_T2F
     // colors addition (4B)
     Color4B             colorsAdd;              // 4 bytes
     // tex coords (2F)
-    Vec2                texCoords;              // 8 bytes
+    Tex2F                texCoords;              // 8 bytes
 };
 
 /**
@@ -50,7 +50,7 @@ struct CC_DLL HierarchiesSprite_V3F_C4B_T2F_Quad
 /**
  * CCHierarchiesSprite texture atlas
  */
-class CC_DLL CCHierarchiesSpriteMesh : public CCObject {
+class CC_DLL CCHierarchiesSpriteMesh : public Ref {
     
 protected:
     GLushort*           _indices;
@@ -66,7 +66,7 @@ protected:
     /** quantity of quads that can be stored with the current texture atlas size */
     CC_PROPERTY_READONLY(unsigned int, _capacity, Capacity)
     /** Quads that are going to be rendered */
-    CC_PROPERTY(CCHierarchiesSprite_V3F_C4B_T2F_Quad*, _quads, Quads)
+    CC_PROPERTY(HierarchiesSprite_V3F_C4B_T2F*, _quads, Quads)
     
 public:
     static CCHierarchiesSpriteMesh* create(unsigned int capacity);
@@ -82,20 +82,20 @@ public:
      * index must be between 0 and the atlas capacity - 1
      @since v0.8
      */
-    void updateQuad(CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad, unsigned int index);
+    void updateQuad(HierarchiesSprite_V3F_C4B_T2F* quad, unsigned int index);
     
     /** Inserts a Quad (texture, vertex and color) at a certain index
      index must be between 0 and the atlas capacity - 1
      @since v0.8
      */
-    void insertQuad(CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad, unsigned int index);
+    void insertQuad(HierarchiesSprite_V3F_C4B_T2F* quad, unsigned int index);
     
     /** Inserts a c array of quads at a given index
      index must be between 0 and the atlas capacity - 1
      this method doesn't enlarge the array when amount + index > totalQuads
      @since v1.1
      */
-    void insertQuads(CCHierarchiesSprite_V3F_C4B_T2F_Quad* quads, unsigned int index, unsigned int amount);
+    void insertQuads(HierarchiesSprite_V3F_C4B_T2F* quads, unsigned int index, unsigned int amount);
     
     /** Removes the quad that is located at a certain index and inserts it at a new index
      This operation is faster than removing and inserting in a quad in 2 different steps
@@ -172,7 +172,7 @@ public:
     void drawQuads();
     /** listen the event that coming to foreground on Android
      */
-    void listenBackToForeground(CCObject *obj);
+    void listenBackToForeground(Ref *obj);
     
     /** whether or not the array buffer of the VBO needs to be updated*/
     inline bool isDirty(void) { return _isDirty; }

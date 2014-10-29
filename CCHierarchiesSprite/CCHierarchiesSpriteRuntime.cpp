@@ -11,7 +11,6 @@
 #include <algorithm>
 #include "CCHierarchiesSpriteReader.h"
 #include "CCHierarchiesSpriteShader.h"
-#include "CCHierarchiesSprite.h"
 
 NS_CC_EXT_BEGIN
 

@@ -14,10 +14,11 @@
 #include <unordered_map>
 #include <string>
 #include <limits.h>
+#include "CCHierarchiesSpriteRuntime.h"
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
-#include "CCHierarchiesSpriteShader.h"
 #include "CCHierarchiesSpriteMesh.h"
+#include "CCHierarchiesSpriteAction.h"
 
 NS_CC_EXT_BEGIN
 
@@ -31,25 +32,25 @@ extern void hierarchiesCalcMatrixSocket (const HierarchiesSpriteAnimation::Eleme
                                          AffineTransform* matrix);
 extern void hierarchiesUpdateQuadVertices (Size size,
                                            const AffineTransform* matrix,
-                                           CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad,
+                                           HierarchiesSprite_V3F_C4B_T2F* quad,
                                            const float z,
                                            const bool isRotation);
 extern void hierarchiesUpdateQuadTextureCoords (const Rect rect,
                                                 const float texWidth,
                                                 const float texHeight,
-                                                CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad,
+                                                HierarchiesSprite_V3F_C4B_T2F* quad,
                                                 const bool isRotation);
 extern void hierarchiesUpdateQuadTextureColorFromAnimation (const float alpha_percent, const int alpha_amount,
                                                             const float red_percent, const int red_amount,
                                                             const float green_percent, const int green_amount,
                                                             const float blue_percent, const int blue_amount,
-                                                            CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad);
+                                                            HierarchiesSprite_V3F_C4B_T2F* quad);
 extern void hierarchiesUpdateQuadTextureColor (const bool opacityModifyRGB,
                                                const int opacity,
                                                const int color_r,
                                                const int color_g,
                                                const int color_b,
-                                               CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad);
+                                               HierarchiesSprite_V3F_C4B_T2F* quad);
 extern void hierarchiesExpandRectByPoint (float* minX,
                                           float* maxX,
                                           float* minY,
@@ -97,6 +98,8 @@ protected:
     HierarchiesSpriteSheet* _sheet;
     HierarchiesSpriteAnimation* _animation;
     
+    AvatarMapType _avatarMap;
+    
     std::vector<DisplayElement> _displayList;
     
     unsigned int _frameStartQuadIndex;
@@ -112,41 +115,48 @@ protected:
     Rect _bbox;
     Color3B _colorAmount;
     
-    GLint _uniformColorLocation;
+    Texture2D* _texture;
+    
+    std::vector<HierarchiesSprite_V3F_C4B_T2F_Quad> _quads;
+    std::vector<GLushort> _indices;
     
 	virtual void updateOpacityModifyRGB ();
 	virtual void updateBlendFunc ();
+    
+    void buildAnimationData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
+                                    int frameOffset,
+                                    unsigned int frameIndex,
+                                    const AffineTransform& parentMatrix,
+                                    const HierarchiesSpriteAnimation* animation,
+                                    float& min_X, float& max_X, float& min_Y, float& max_Y,
+                                    const float parent_alpha_percent, const int parent_alpha_amount,
+                                    const float parent_red_percent, const int parent_red_amount,
+                                    const float parent_green_percent, const int parent_green_amount,
+                                    const float parent_blue_percent, const int parent_blue_amount);
 	
 CC_CONSTRUCTOR_ACCESS:
     HierarchiesSprite ();
     virtual ~HierarchiesSprite ();
-	virtual bool initWithFile (const char* sheetFileName,
-                               const char* animationFileName);
-    virtual bool initWithFile (const char* sheetFileName,
-                               const char* animationFileNameBase,
-                               const char* animationFileNameSub);
-    virtual bool initWithFileAndAvatar (const char* sheetFileName,
-                                        const char* animationFileName,
-                                        const AvatarMapType& avatarMap);
-    virtual bool initWithFileAndAvatar (const char* sheetFileName,
-                                        const char* animationFileNameBase,
-                                        const char* animationFileNameSub,
-                                        const AvatarMapType& avatarMap);
+    virtual bool init (const std::string& sheetFileName,
+                       const std::string& animationFileNameBase,
+                       const std::string& animationFileNameSub,
+                       const AvatarMapType& avatarMap);
     
 public:
-	static HierarchiesSprite* create (const char* sheetFileName,
-                                               const char* animationFileName);
-    static HierarchiesSprite* create (const char* sheetFileName,
-                                               const char* animationFileNameBase,
-                                               const char* animationFileNameSub);
-    static HierarchiesSprite* create (const char* sheetFileName,
-                                               const char* animationFileName,
-                                               const AvatarMapType& avatarMap);
-    static HierarchiesSprite* create (const char* sheetFileName,
-                                               const char* animationFileNameBase,
-                                               const char* animationFileNameSub,
-                                               const AvatarMapType& avatarMap);
+	static HierarchiesSprite* create (const std::string& sheetFileName,
+                                      const std::string& animationFileName);
+    static HierarchiesSprite* create (const std::string& sheetFileName,
+                                      const std::string& animationFileNameBase,
+                                      const std::string& animationFileNameSub);
+    static HierarchiesSprite* create (const std::string& sheetFileName,
+                                      const std::string& animationFileName,
+                                      const AvatarMapType& avatarMap);
+    static HierarchiesSprite* create (const std::string& sheetFileName,
+                                      const std::string& animationFileNameBase,
+                                      const std::string& animationFileNameSub,
+                                      const AvatarMapType& avatarMap);
     
+    // property
     std::string getSheetName () {
         return _sheetName;
     }
@@ -159,33 +169,33 @@ public:
     std::string getAnimationNameSub () {
         return _animationNameSub;
     }
-    
     HierarchiesSpriteSheet* getSheet () {
         return _sheet;
-    }
-    void setSheet (HierarchiesSpriteSheet* value) {
-        CC_SAFE_RETAIN(value);
-        CC_SAFE_RELEASE(_sheet);
-        _sheet = value;
     }
     HierarchiesSpriteAnimation* getAnimation () {
         return _animation;
     }
-    void setAnimation (HierarchiesSpriteAnimation* value) {
-        CC_SAFE_RETAIN(value);
-        CC_SAFE_RELEASE(_animation);
-        _animation = value;
+    
+    bool getFlipX () {
+        return _flipX;
     }
-    
-    unsigned int getEventCount (std::string eventName);
-    
-    bool getFlipX ();
     void setFlipX (bool value);
-    bool getFlipY ();
+    bool getFlipY () {
+        return _flipY;
+    }
     void setFlipY (bool value);
     
-    Color3B getColorAmount ();
-    void setColorAmount (const Color3B& color);
+    Color3B getColorAmount () {
+        return _colorAmount;
+    }
+    void setColorAmount (const Color3B& value);
+    
+    virtual Texture2D* getTexture() const {
+        return _texture;
+    }
+    virtual void setTexture(Texture2D *texture);
+    
+    unsigned int getEventCount (const std::string& eventName);
 	
     // Animation
 	virtual bool displayFrameAtIndex (unsigned int frameIndex);
@@ -193,14 +203,16 @@ public:
     unsigned int getCurrentFrameIndex ();
     
     // Avatar
-	bool setAvatarMap (const char* name, const char* mapName);
-    bool getAvatarMap (const char* name, std::string& mapName);
+	void setAvatarMap (const std::string& name, const std::string& mapName);
+    void setAvatarMap (const AvatarMapType& map);
+    std::string getAvatarMap (const std::string& name);
     void resetAvatarMap ();
+    
+    // Draw
+    virtual void draw(Renderer *renderer, const Mat4& transform, uint32_t flags);
     
     // Node
     virtual AffineTransform nodeToParentTransform ();
-//    CCRect nestingBoundingBox ();
-//    CCRect nestingBoundingBoxInner ();
 	
 	// BlendProtocol
 	virtual void setBlendFunc (BlendFunc blendFunc);
