@@ -34,7 +34,7 @@ HierarchiesAnimate::HierarchiesAnimate ()
 
 HierarchiesAnimate::~HierarchiesAnimate ()
 {
-    CC_SAFE_RELEASE(_spriteAnimation);
+    HierarchiesSpriteRuntime::getInstance()->removeAnimation(_spriteAnimationName);
 }
 
 bool HierarchiesAnimate::init (const std::string& animationName,
@@ -42,11 +42,11 @@ bool HierarchiesAnimate::init (const std::string& animationName,
 {
     CCASSERT(!animationName.empty() && !spriteAnimationName.empty(), "HierarchiesAnimate: arguments must be non-nil");
     
-    _spriteAnimation = CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->addAnimation(spriteAnimationName);
+    _spriteAnimation = HierarchiesSpriteRuntime::getInstance()->addAnimation(spriteAnimationName);
     
     if (!_spriteAnimation->getAnimationByName(animationName, _currentAnimation)) {
-        CCLOG("no animation (%s) in (%s) while create CCHierarchiesAnimate", animationName, spriteAnimationName);
-        CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->removeAnimation(spriteAnimationName);
+        CCLOG("no animation (%s) in (%s) while create HierarchiesAnimate", animationName.c_str(), spriteAnimationName.c_str());
+        HierarchiesSpriteRuntime::getInstance()->removeAnimation(spriteAnimationName);
         CC_SAFE_RELEASE(this);
         return false;
     }
@@ -77,7 +77,7 @@ void HierarchiesAnimate::startWithTarget (Node* pTarget)
     target->displayFrameAtIndex(_curFrameIndex);
 }
 
-ActionInterval* HierarchiesAnimate::reverse(void)
+ActionInterval* HierarchiesAnimate::reverse(void) const
 {
     HierarchiesAnimate* animate = animate = HierarchiesAnimate::create(_animationName, _spriteAnimationName);
     unsigned int tmp = animate->_currentAnimation.endFrameIndex;
@@ -138,10 +138,10 @@ void HierarchiesFlipX::update(float time)
     
     HierarchiesSprite* target = dynamic_cast<HierarchiesSprite*>(_target);
     CCASSERT(target, "HierarchiesFlipX only valid on HierarchiesSprite class");
-    target->setFlipX(_flipX);
+    target->setFlippedX(_flipX);
 }
 
-ActionInstant* HierarchiesFlipX::reverse()
+ActionInstant* HierarchiesFlipX::reverse() const
 {
     return HierarchiesFlipX::create(!_flipX);
 }
@@ -177,15 +177,15 @@ void HierarchiesFlipY::update(float time)
     
     HierarchiesSprite* target = dynamic_cast<HierarchiesSprite*>(_target);
     CCASSERT(target, "HierarchiesFlipY only valid on HierarchiesSprite class");
-    target->setFlipY(_flipY);
+    target->setFlippedY(_flipY);
 }
 
-ActionInstant* HierarchiesFlipY::reverse()
+ActionInstant* HierarchiesFlipY::reverse() const
 {
     return HierarchiesFlipY::create(!_flipY);
 }
 
-ActionInstant* HierarchiesFlipX::clone() const
+ActionInstant* HierarchiesFlipY::clone() const
 {
     return HierarchiesFlipY::create(_flipY);
 }
@@ -261,7 +261,7 @@ ActionInstant* HierarchiesAvatarMapReset::clone() const
 
 #pragma mark - HierarchiesAvatarMapSet
 
-HierarchiesAvatarMapSet* HierarchiesAvatarMapSet::create (const AvatarMapType& avatarMap)
+HierarchiesAvatarMapSet* HierarchiesAvatarMapSet::create (const HierarchiesSprite::AvatarMapType& avatarMap)
 {
     HierarchiesAvatarMapSet* ret = new (std::nothrow) HierarchiesAvatarMapSet();
     if (ret && ret->init(avatarMap)) {
@@ -272,7 +272,7 @@ HierarchiesAvatarMapSet* HierarchiesAvatarMapSet::create (const AvatarMapType& a
     return nullptr;
 }
 
-bool HierarchiesAvatarMapSet::init (const AvatarMapType& avatarMap)
+bool HierarchiesAvatarMapSet::init (const HierarchiesSprite::AvatarMapType& avatarMap)
 {
     _avatarMap = avatarMap;
     return true;
@@ -285,7 +285,7 @@ void HierarchiesAvatarMapSet::update (float time)
     HierarchiesSprite* target = dynamic_cast<HierarchiesSprite*>(_target);
     CCASSERT(target, "HierarchiesAvatarMapSet only valid on HierarchiesSprite class");
     target->resetAvatarMap();
-    AvatarMapType::const_iterator avatarItemIter;
+    HierarchiesSprite::AvatarMapType::const_iterator avatarItemIter;
     for (avatarItemIter = _avatarMap.cbegin(); avatarItemIter != _avatarMap.cend(); avatarItemIter++) {
         target->setAvatarMap(avatarItemIter->first, avatarItemIter->second);
     }

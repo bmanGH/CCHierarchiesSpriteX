@@ -45,12 +45,6 @@ extern void hierarchiesUpdateQuadTextureColorFromAnimation (const float alpha_pe
                                                             const float green_percent, const int green_amount,
                                                             const float blue_percent, const int blue_amount,
                                                             HierarchiesSprite_V3F_C4B_T2F* quad);
-extern void hierarchiesUpdateQuadTextureColor (const bool opacityModifyRGB,
-                                               const int opacity,
-                                               const int color_r,
-                                               const int color_g,
-                                               const int color_b,
-                                               HierarchiesSprite_V3F_C4B_T2F* quad);
 extern void hierarchiesExpandRectByPoint (float* minX,
                                           float* maxX,
                                           float* minY,
@@ -64,28 +58,28 @@ extern float float_round (float r);
 class HierarchiesSprite : public Node, public TextureProtocol {
     
 public:
-    struct DisplayElement {
-        HierarchiesSpriteAnimation::Element socketElement;
-        unsigned int quadsIndex;
-        unsigned int quadsCount;// 0 means it's a sub sprite element
-        
-        DisplayElement ()
-        : quadsIndex(0), quadsCount(0) {
-        }
-        
-        DisplayElement (const DisplayElement& copy) {
-            this->socketElement = copy.socketElement;
-            this->quadsIndex = copy.quadsIndex;
-            this->quadsCount = copy.quadsCount;
-        }
-        
-        DisplayElement& operator= (const DisplayElement& rhs) {
-            this->socketElement = rhs.socketElement;
-            this->quadsIndex = rhs.quadsIndex;
-            this->quadsCount = rhs.quadsCount;
-            return *this;
-        }
-    };
+//    struct DisplayElement {
+//        HierarchiesSpriteAnimation::Element socketElement;
+//        unsigned int quadsIndex;
+//        unsigned int quadsCount;// 0 means it's a sub sprite element
+//        
+//        DisplayElement ()
+//        : quadsIndex(0), quadsCount(0) {
+//        }
+//        
+//        DisplayElement (const DisplayElement& copy) {
+//            this->socketElement = copy.socketElement;
+//            this->quadsIndex = copy.quadsIndex;
+//            this->quadsCount = copy.quadsCount;
+//        }
+//        
+//        DisplayElement& operator= (const DisplayElement& rhs) {
+//            this->socketElement = rhs.socketElement;
+//            this->quadsIndex = rhs.quadsIndex;
+//            this->quadsCount = rhs.quadsCount;
+//            return *this;
+//        }
+//    };
     
     typedef std::unordered_map<std::string, std::string> AvatarMapType;
 	
@@ -100,39 +94,33 @@ protected:
     
     AvatarMapType _avatarMap;
     
-    std::vector<DisplayElement> _displayList;
+//    std::vector<DisplayElement> _displayList;
     
     unsigned int _frameStartQuadIndex;
     
     unsigned int _curFrameIndex;
-	bool _needFresh;
     
 	BlendFunc _blendFunc;
 	bool _opacityModifyRGB;
     
     bool _flipX;
     bool _flipY;
+    
+    Color3B _displayColorAmount;
+    
     Rect _bbox;
-    Color3B _colorAmount;
+    bool _insideBounds;
     
     Texture2D* _texture;
     
     std::vector<HierarchiesSprite_V3F_C4B_T2F_Quad> _quads;
     std::vector<GLushort> _indices;
+    Primitive* _primitive;
+    PrimitiveCommand _renderCommand;
     
-	virtual void updateOpacityModifyRGB ();
-	virtual void updateBlendFunc ();
-    
-    void buildAnimationData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
-                                    int frameOffset,
-                                    unsigned int frameIndex,
-                                    const AffineTransform& parentMatrix,
-                                    const HierarchiesSpriteAnimation* animation,
-                                    float& min_X, float& max_X, float& min_Y, float& max_Y,
-                                    const float parent_alpha_percent, const int parent_alpha_amount,
-                                    const float parent_red_percent, const int parent_red_amount,
-                                    const float parent_green_percent, const int parent_green_amount,
-                                    const float parent_blue_percent, const int parent_blue_amount);
+#if CC_SPRITE_DEBUG_DRAW
+    DrawNode *_debugDrawNode;
+#endif //CC_SPRITE_DEBUG_DRAW
 	
 CC_CONSTRUCTOR_ACCESS:
     HierarchiesSprite ();
@@ -176,24 +164,19 @@ public:
         return _animation;
     }
     
-    bool getFlipX () {
+    bool getFlippedX () {
         return _flipX;
     }
-    void setFlipX (bool value);
-    bool getFlipY () {
+    void setFlippedX (bool value);
+    bool getFlippedY () {
         return _flipY;
     }
-    void setFlipY (bool value);
+    void setFlippedY (bool value);
     
     Color3B getColorAmount () {
-        return _colorAmount;
+        return _displayColorAmount;
     }
     void setColorAmount (const Color3B& value);
-    
-    virtual Texture2D* getTexture() const {
-        return _texture;
-    }
-    virtual void setTexture(Texture2D *texture);
     
     unsigned int getEventCount (const std::string& eventName);
 	
@@ -209,27 +192,43 @@ public:
     void resetAvatarMap ();
     
     // Draw
-    virtual void draw(Renderer *renderer, const Mat4& transform, uint32_t flags);
+    virtual void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
     
-    // Node
-    virtual AffineTransform nodeToParentTransform ();
-	
-	// BlendProtocol
-	virtual void setBlendFunc (BlendFunc blendFunc);
-	virtual BlendFunc getBlendFunc (void);
-	
-	// TextureProtocol
-	virtual Texture2D* getTexture (void);
-    virtual void setTexture (Texture2D *texture);
-	
-	// RGBAProtocol
-	virtual void setColor (const Color3B& color);
-    virtual void setOpacity (GLubyte opacity);
-    virtual void updateDisplayedColor(const Color3B& color);
-    virtual void updateDisplayedOpacity(GLubyte opacity);
-    virtual void setOpacityModifyRGB (bool bValue);
-    virtual bool isOpacityModifyRGB (void);
+    // Override
+    virtual const Mat4& getNodeToParentTransform() const override;
     
+    virtual bool isOpacityModifyRGB() const override {
+        return _opacityModifyRGB;
+    }
+    virtual void setOpacityModifyRGB(bool value) override;
+
+    virtual const BlendFunc& getBlendFunc() const override {
+        return _blendFunc;
+    }
+    virtual void setBlendFunc(const BlendFunc &blendFunc) override;
+    
+    virtual Texture2D* getTexture() const override {
+        return _texture;
+    }
+    virtual void setTexture(Texture2D *texture) override;
+
+protected:
+	virtual void updateShader ();
+	virtual void updateBlendFunc ();
+    
+    void buildAnimationData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
+                             int frameOffset,
+                             unsigned int frameIndex,
+                             const AffineTransform& parentMatrix,
+                             const HierarchiesSpriteAnimation* animation,
+                             float& min_X, float& max_X, float& min_Y, float& max_Y,
+                             const float parent_alpha_percent, const int parent_alpha_amount,
+                             const float parent_red_percent, const int parent_red_amount,
+                             const float parent_green_percent, const int parent_green_amount,
+                             const float parent_blue_percent, const int parent_blue_amount);
+
+    void buildVertexData ();
+
 };
 
 

@@ -7,30 +7,12 @@
 //
 
 #include "CCHierarchiesSprite.h"
+#include "CCHierarchiesSpriteShader.h"
 
 NS_CC_EXT_BEGIN
 
 
 #pragma mark - Math
-
-// void hierarchiesCalcMatrixSocket (HierarchiesSpriteAnimation::Element* element, AffineTransform* matrix) {
-//    FMatrix2D m0;
-//    FMatrix2D m1;
-//
-//    m0.setAnchorX(element->anchorX);
-//    m0.setAnchorY(element->anchorY);
-//
-//    m1.setScaleX(element->scaleX);
-//    m1.setScaleY(element->scaleY);
-//    m1.setSkewX(element->skewX);
-//    m1.setSkewY(element->skewY);
-//    m1.setTransformX(element->x);
-//    m1.setTransformY(element->y);
-//
-//    FMatrix2D m = m0.concat(m1);
-//
-//    *matrix = AffineTransformMake(m.a, -m.b, -m.c, m.d, m.tx, -m.ty);
-//}
 
 void hierarchiesCalcMatrix (const HierarchiesSpriteAnimation::Symbol* symbol,
                             const HierarchiesSpriteSheet::Spr* spr,
@@ -195,53 +177,6 @@ void hierarchiesUpdateQuadTextureColorFromAnimation (const float alpha_percent, 
     quad->tr.colorsAdd.b = blue_amount;
 }
 
-//void hierarchiesUpdateQuadTextureColor (const bool opacityModifyRGB, const int opacity, const int color_r, const int color_g, const int color_b, CCHierarchiesSprite_V3F_C4B_T2F_Quad* quad) {
-//	// If opacityModifyRGB is NO then opacity will be applied as: glColor(R,G,B,opacity);
-//	// If opacityModifyRGB is YES then oapcity will be applied as: glColor(opacity, opacity, opacity, opacity );
-//	if (opacityModifyRGB) {
-//		quad->bl.colorsMul.a = quad->bl.colorsMul.a * (opacity / 255.0f);
-//		quad->br.colorsMul.a = quad->br.colorsMul.a * (opacity / 255.0f);
-//		quad->tl.colorsMul.a = quad->tl.colorsMul.a * (opacity / 255.0f);
-//		quad->tr.colorsMul.a = quad->tr.colorsMul.a * (opacity / 255.0f);
-//
-//		quad->bl.colorsMul.r = quad->bl.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.r = quad->br.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.r = quad->tl.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.r = quad->tr.colorsMul.r * (color_r / 255.0f) * (opacity / 255.0f);
-//
-//		quad->bl.colorsMul.g = quad->bl.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.g = quad->br.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.g = quad->tl.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.g = quad->tr.colorsMul.g * (color_g / 255.0f) * (opacity / 255.0f);
-//
-//		quad->bl.colorsMul.b = quad->bl.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->br.colorsMul.b = quad->br.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->tl.colorsMul.b = quad->tl.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//		quad->tr.colorsMul.b = quad->tr.colorsMul.b * (color_b / 255.0f) * (opacity / 255.0f);
-//	}
-//	else {
-//		quad->bl.colorsMul.a = quad->bl.colorsMul.a * (opacity / 255.0f);
-//		quad->br.colorsMul.a = quad->br.colorsMul.a * (opacity / 255.0f);
-//		quad->tl.colorsMul.a = quad->tl.colorsMul.a * (opacity / 255.0f);
-//		quad->tr.colorsMul.a = quad->tr.colorsMul.a * (opacity / 255.0f);
-//
-//		quad->bl.colorsMul.r = quad->bl.colorsMul.r * (color_r / 255.0f);
-//		quad->br.colorsMul.r = quad->br.colorsMul.r * (color_r / 255.0f);
-//		quad->tl.colorsMul.r = quad->tl.colorsMul.r * (color_r / 255.0f);
-//		quad->tr.colorsMul.r = quad->tr.colorsMul.r * (color_r / 255.0f);
-//
-//		quad->bl.colorsMul.g = quad->bl.colorsMul.g * (color_g / 255.0f);
-//		quad->br.colorsMul.g = quad->br.colorsMul.g * (color_g / 255.0f);
-//		quad->tl.colorsMul.g = quad->tl.colorsMul.g * (color_g / 255.0f);
-//		quad->tr.colorsMul.g = quad->tr.colorsMul.g * (color_g / 255.0f);
-//
-//		quad->bl.colorsMul.b = quad->bl.colorsMul.b * (color_b / 255.0f);
-//		quad->br.colorsMul.b = quad->br.colorsMul.b * (color_b / 255.0f);
-//		quad->tl.colorsMul.b = quad->tl.colorsMul.b * (color_b / 255.0f);
-//		quad->tr.colorsMul.b = quad->tr.colorsMul.b * (color_b / 255.0f);
-//	}
-//}
-
 void hierarchiesExpandRectByPoint (float* minX, float* maxX, float* minY, float* maxY, float* pX, float* pY) {
     if (*pX < *minX) {
         *minX = *pX;
@@ -340,17 +275,26 @@ HierarchiesSprite::HierarchiesSprite ()
 : _sheet(nullptr)
 , _animation(nullptr)
 //, _mesh(nullptr)
+, _frameStartQuadIndex(0)
 , _curFrameIndex(0)
-, _needFresh(false)
 , _blendFunc(BlendFunc::DISABLE)
 , _opacityModifyRGB(false)
 , _flipX(false)
 , _flipY(false)
+, _displayColorAmount(Color3B::BLACK)
 , _bbox(Rect::ZERO)
-, _texture(nullptr) {
+, _insideBounds(true)
+, _texture(nullptr)
+, _primitive(nullptr)
+{
+#if CC_SPRITE_DEBUG_DRAW
+    _debugDrawNode = DrawNode::create();
+    addChild(_debugDrawNode);
+#endif //CC_SPRITE_DEBUG_DRAW
 }
 
-HierarchiesSprite::~HierarchiesSprite () {
+HierarchiesSprite::~HierarchiesSprite ()
+{
     CC_SAFE_RELEASE_NULL(_texture);
 //    CC_SAFE_RELEASE_NULL(_mesh);
     
@@ -362,17 +306,11 @@ bool HierarchiesSprite::init (const std::string& sheetFileName,
                               const std::string& animationFileNameBase,
                               const std::string& animationFileNameSub,
                               const AvatarMapType& avatarMap) {
-    if (CCNodeRGBA::init()) {
+    if (Node::init()) {
         _sheetName = sheetFileName;
         _animationNameBase = animationFileNameBase;
         _animationNameSub = animationFileNameSub;
         _animationName = _animationNameBase + _animationNameSub;
-        
-        _blendFunc.src = GL_SRC_ALPHA;
-        _blendFunc.dst = GL_ONE_MINUS_SRC_ALPHA;
-        
-        _flipX = false;
-        _flipY = false;
         
         _curFrameIndex = UINT_MAX;
         
@@ -385,11 +323,10 @@ bool HierarchiesSprite::init (const std::string& sheetFileName,
         if (found != std::string::npos)
             imageName = _sheetName.substr(0, found + 1) + imageName;
         
-        _texture = Director::getInstance()->getTextureCache()->addImage(imageName);
-        CC_SAFE_RETAIN(_texture);
+        Texture2D* texture = Director::getInstance()->getTextureCache()->addImage(imageName);
+        this->setTexture(texture);
         
-        this->updateBlendFunc();
-        this->updateOpacityModifyRGB();
+        this->displayFrameAtIndex(0);
         
         return true;
     }
@@ -399,31 +336,18 @@ bool HierarchiesSprite::init (const std::string& sheetFileName,
 
 #pragma mark - Property
 
-void HierarchiesSprite::setFlipX (bool value) {
+void HierarchiesSprite::setFlippedX (bool value) {
     _flipX = value;
-    _transformDirty = _inverseDirty = true;
+    _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
-void HierarchiesSprite::setFlipY (bool value) {
+void HierarchiesSprite::setFlippedY (bool value) {
     _flipY = value;
-    _transformDirty = _inverseDirty = true;
+    _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
 void HierarchiesSprite::setColorAmount (const Color3B& value) {
-    _colorAmount = value;
-}
-
-void HierarchiesSprite::setTexture(Texture2D *texture) {
-    if (_texture != texture) {
-        CC_SAFE_RETAIN(texture);
-        CC_SAFE_RELEASE(_texture);
-        _texture = texture;
-        
-        this->updateBlendFunc();
-        this->updateOpacityModifyRGB();
-        
-        this->freshCurrentFrame();
-    }
+    _displayColorAmount = value;
 }
 
 unsigned int HierarchiesSprite::getEventCount (const std::string& eventName) {
@@ -457,9 +381,39 @@ bool HierarchiesSprite::displayFrameAtIndex (unsigned int frameIndex) {
 //		}
 //	}
     
-    _needFresh = true;
-    
     _curFrameIndex = frameIndex;
+    
+    _quads.clear();
+    float min_X = 10000, max_X = -10000, min_Y = 10000, max_Y = -10000;
+    this->buildAnimationData(HierarchiesSpriteAnimation::kNoneLoopMode,
+                                    0,
+                                    _curFrameIndex,
+                                    AffineTransformIdentity,
+                                    _animation,
+                                    min_X, max_X, min_Y, max_Y,
+                                    1, 0,
+                                    1, 0,
+                                    1, 0,
+                                    1, 0);
+    
+    if (min_X == 10000 ||
+        max_X == -10000 ||
+        min_Y == 10000 ||
+        max_Y == -10000) {
+        // this frame is whole empty
+        _bbox = Rect::ZERO;
+        
+        this->setAnchorPoint(Vec2::ZERO);
+        this->setContentSize(Size::ZERO);
+    }
+    else {
+        _bbox = Rect(min_X, min_Y, max_X - min_X, max_Y - min_Y);
+        Vec2 anchorPoint = Vec2((0 - _bbox.origin.x) / _bbox.size.width,
+                                (0 - _bbox.origin.y) / _bbox.size.height);
+        
+        this->setAnchorPoint(anchorPoint);
+        this->setContentSize(_bbox.size);
+    }
     
     return true;
 }
@@ -511,162 +465,97 @@ void HierarchiesSprite::draw(Renderer *renderer, const Mat4& transform, uint32_t
         return;
     }
     
-    if (_needFresh) {
-        _indices.clear();
-        _indices.resize(_quads.size() * 6);
-        
-        for(size_t i = 0; i < _quads.size(); i++)
-        {
+    // Don't do calculate the culling if the transform was not updated
+    _insideBounds = (flags & FLAGS_TRANSFORM_DIRTY) ? renderer->checkVisibility(transform, _contentSize) : _insideBounds;
+    
+    if(_insideBounds)
+    {
+        if (_needFresh) {
+            _indices.clear();
+            _indices.resize(_quads.size() * 6);
+            
+            for(size_t i = 0; i < _quads.size(); i++)
+            {
 #if HIERARCHIES_USE_TRIANGLE_STRIP
-            _indices[i*6+0] = i*4+0;
-            _indices[i*6+1] = i*4+0;
-            _indices[i*6+2] = i*4+2;
-            _indices[i*6+3] = i*4+1;
-            _indices[i*6+4] = i*4+3;
-            _indices[i*6+5] = i*4+3;
+                _indices[i*6+0] = i*4+0;
+                _indices[i*6+1] = i*4+0;
+                _indices[i*6+2] = i*4+2;
+                _indices[i*6+3] = i*4+1;
+                _indices[i*6+4] = i*4+3;
+                _indices[i*6+5] = i*4+3;
 #else
-            _indices[i*6+0] = i*4+0;
-            _indices[i*6+1] = i*4+1;
-            _indices[i*6+2] = i*4+2;
-            _indices[i*6+3] = i*4+3;
-            _indices[i*6+4] = i*4+2;
-            _indices[i*6+5] = i*4+1;
+                _indices[i*6+0] = i*4+0;
+                _indices[i*6+1] = i*4+1;
+                _indices[i*6+2] = i*4+2;
+                _indices[i*6+3] = i*4+3;
+                _indices[i*6+4] = i*4+2;
+                _indices[i*6+5] = i*4+1;
 #endif
+            }
+            
+            _needFresh = false;
         }
         
-        _needFresh = false;
-    }
-    
-    // ignore the anchor point while drawing
-    CCPoint ap = this->getAnchorPointInPoints();
-    kmGLTranslatef(ap.x, ap.y, 0);
-    
-    // draw with Vertex Array
-    CC_PROFILER_START_CATEGORY(HIERARCHIES_SPRITE_PROFILER, "CCHierarchiesSpriteDynamic - draw");
-    
-    CC_NODE_DRAW_SETUP();
-    
-    GLfloat colors[4];
-    colors[0] = _displayedColor.r / 255.0f;
-    colors[1] = _displayedColor.g / 255.0f;
-    colors[2] = _displayedColor.b / 255.0f;
-    colors[3] = _displayedOpacity / 255.0f;
-    this->getShaderProgram()->setUniformLocationWith4fv(_uniformColorLocation, colors, 1);
-    
-    ccGLBlendFunc( _blendFunc.src, _blendFunc.dst );
-    
-    ccGLBindTexture2D(_texture->getName());
-    
-    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords);
-    glEnableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Mul);
-    glEnableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Add);
-    
-#   define kQuadSize sizeof(_quads[0].tl)
-    // vertices
-    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize,
-                          (GLvoid*) &_quads[0].tl.vertices);
-    
-    // colors
-    glVertexAttribPointer(kCCHierarchiesSprite_VertexAttrib_Color_Mul, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize,
-                          (GLvoid*) &_quads[0].tl.colorsMul);
-    glVertexAttribPointer(kCCHierarchiesSprite_VertexAttrib_Color_Add, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize,
-                          (GLvoid*) &_quads[0].tl.colorsAdd);
-    
-    // tex coords
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize,
-                          (GLvoid*) &_quads[0].tl.texCoords);
-    
-    
-#if HIERARCHIES_USE_TRIANGLE_STRIP
-    glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)_quads.size()*6, GL_UNSIGNED_SHORT, (GLvoid*) &_indices[0]);
-#else
-    glDrawElements(GL_TRIANGLES, (GLsizei)_quads.size()*6, GL_UNSIGNED_SHORT, (GLvoid*) &_indices[0]);
-#endif // HIERARCHIES_USE_TRIANGLE_STRIP
-    
-    glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Mul);
-    glDisableVertexAttribArray(kCCHierarchiesSprite_VertexAttrib_Color_Add);
-    
-    CC_INCREMENT_GL_DRAWS(1);
-    CHECK_GL_ERROR_DEBUG();
-    
-#if HIERARCHIES_DEBUG_DRAW == 1
-    // draw bounding box
-    ccDrawColor4B(255, 0, 255, 255);
-    CCPoint vertices[4] = {
-        ccp(_bbox.origin.x, _bbox.origin.y),
-        ccp(_bbox.origin.x + _bbox.size.width, _bbox.origin.y),
-        ccp(_bbox.origin.x + _bbox.size.width, _bbox.origin.y + _bbox.size.height),
-        ccp(_bbox.origin.x, _bbox.origin.y + _bbox.size.height),
-    };
-    ccDrawPoly(vertices, 4, true);
-    
-    //#elif HIERARCHIES_DEBUG_DRAW == 2
-    //            // draw nesting bounding box
-    //            ccDrawColor4B(0, 255, 255, 255);
-    //            CCRect bbox = this->nestingBoundingBoxInner();
-    //            CCPoint vertices2[4] = {
-    //                ccp(bbox.origin.x, bbox.origin.y),
-    //                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y),
-    //                ccp(bbox.origin.x + bbox.size.width, bbox.origin.y + bbox.size.height),
-    //                ccp(bbox.origin.x, bbox.origin.y + bbox.size.height),
-    //            };
-    //            ccDrawPoly(vertices2, 4, true);
-    
-#elif HIERARCHIES_DEBUG_DRAW == 3
-    // draw quads
-    ccDrawColor4B(0, 255, 0, 255);
-    for (int i = 0; i < _quads.size(); i++) {
-        CCPoint vertices3[4] = {
-            ccp(_quads[i].tl.vertices.x, _quads[i].tl.vertices.y),
-            ccp(_quads[i].tr.vertices.x, _quads[i].tr.vertices.y),
-            ccp(_quads[i].br.vertices.x, _quads[i].br.vertices.y),
-            ccp(_quads[i].bl.vertices.x, _quads[i].bl.vertices.y),
+        // ignore the anchor point while drawing
+        CCPoint ap = this->getAnchorPointInPoints();
+        kmGLTranslatef(ap.x, ap.y, 0);
+        
+        this->buildVertexData();
+        
+        _renderCommand.init(_globalZOrder, _texture->getName(), this->getGLProgramState(), _blendFunc, _primitive, transform);
+        renderer->addCommand(&_renderCommand);
+        
+#if CC_SPRITE_DEBUG_DRAW
+        _debugDrawNode->clear();
+        Vec2 vertices[4] = {
+            Vec2(_bbox.origin.x, _bbox.origin.y),
+            Vec2(_bbox.origin.x + _bbox.size.width, _bbox.origin.y),
+            Vec2(_bbox.origin.x + _bbox.size.width, _bbox.origin.y + _bbox.size.height),
+            Vec2(_bbox.origin.x, _bbox.origin.y + _bbox.size.height),
         };
-        ccDrawPoly(vertices3, 4, true);
+        _debugDrawNode->drawPoly(vertices, 4, true, Color4F(1.0, 1.0, 1.0, 1.0));
+#endif //CC_SPRITE_DEBUG_DRAW
     }
-    
-    ccDrawColor4B(255, 255, 255, 255);
-#endif
-    
-    CC_PROFILER_STOP_CATEGORY(HIERARCHIES_SPRITE_PROFILER, "CCHierarchiesSpriteDynamic - draw");
 }
 
 
-#pragma mark - Node
+#pragma mark - Override
 
-AffineTransform HierarchiesSprite::nodeToParentTransform () {
+const Mat4& HierarchiesSprite::getNodeToParentTransform() const {
     if (_transformDirty)
     {
+        // HierarchiesSprite
         // flip anchor point in points
-        Point obAnchorPointInPoints = _obAnchorPointInPoints;
+        Vec2 anchorPointInPoints = _anchorPointInPoints;
         if (_flipX && _flipY) {
-            obAnchorPointInPoints = Point(-_obAnchorPointInPoints.x, -_obAnchorPointInPoints.y);
+            anchorPointInPoints = Vec2(-_anchorPointInPoints.x, -_anchorPointInPoints.y);
         }
         else if (_flipX) {
-            obAnchorPointInPoints = Point(-_obAnchorPointInPoints.x, _obAnchorPointInPoints.y);
+            anchorPointInPoints = Vec2(-_anchorPointInPoints.x, _anchorPointInPoints.y);
         }
         else if (_flipY) {
-            obAnchorPointInPoints = Point(_obAnchorPointInPoints.x, -_obAnchorPointInPoints.y);
+            anchorPointInPoints = Vec2(_anchorPointInPoints.x, -_anchorPointInPoints.y);
         }
         
         // Translate values
-        float x = _obPosition.x;
-        float y = _obPosition.y;
+        float x = _position.x;
+        float y = _position.y;
+        float z = _positionZ;
         
         if (_ignoreAnchorPointForPosition)
         {
-            x += obAnchorPointInPoints.x;
-            y += obAnchorPointInPoints.y;
+            x += anchorPointInPoints.x;
+            y += anchorPointInPoints.y;
         }
         
         // Rotation values
 		// Change rotation code to handle X and Y
 		// If we skew with the exact same value for both x and y then we're simply just rotating
         float cx = 1, sx = 0, cy = 1, sy = 0;
-        if (_rotationX || _rotationY)
+        if (_rotationZ_X || _rotationZ_Y)
         {
-            float radiansX = -CC_DEGREES_TO_RADIANS(_rotationX);
-            float radiansY = -CC_DEGREES_TO_RADIANS(_rotationY);
+            float radiansX = -CC_DEGREES_TO_RADIANS(_rotationZ_X);
+            float radiansY = -CC_DEGREES_TO_RADIANS(_rotationZ_Y);
             cx = cosf(radiansX);
             sx = sinf(radiansX);
             cy = cosf(radiansY);
@@ -675,54 +564,93 @@ AffineTransform HierarchiesSprite::nodeToParentTransform () {
         
         bool needsSkewMatrix = ( _skewX || _skewY );
         
+        Vec2 anchorPoint;
+        anchorPoint.x = anchorPointInPoints.x * _scaleX;
+        anchorPoint.y = anchorPointInPoints.y * _scaleY;
         
         // optimization:
         // inline anchor point calculation if skew is not needed
         // Adjusted transform calculation for rotational skew
-        if (! needsSkewMatrix && !obAnchorPointInPoints.equals(Point::ZERO))
+        if (! needsSkewMatrix && !anchorPointInPoints.equals(Vec2::ZERO))
         {
-            x += cy * -obAnchorPointInPoints.x * _scaleX + -sx * -obAnchorPointInPoints.y * _scaleY;
-            y += sy * -obAnchorPointInPoints.x * _scaleX +  cx * -obAnchorPointInPoints.y * _scaleY;
+            x += cy * -anchorPoint.x + -sx * -anchorPoint.y;
+            y += sy * -anchorPoint.x +  cx * -anchorPoint.y;
         }
-        
         
         // Build Transform Matrix
         // Adjusted transform calculation for rotational skew
-        _transform = AffineTransformMake( cy * _scaleX,  sy * _scaleX,
-                                         -sx * _scaleY, cx * _scaleY,
-                                         x, y );
+        float mat[] = {
+            cy * _scaleX,   sy * _scaleX,   0,          0,
+            -sx * _scaleY,  cx * _scaleY,   0,          0,
+            0,              0,              _scaleZ,    0,
+            x,              y,              z,          1 };
         
-        // XXX: Try to inline skew
+        _transform.set(mat);
+        
+        if(!_ignoreAnchorPointForPosition)
+        {
+            _transform.translate(anchorPoint.x, anchorPoint.y, 0);
+        }
+        
+        // FIXME:
+        // FIX ME: Expensive operation.
+        // FIX ME: It should be done together with the rotationZ
+        if(_rotationY) {
+            Mat4 rotY;
+            Mat4::createRotationY(CC_DEGREES_TO_RADIANS(_rotationY), &rotY);
+            _transform = _transform * rotY;
+        }
+        if(_rotationX) {
+            Mat4 rotX;
+            Mat4::createRotationX(CC_DEGREES_TO_RADIANS(_rotationX), &rotX);
+            _transform = _transform * rotX;
+        }
+        
+        if(!_ignoreAnchorPointForPosition)
+        {
+            _transform.translate(-anchorPoint.x, -anchorPoint.y, 0);
+        }
+        
+        // FIXME:: Try to inline skew
         // If skew is needed, apply skew and then anchor point
         if (needsSkewMatrix)
         {
-            AffineTransform skewMatrix = AffineTransformMake(1.0f, tanf(CC_DEGREES_TO_RADIANS(_skewY)),
-                                                                 tanf(CC_DEGREES_TO_RADIANS(_skewX)), 1.0f,
-                                                                 0.0f, 0.0f );
-            _transform = AffineTransformConcat(skewMatrix, _transform);
+            float skewMatArray[16] =
+            {
+                1, (float)tanf(CC_DEGREES_TO_RADIANS(_skewY)), 0, 0,
+                (float)tanf(CC_DEGREES_TO_RADIANS(_skewX)), 1, 0, 0,
+                0,  0,  1, 0,
+                0,  0,  0, 1
+            };
+            Mat4 skewMatrix(skewMatArray);
+            
+            _transform = _transform * skewMatrix;
             
             // adjust anchor point
-            if (!obAnchorPointInPoints.equals(Point::ZERO))
+            if (!anchorPointInPoints.equals(Vec2::ZERO))
             {
-                _transform = AffineTransformTranslate(_transform, -obAnchorPointInPoints.x, -obAnchorPointInPoints.y);
+                // FIXME:: Argh, Mat4 needs a "translate" method.
+                // FIXME:: Although this is faster than multiplying a vec4 * mat4
+                _transform.m[12] += _transform.m[0] * -anchorPointInPoints.x + _transform.m[4] * -anchorPointInPoints.y;
+                _transform.m[13] += _transform.m[1] * -anchorPointInPoints.x + _transform.m[5] * -anchorPointInPoints.y;
             }
         }
         
-        if (_additionalTransformDirty)
-        {
-            _transform = AffineTransformConcat(_transform, _additionalTransform);
-            _additionalTransformDirty = false;
-        }
-        
+        // HierarchiesSprite
         // flip
         if (_flipX && _flipY) {
-            _transform = AffineTransformScale(_transform, -1, -1);
+            _transform.scale(-1, -1, 1);
         }
         else if (_flipX) {
-            _transform = AffineTransformScale(_transform, -1, 1);
+            _transform.scale(-1, 1, 1);
         }
         else if (_flipY) {
-            _transform = AffineTransformScale(_transform, 1, -1);
+            _transform.scale(1, -1, 1);
+        }
+        
+        if (_useAdditionalTransform)
+        {
+            _transform = _transform * _additionalTransform;
         }
         
         _transformDirty = false;
@@ -731,106 +659,50 @@ AffineTransform HierarchiesSprite::nodeToParentTransform () {
     return _transform;
 }
 
-void HierarchiesSprite::setColor (const ccColor3B& color3) {
-    Node::setColor(color3);
-    this->freshCurrentFrame();
-}
-
-void HierarchiesSprite::setOpacity (GLubyte opacity) {
-    Node::setOpacity(opacity);
-    this->freshCurrentFrame();
-}
-
-void HierarchiesSprite::updateDisplayedColor(const ccColor3B& color) {
-    Node::updateDisplayedColor(color);
-    this->freshCurrentFrame();
-}
-
-void HierarchiesSprite::updateDisplayedOpacity(GLubyte opacity) {
-    CCNodeRGBA::updateDisplayedOpacity(opacity);
-    this->freshCurrentFrame();
-}
-
 void HierarchiesSprite::setOpacityModifyRGB (bool bValue) {
-    if (_opacityModifyRGB != bValue) {
-        _opacityModifyRGB = bValue;
-        
-        // setup shader program
-        if (_opacityModifyRGB) {
-            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite_Premultiplied));
-            
-            this->freshCurrentFrame();
-        }
-        else {
-            this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite));
-            
-            this->freshCurrentFrame();
-        }
-    }
+    _opacityModifyRGB = bValue;
 }
 
-bool HierarchiesSprite::isOpacityModifyRGB (void) {
-	return _opacityModifyRGB;
-}
-
-
-#pragma mark - BlendProtocol
-
-void HierarchiesSprite::setBlendFunc (ccBlendFunc value) {
+void HierarchiesSprite::setBlendFunc (const BlendFunc& value) {
 	_blendFunc = value;
 }
 
-ccBlendFunc HierarchiesSprite::getBlendFunc (void) {
-	return _blendFunc;
-}
-
-
-#pragma mark - TextureProtocol
-
-CCTexture2D* HierarchiesSprite::getTexture (void) {
-    return _texture;
-}
-
-void HierarchiesSprite::setTexture(CCTexture2D *texture) {
+void HierarchiesSprite::setTexture(Texture2D *texture) {
     if (_texture != texture) {
         CC_SAFE_RETAIN(texture);
         CC_SAFE_RELEASE(_texture);
         _texture = texture;
         
+        this->setOpacityModifyRGB(_texture->hasPremultipliedAlpha());
         this->updateBlendFunc();
-        this->updateOpacityModifyRGB();
-        
-        this->freshCurrentFrame();
+        this->updateShader();
     }
 }
 
 
 #pragma mark - Private
 
-void HierarchiesSprite::updateOpacityModifyRGB () {
-	_opacityModifyRGB = _texture->hasPremultipliedAlpha();
-    
-    // setup shader program
-    if (_opacityModifyRGB) {
+void HierarchiesSprite::updateShader () {
+    if (_texture->hasPremultipliedAlpha()) {
         this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite_Premultiplied));
         
-        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
+//        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
     }
     else {
         this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite));
         
-        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
+//        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
     }
 }
 
 void HierarchiesSprite::updateBlendFunc () {
-	if( !_texture->hasPremultipliedAlpha() ) {
-		_blendFunc.src = GL_SRC_ALPHA;
-		_blendFunc.dst = GL_ONE_MINUS_SRC_ALPHA;
-	}
-    else {
-        _blendFunc.src = GL_ONE;
-		_blendFunc.dst = GL_ONE_MINUS_SRC_ALPHA;
+    if (!_texture->hasPremultipliedAlpha())
+    {
+        _blendFunc = BlendFunc::ALPHA_NON_PREMULTIPLIED;
+    }
+    else
+    {
+        _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
     }
 }
 
@@ -843,40 +715,41 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
                                             const float parent_alpha_percent, const int parent_alpha_amount,
                                             const float parent_red_percent, const int parent_red_amount,
                                             const float parent_green_percent, const int parent_green_amount,
-                                            const float parent_blue_percent, const int parent_blue_amount) {
-    CCHierarchiesSpriteAnimation::FrameElements frameElements;
+                                            const float parent_blue_percent, const int parent_blue_amount)
+{
+    HierarchiesSpriteAnimation::FrameElements frameElements;
     int eNum = animation->getFrameElementsAtFrameIndex(loopMode, frameOffset, frameIndex, frameElements); //!!! frameIndex will update with loop mode
     
     _quads.reserve(_quads.size() + eNum);
     
-    CCAffineTransform matrix;
-    CCHierarchiesSprite_V3F_C4B_T2F_Quad quad;
-    CCHierarchiesSpriteAnimation::FrameElements::const_iterator layerIter;
+    AffineTransform matrix;
+    HierarchiesSprite_V3F_C4B_T2F_Quad quad;
+    HierarchiesSpriteAnimation::FrameElements::const_iterator layerIter;
     int layerZOrder = 0;
-    //        unsigned int quadsIndex = 0;
-    //        unsigned int quadsCount = 0;
+//        unsigned int quadsIndex = 0;
+//        unsigned int quadsCount = 0;
     //!!! reverse order to display
     for (layerIter = frameElements.cbegin(); layerIter != frameElements.cend(); layerIter++) { // element layers BEGIN
-        const CCHierarchiesSpriteAnimation::Element* elementIter = &(*layerIter);
+        const HierarchiesSpriteAnimation::Element* elementIter = &(*layerIter);
         
-        CCHierarchiesSpriteAnimation::Symbol symbol;
+        HierarchiesSpriteAnimation::Symbol symbol;
         bool result = animation->getSymbolByIndex(elementIter->symbolIndex, symbol);
         assert(result);
         
         if (symbol.isSocket == false) { // simple element BEGIN
-            CCHierarchiesSpriteSheet::Spr spr;
+            HierarchiesSpriteSheet::Spr spr;
             result = _sheet->getSpr(symbol.name.c_str(), spr);
             assert(result);
             
             // calc matrix
             hierarchiesCalcMatrix(&symbol, &spr, &(*elementIter), &matrix);
-            matrix = CCAffineTransformConcat(matrix, parentMatrix);
+            matrix = AffineTransformConcat(matrix, parentMatrix);
             
             // update vertices
-            hierarchiesUpdateQuadVertices(CCSizeMake(spr.w, spr.h),
+            hierarchiesUpdateQuadVertices(Size(spr.w, spr.h),
                                           &matrix,
                                           &quad,
-                                          layerZOrder * HIERARCHIES_SPRITE_LAYER_Z_ORDER_SCALE,
+                                          0,
                                           spr.isRotation);
             
             // update color from animation
@@ -899,7 +772,7 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
             hierarchiesExpandRectByPoint(&min_X, &max_X, &min_Y, &max_Y, &quad.tl.vertices.x, &quad.tl.vertices.y);
             hierarchiesExpandRectByPoint(&min_X, &max_X, &min_Y, &max_Y, &quad.tr.vertices.x, &quad.tr.vertices.y);
             
-            hierarchiesUpdateQuadTextureCoords(CCRectMake(spr.x, spr.y, spr.w, spr.h),
+            hierarchiesUpdateQuadTextureCoords(Rect(spr.x, spr.y, spr.w, spr.h),
                                                _sheet->getImageWidth(),
                                                _sheet->getImageHeight(),
                                                &quad,
@@ -917,10 +790,10 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
             else {
                 subSpriteAnimationName += symbol.name + ".hanims";
             }
-            CCHierarchiesSpriteAnimation* subAnimation = CCHierarchiesSpriteAnimationCache::sharedHierarchiesSpriteAnimationCache()->addAnimation(subSpriteAnimationName.c_str());
+            HierarchiesSpriteAnimation* subAnimation = HierarchiesSpriteRuntime::getInstance()->addAnimation(subSpriteAnimationName.c_str());
             
             hierarchiesCalcMatrixSocket(&(*elementIter), &matrix);
-            matrix = CCAffineTransformConcat(matrix, parentMatrix);
+            matrix = AffineTransformConcat(matrix, parentMatrix);
             
             float alpha_percent = parent_alpha_percent * elementIter->color_alpha_percent;
             int alpha_amount = parent_alpha_percent * elementIter->color_alpha_amount + parent_alpha_amount;
@@ -930,7 +803,7 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
             int green_amount = parent_green_percent * elementIter->color_green_amount + parent_green_amount;
             float blue_percent = parent_blue_percent * elementIter->color_blue_percent;
             int blue_amount = parent_blue_percent * elementIter->color_blue_amount + parent_blue_amount;
-            this->buildDynamicAnimationData(elementIter->loopMode,
+            this->buildAnimationData(elementIter->loopMode,
                                             elementIter->frameOffset,
                                             frameIndex - elementIter->startDisplayFrameIndex,
                                             matrix,
@@ -944,6 +817,27 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
         
         layerZOrder++;
     } // element layers END
+}
+
+void HierarchiesSprite::buildVertexData ()
+{
+    auto vertexBuffer = VertexBuffer::create(sizeof(HierarchiesSprite_V3F_C4B_T2F), _quads.size() * 4);
+	vertexBuffer->updateVertices(_quads.data(), _quads.size() * 4, 0);
+    
+    auto vertexData = VertexData::create();
+	vertexData->addStream(vertexBuffer, VertexStreamAttribute(0, cocos2d::GLProgram::VERTEX_ATTRIB_POSITION, GL_FLOAT, 3, fasle));
+	vertexData->addStream(vertexBuffer, VertexStreamAttribute(12, kHierarchiesSprite_Attribute_ColorMul, GL_UNSIGNED_BTYE, 4, true));
+	vertexData->addStream(vertexBuffer, VertexStreamAttribute(4, kHierarchiesSprite_Attribute_ColorAdd, GL_UNSIGNED_BTYE, 4, true));
+	vertexData->addStream(vertexBuffer, VertexStreamAttribute(4, cocos2d::GLProgram::VERTEX_ATTRIB_TEX_COORD, GL_FLOAT, 2, fasle));
+    
+    auto indexBuffer = IndexBuffer::create(IndexType::INDEX_TYPE_SHORT_16, 6);
+	indexBuffer->updateIndices(_indices.data(), _indices.size(), 0);
+    
+    CC_SAFE_RELEASE(_primitive);
+    _primitve = Primitive::create(vertexData, indexBuffer, GL_TRIANGLES);
+	primitive->setStart(0);
+	primitive->setCount(_indices.size());
+    CC_SAFE_RETAIN(_primitive);
 }
 
 

@@ -45,7 +45,6 @@
 		D43AC41C19F7B11D00A3AA0C /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D43AC3E219F7A65100A3AA0C /* libcocos2d iOS.a */; };
 		D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630619F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp */; };
 		D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630919F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp */; };
-		D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */; };
 		D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */; };
 		D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */; };
 		D60AE43417F7FFE100757E4B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60AE43317F7FFE100757E4B /* CoreMotion.framework */; };
@@ -507,7 +506,6 @@
 				D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */,
 				06FF8D4C19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp in Sources */,
 				0629633819FCE119000406FD /* CCHierarchiesSprite.cpp in Sources */,
-				D464630E19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
