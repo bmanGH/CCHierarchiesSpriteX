@@ -18,7 +18,9 @@
 #define kShader_Name_HierarchiesSprite_Premultiplied "Shader_Name_HierarchiesSprite_Premultiplied"
 
 
-// shader vertex attribute names and index
+// shader vertex attribute and uniform names and index
+extern const char* kHierarchiesSprite_GLProgram_Uniform_Name_ColorMul;
+extern const char* kHierarchiesSprite_GLProgram_Uniform_Name_ColorAdd;
 extern const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul;
 extern const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd;
 enum {

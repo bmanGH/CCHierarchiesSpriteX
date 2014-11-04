@@ -222,10 +222,10 @@ HierarchiesSprite* HierarchiesSprite::create (const std::string& sheetFileName,
                                               const std::string& animationFileNameBase,
                                               const std::string& animationFileNameSub) {
     HierarchiesSprite* ret = new (std::nothrow) HierarchiesSprite();
-	if (ret && ret->init(sheetFileName,
-                         animationFileNameBase,
-                         animationFileNameSub,
-                         AvatarMapType()))
+	if (ret && ret->initWithFile(sheetFileName,
+                                 animationFileNameBase,
+                                 animationFileNameSub,
+                                 AvatarMapType()))
 	{
 		ret->autorelease();
 		return ret;
@@ -259,10 +259,10 @@ HierarchiesSprite* HierarchiesSprite::create (const std::string& sheetFileName,
                                               const std::string& animationFileNameSub,
                                               const AvatarMapType& avatarMap) {
     HierarchiesSprite* ret = new (std::nothrow) HierarchiesSprite();
-	if (ret && ret->init(sheetFileName,
-                         animationFileNameBase,
-                         animationFileNameSub,
-                         avatarMap))
+	if (ret && ret->initWithFile(sheetFileName,
+                                 animationFileNameBase,
+                                 animationFileNameSub,
+                                 avatarMap))
 	{
 		ret->autorelease();
 		return ret;
@@ -279,7 +279,7 @@ HierarchiesSprite::HierarchiesSprite ()
 , _opacityModifyRGB(false)
 , _flipX(false)
 , _flipY(false)
-, _displayColorAmount(Color3B::BLACK)
+, _displayedColorAdd(0, 0, 0, 0)
 , _bbox(Rect::ZERO)
 , _insideBounds(true)
 , _texture(nullptr)
@@ -288,10 +288,10 @@ HierarchiesSprite::HierarchiesSprite ()
 , _vertexData(nullptr)
 , _primitive(nullptr)
 {
-//#if CC_SPRITE_DEBUG_DRAW
+#if CC_SPRITE_DEBUG_DRAW
     _debugDrawNode = DrawNode::create();
     addChild(_debugDrawNode);
-//#endif
+#endif
 }
 
 HierarchiesSprite::~HierarchiesSprite ()
@@ -348,9 +348,12 @@ void HierarchiesSprite::setFlippedY (bool value) {
     _transformUpdated = _transformDirty = _inverseDirty = true;
 }
 
-void HierarchiesSprite::setColorAmount (const Color3B& value) {
-    _displayColorAmount = value;
+void HierarchiesSprite::setColorAdd (const Color4B& value) {
+    _displayedColorAdd = value;
 }
+
+
+#pragma mark - Event
 
 unsigned int HierarchiesSprite::getEventCount (const std::string& eventName) {
     const std::vector<HierarchiesSpriteAnimation::Event>& events = _animation->getEvents();
@@ -361,6 +364,10 @@ unsigned int HierarchiesSprite::getEventCount (const std::string& eventName) {
             ret++;
     }
     return ret;
+}
+
+void HierarchiesSprite::setEventHandle (const std::function<void(int, const std::string&)>& eventHandle) {
+    _eventHandle = eventHandle;
 }
 
 
@@ -468,15 +475,21 @@ void HierarchiesSprite::draw(Renderer *renderer, const Mat4& transform, uint32_t
     {
         this->buildPrimitiveData();
         
+        // set shader parameter
+        _glProgramState->setUniformVec4(kHierarchiesSprite_GLProgram_Uniform_Name_ColorMul,
+                                        Vec4(_displayedColor.r / 255.0f, _displayedColor.g / 255.0f, _displayedColor.b / 255.0f, _displayedOpacity / 255.0f));
+        _glProgramState->setUniformVec4(kHierarchiesSprite_GLProgram_Uniform_Name_ColorAdd,
+                                        Vec4(_displayedColorAdd.r / 255.0f, _displayedColorAdd.g / 255.0f, _displayedColorAdd.b / 255.0f, _displayedColorAdd.a / 255.0f));
+        
         // ignore the anchor point while drawing
         Vec2 ap = this->getAnchorPointInPoints();
         Mat4 apMat;
         Mat4::createTranslation(Vec3(ap.x, ap.y, 0), &apMat);
         
-        _renderCommand.init(_globalZOrder, _texture->getName(), this->getGLProgramState(), _blendFunc, _primitive, transform * apMat);
+        _renderCommand.init(_globalZOrder, _texture->getName(), _glProgramState, _blendFunc, _primitive, transform * apMat);
         renderer->addCommand(&_renderCommand);
         
-//#if CC_SPRITE_DEBUG_DRAW
+#if CC_SPRITE_DEBUG_DRAW
         _debugDrawNode->clear();
         Vec2 vertices[4] = {
             Vec2(_bbox.origin.x + ap.x, _bbox.origin.y + ap.y),
@@ -485,7 +498,7 @@ void HierarchiesSprite::draw(Renderer *renderer, const Mat4& transform, uint32_t
             Vec2(_bbox.origin.x + ap.x, _bbox.origin.y + ap.y + _bbox.size.height),
         };
         _debugDrawNode->drawPoly(vertices, 4, true, Color4F(1.0, 1.0, 1.0, 1.0));
-//#endif
+#endif
     }
 }
 
@@ -650,19 +663,17 @@ void HierarchiesSprite::setTexture(Texture2D *texture) {
     }
 }
 
-void HierarchiesSprite::setEventHandle (const std::function<void(int, const std::string&)>& eventHandle) {
-    _eventHandle = eventHandle;
-}
-
 
 #pragma mark - Private
 
 void HierarchiesSprite::updateShader () {
     if (_texture->hasPremultipliedAlpha()) {
-        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite_Premultiplied));
+        GLProgram *glProgram = GLProgramCache::getInstance()->getGLProgram(kShader_Name_HierarchiesSprite_Premultiplied);
+        this->setGLProgramState(GLProgramState::create(glProgram));
     }
     else {
-        this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite));
+        GLProgram *glProgram = GLProgramCache::getInstance()->getGLProgram(kShader_Name_HierarchiesSprite);
+        this->setGLProgramState(GLProgramState::create(glProgram));
     }
 }
 
@@ -719,7 +730,8 @@ void HierarchiesSprite::buildHierarchiesData (HierarchiesSpriteAnimation::Elemen
             hierarchiesUpdateQuadVertices(Size(spr.w, spr.h),
                                           &matrix,
                                           &quad,
-                                          (depth + layerZOrder) * 0.01,
+//                                          (depth + layerZOrder) * 0.01,
+                                          0,
                                           spr.isRotation);
             
             // update color from animation
@@ -750,7 +762,7 @@ void HierarchiesSprite::buildHierarchiesData (HierarchiesSpriteAnimation::Elemen
             
             _quads.push_back(quad);
             
-            //                quadsCount++;
+//                quadsCount++;
         } // simple element END
         else { // nesting sprite element BEGIN
             std::string subSpriteAnimationName(_animationNameBase);
@@ -865,5 +877,3 @@ void HierarchiesSprite::buildPrimitiveData ()
 
 
 NS_CC_EXT_END
-
-#pragma mark - HierarchiesSprite

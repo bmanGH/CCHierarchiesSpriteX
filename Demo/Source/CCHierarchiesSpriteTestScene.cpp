@@ -37,8 +37,8 @@ void CCHierarchiesSpriteTestScene::loadSprites () {
     
 //    Director::getInstance()->getScheduler()->setTimeScale(0.5);
     
-#define SPRITE_ARRAY_COL_COUNT (1)
-#define SPRITE_ARRAY_ROW_COUNT (1)
+#define SPRITE_ARRAY_COL_COUNT (4)
+#define SPRITE_ARRAY_ROW_COUNT (4)
     for (int i = 0; i < SPRITE_ARRAY_ROW_COUNT; i++) {
         for (int j = 1; j <= SPRITE_ARRAY_COL_COUNT; j++) {
             HierarchiesSprite* spr = nullptr;
@@ -47,6 +47,7 @@ void CCHierarchiesSpriteTestScene::loadSprites () {
                 case 0: {
                     spr = HierarchiesSprite::create("test_new_anim/hanim_test_lvmeng/lumengquan.hsheet",
                                                       "test_new_anim/hanim_test_lvmeng/lumengquan.hanims");
+                    spr->setColorAdd(Color4B(0, 255, 0, 0));
                     break;
                 }
                 case 1: {
@@ -70,9 +71,6 @@ void CCHierarchiesSpriteTestScene::loadSprites () {
             }
             
             spr->setPosition(Point(winSize.width / (SPRITE_ARRAY_COL_COUNT + 1) * j, winSize.height / (SPRITE_ARRAY_ROW_COUNT + 1) * i));
-            spr->setPosition(Point(winSize.width / 2, winSize.height / 2));
-            spr->setScale(2);
-            spr->setFlippedX(true);
             
             spr->setEventHandle([] (int frameIndex, const std::string& eventName) {
                 CCLOG("event emit:%s", eventName.c_str());

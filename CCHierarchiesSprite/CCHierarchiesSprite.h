@@ -79,7 +79,7 @@ protected:
     bool _flipX;
     bool _flipY;
     
-    Color3B _displayColorAmount;
+    Color4B _displayedColorAdd;
     
     Rect _bbox;
     bool _insideBounds;
@@ -96,9 +96,9 @@ protected:
     
     std::function<void(int, const std::string&)> _eventHandle;
     
-//#if CC_SPRITE_DEBUG_DRAW
+#if CC_SPRITE_DEBUG_DRAW
     DrawNode *_debugDrawNode;
-//#endif
+#endif
 	
 CC_CONSTRUCTOR_ACCESS:
     HierarchiesSprite ();
@@ -151,12 +151,14 @@ public:
     }
     void setFlippedY (bool value);
     
-    Color3B getColorAmount () {
-        return _displayColorAmount;
+    Color4B getColorAdd () {
+        return _displayedColorAdd;
     }
-    void setColorAmount (const Color3B& value);
+    void setColorAdd (const Color4B& value);
     
+    // Event
     unsigned int getEventCount (const std::string& eventName);
+    void setEventHandle (const std::function<void(int frameIndex, const std::string& eventName)>& eventHandle);
 	
     // Animation
 	virtual bool displayFrameAtIndex (unsigned int frameIndex);
@@ -191,8 +193,6 @@ public:
         return _texture;
     }
     virtual void setTexture(Texture2D *texture) override;
-
-    void setEventHandle (const std::function<void(int frameIndex, const std::string& eventName)>& eventHandle);
 
 protected:
 	virtual void updateShader ();
