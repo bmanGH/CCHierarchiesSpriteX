@@ -32,7 +32,7 @@ public:
         Animation () {
         }
         
-        Animation (std::string name, unsigned int startFrameIndex, unsigned int endFrameIndex)
+        Animation (const std::string& name, unsigned int startFrameIndex, unsigned int endFrameIndex)
         : name(name), startFrameIndex(startFrameIndex), endFrameIndex(endFrameIndex) {
         }
         
@@ -252,7 +252,7 @@ public:
         
         Symbol () {}
         
-        Symbol (std::string name, bool isSocket, float left, float bottom)
+        Symbol (const std::string& name, bool isSocket, float left, float bottom)
         : name(name), isSocket(isSocket), left(left), bottom(bottom) {
         }
         
@@ -279,7 +279,7 @@ public:
         Event () {
         }
         
-        Event (unsigned int frameId, std::string content)
+        Event (unsigned int frameId, const std::string& name)
         : frameId(frameId), name(name) {
         }
         

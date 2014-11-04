@@ -14,11 +14,11 @@
 #include <unordered_map>
 #include <string>
 #include <limits.h>
+#include <functional>
 #include "CCHierarchiesSpriteRuntime.h"
 #include "CCHierarchiesSpriteSheet.h"
 #include "CCHierarchiesSpriteAnimation.h"
 #include "CCHierarchiesSpriteMesh.h"
-#include "CCHierarchiesSpriteAction.h"
 
 NS_CC_EXT_BEGIN
 
@@ -58,29 +58,6 @@ extern float float_round (float r);
 class HierarchiesSprite : public Node, public TextureProtocol {
     
 public:
-//    struct DisplayElement {
-//        HierarchiesSpriteAnimation::Element socketElement;
-//        unsigned int quadsIndex;
-//        unsigned int quadsCount;// 0 means it's a sub sprite element
-//        
-//        DisplayElement ()
-//        : quadsIndex(0), quadsCount(0) {
-//        }
-//        
-//        DisplayElement (const DisplayElement& copy) {
-//            this->socketElement = copy.socketElement;
-//            this->quadsIndex = copy.quadsIndex;
-//            this->quadsCount = copy.quadsCount;
-//        }
-//        
-//        DisplayElement& operator= (const DisplayElement& rhs) {
-//            this->socketElement = rhs.socketElement;
-//            this->quadsIndex = rhs.quadsIndex;
-//            this->quadsCount = rhs.quadsCount;
-//            return *this;
-//        }
-//    };
-    
     typedef std::unordered_map<std::string, std::string> AvatarMapType;
 	
 protected:
@@ -93,10 +70,6 @@ protected:
     HierarchiesSpriteAnimation* _animation;
     
     AvatarMapType _avatarMap;
-    
-//    std::vector<DisplayElement> _displayList;
-    
-    unsigned int _frameStartQuadIndex;
     
     unsigned int _curFrameIndex;
     
@@ -115,20 +88,25 @@ protected:
     
     std::vector<HierarchiesSprite_V3F_C4B_T2F_Quad> _quads;
     std::vector<GLushort> _indices;
+    VertexBuffer* _vertexBuffer;
+    IndexBuffer* _indexBuffer;
+    VertexData* _vertexData;
     Primitive* _primitive;
     PrimitiveCommand _renderCommand;
     
-#if CC_SPRITE_DEBUG_DRAW
+    std::function<void(int, const std::string&)> _eventHandle;
+    
+//#if CC_SPRITE_DEBUG_DRAW
     DrawNode *_debugDrawNode;
-#endif //CC_SPRITE_DEBUG_DRAW
+//#endif
 	
 CC_CONSTRUCTOR_ACCESS:
     HierarchiesSprite ();
     virtual ~HierarchiesSprite ();
-    virtual bool init (const std::string& sheetFileName,
-                       const std::string& animationFileNameBase,
-                       const std::string& animationFileNameSub,
-                       const AvatarMapType& avatarMap);
+    virtual bool initWithFile (const std::string& sheetFileName,
+                               const std::string& animationFileNameBase,
+                               const std::string& animationFileNameSub,
+                               const AvatarMapType& avatarMap);
     
 public:
 	static HierarchiesSprite* create (const std::string& sheetFileName,
@@ -183,7 +161,9 @@ public:
     // Animation
 	virtual bool displayFrameAtIndex (unsigned int frameIndex);
 	bool freshCurrentFrame ();
-    unsigned int getCurrentFrameIndex ();
+    unsigned int getCurrentFrameIndex () {
+        return _curFrameIndex;
+    }
     
     // Avatar
 	void setAvatarMap (const std::string& name, const std::string& mapName);
@@ -212,11 +192,13 @@ public:
     }
     virtual void setTexture(Texture2D *texture) override;
 
+    void setEventHandle (const std::function<void(int frameIndex, const std::string& eventName)>& eventHandle);
+
 protected:
 	virtual void updateShader ();
 	virtual void updateBlendFunc ();
     
-    void buildAnimationData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
+    void buildHierarchiesData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
                              int frameOffset,
                              unsigned int frameIndex,
                              const AffineTransform& parentMatrix,
@@ -225,9 +207,10 @@ protected:
                              const float parent_alpha_percent, const int parent_alpha_amount,
                              const float parent_red_percent, const int parent_red_amount,
                              const float parent_green_percent, const int parent_green_amount,
-                             const float parent_blue_percent, const int parent_blue_amount);
+                             const float parent_blue_percent, const int parent_blue_amount,
+                             float depth);
 
-    void buildVertexData ();
+    void buildPrimitiveData ();
 
 };
 

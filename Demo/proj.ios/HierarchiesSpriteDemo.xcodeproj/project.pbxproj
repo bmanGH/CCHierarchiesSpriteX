@@ -20,7 +20,6 @@
 		A07A52C01783AF250073F6A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07A52B71783AE6D0073F6A7 /* UIKit.framework */; };
 		A07A52C31783B02C0073F6A7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07A52C11783B01F0073F6A7 /* AVFoundation.framework */; };
 		D41B6B8F19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */; };
-		D43AC3E519F7A69C00A3AA0C /* Resource in Resources */ = {isa = PBXBuildFile; fileRef = D43AC3E419F7A69C00A3AA0C /* Resource */; };
 		D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D43AC3EA19F7A6E000A3AA0C /* AppController.mm */; };
 		D43AC3EF19F7A6E000A3AA0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D43AC3EB19F7A6E000A3AA0C /* main.m */; };
 		D43AC3F019F7A6E000A3AA0C /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D43AC3ED19F7A6E000A3AA0C /* RootViewController.mm */; };
@@ -47,6 +46,12 @@
 		D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630919F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp */; };
 		D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464631E19F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp */; };
 		D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */; };
+		D48FC4B21A07200F000E0187 /* CCHierarchiesSpriteRuntime.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D464630C19F8B3C2001CDA91 /* CCHierarchiesSpriteRuntime.cpp */; };
+		D48FC4B61A07214F000E0187 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D48FC4B41A07214F000E0187 /* MainMenu.cpp */; };
+		D48FC4B91A07233B000E0187 /* CCHierarchiesSpriteTestScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D48FC4B71A07233B000E0187 /* CCHierarchiesSpriteTestScene.cpp */; };
+		D48FC4BC1A072509000E0187 /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D48FC4BA1A072509000E0187 /* Utils.cpp */; };
+		D499D9751A07876600FAA28D /* avatar_data in Resources */ = {isa = PBXBuildFile; fileRef = D499D9731A07876600FAA28D /* avatar_data */; };
+		D499D9761A07876600FAA28D /* test_new_anim in Resources */ = {isa = PBXBuildFile; fileRef = D499D9741A07876600FAA28D /* test_new_anim */; };
 		D60AE43417F7FFE100757E4B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60AE43317F7FFE100757E4B /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,7 +135,6 @@
 		D41B6B8D19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteShader.cpp; sourceTree = "<group>"; };
 		D41B6B8E19F8D86100E2970A /* CCHierarchiesSpriteShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteShader.h; sourceTree = "<group>"; };
 		D43AC3DA19F7A65000A3AA0C /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = "../../cocos2d-x/build/cocos2d_libs.xcodeproj"; sourceTree = "<group>"; };
-		D43AC3E419F7A69C00A3AA0C /* Resource */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resource; path = ../Resource; sourceTree = "<group>"; };
 		D43AC3E919F7A6E000A3AA0C /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		D43AC3EA19F7A6E000A3AA0C /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
 		D43AC3EB19F7A6E000A3AA0C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -172,6 +176,14 @@
 		D464631F19F8C387001CDA91 /* CCHierarchiesSpriteReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteReader.h; sourceTree = "<group>"; };
 		D464632119F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteAction.cpp; sourceTree = "<group>"; };
 		D464632219F8C427001CDA91 /* CCHierarchiesSpriteAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteAction.h; sourceTree = "<group>"; };
+		D48FC4B41A07214F000E0187 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenu.cpp; sourceTree = "<group>"; };
+		D48FC4B51A07214F000E0187 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		D48FC4B71A07233B000E0187 /* CCHierarchiesSpriteTestScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCHierarchiesSpriteTestScene.cpp; sourceTree = "<group>"; };
+		D48FC4B81A07233B000E0187 /* CCHierarchiesSpriteTestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHierarchiesSpriteTestScene.h; sourceTree = "<group>"; };
+		D48FC4BA1A072509000E0187 /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utils.cpp; sourceTree = "<group>"; };
+		D48FC4BB1A072509000E0187 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		D499D9731A07876600FAA28D /* avatar_data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = avatar_data; path = ../../../CCHierarchiesSpriteX1/CCHierarchiesSpriteXDemo/Resource/avatar_data; sourceTree = "<group>"; };
+		D499D9741A07876600FAA28D /* test_new_anim */ = {isa = PBXFileReference; lastKnownFileType = folder; name = test_new_anim; path = ../../../CCHierarchiesSpriteX1/CCHierarchiesSpriteXDemo/Resource/test_new_anim; sourceTree = "<group>"; };
 		D60AE43317F7FFE100757E4B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		EDCC747E17C455FD007B692C /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -225,7 +237,7 @@
 				D43AC3E619F7A6A400A3AA0C /* Source */,
 				D464630419F8B078001CDA91 /* CCHierarchiesSprite */,
 				D464631219F8B45F001CDA91 /* rapidxml */,
-				D43AC3E419F7A69C00A3AA0C /* Resource */,
+				D499D9721A07871000FAA28D /* Resource */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -311,6 +323,12 @@
 				D43AC41619F7A99200A3AA0C /* AppDelegate.h */,
 				D43AC41819F7AE2300A3AA0C /* DemoScene.cpp */,
 				D43AC41919F7AE2300A3AA0C /* DemoScene.h */,
+				D48FC4B41A07214F000E0187 /* MainMenu.cpp */,
+				D48FC4B51A07214F000E0187 /* MainMenu.h */,
+				D48FC4B71A07233B000E0187 /* CCHierarchiesSpriteTestScene.cpp */,
+				D48FC4B81A07233B000E0187 /* CCHierarchiesSpriteTestScene.h */,
+				D48FC4BA1A072509000E0187 /* Utils.cpp */,
+				D48FC4BB1A072509000E0187 /* Utils.h */,
 			);
 			name = Source;
 			path = ../Source;
@@ -389,6 +407,15 @@
 			path = ../../rapidxml;
 			sourceTree = "<group>";
 		};
+		D499D9721A07871000FAA28D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D499D9731A07876600FAA28D /* avatar_data */,
+				D499D9741A07876600FAA28D /* test_new_anim */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,6 +423,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A07A52261783A1D20073F6A7 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
+				D48FC4BF1A0727CD000E0187 /* ShellScript */,
 				A07A518A1783A1D20073F6A7 /* Resources */,
 				A07A51AD1783A1D20073F6A7 /* Sources */,
 				A07A52171783A1D20073F6A7 /* Frameworks */,
@@ -472,11 +500,12 @@
 				D43AC40A19F7A6F400A3AA0C /* Icon-72.png in Resources */,
 				D43AC41119F7A6F400A3AA0C /* Icon-152.png in Resources */,
 				D43AC40619F7A6F400A3AA0C /* Default@2x.png in Resources */,
-				D43AC3E519F7A69C00A3AA0C /* Resource in Resources */,
 				D43AC40319F7A6F400A3AA0C /* Default-667h@2x.png in Resources */,
 				D43AC40719F7A6F400A3AA0C /* Icon-40.png in Resources */,
 				D43AC40B19F7A6F400A3AA0C /* Icon-76.png in Resources */,
+				D499D9761A07876600FAA28D /* test_new_anim in Resources */,
 				D43AC40919F7A6F400A3AA0C /* Icon-58.png in Resources */,
+				D499D9751A07876600FAA28D /* avatar_data in Resources */,
 				D43AC40C19F7A6F400A3AA0C /* Icon-80.png in Resources */,
 				D43AC40219F7A6F400A3AA0C /* Default-568h@2x.png in Resources */,
 				D43AC40E19F7A6F400A3AA0C /* Icon-114.png in Resources */,
@@ -489,6 +518,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D48FC4BF1A0727CD000E0187 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find ${SRCROOT}/../Resource/ -exec touch -cm {} \\;";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A07A51AD1783A1D20073F6A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -496,12 +541,16 @@
 			files = (
 				D43AC41A19F7AE2300A3AA0C /* DemoScene.cpp in Sources */,
 				D464632019F8C387001CDA91 /* CCHierarchiesSpriteReader.cpp in Sources */,
+				D48FC4B91A07233B000E0187 /* CCHierarchiesSpriteTestScene.cpp in Sources */,
 				D464632319F8C427001CDA91 /* CCHierarchiesSpriteAction.cpp in Sources */,
 				D43AC41719F7A99200A3AA0C /* AppDelegate.cpp in Sources */,
+				D48FC4B21A07200F000E0187 /* CCHierarchiesSpriteRuntime.cpp in Sources */,
+				D48FC4B61A07214F000E0187 /* MainMenu.cpp in Sources */,
 				D43AC3EF19F7A6E000A3AA0C /* main.m in Sources */,
 				D41B6B8F19F8D86100E2970A /* CCHierarchiesSpriteShader.cpp in Sources */,
 				D464630B19F8B3B3001CDA91 /* CCHierarchiesSpriteSheet.cpp in Sources */,
 				D43AC3F019F7A6E000A3AA0C /* RootViewController.mm in Sources */,
+				D48FC4BC1A072509000E0187 /* Utils.cpp in Sources */,
 				D464630819F8B39D001CDA91 /* CCHierarchiesSpriteAnimation.cpp in Sources */,
 				D43AC3EE19F7A6E000A3AA0C /* AppController.mm in Sources */,
 				06FF8D4C19FCC56500F83A3F /* CCHierarchiesSpriteMesh.cpp in Sources */,

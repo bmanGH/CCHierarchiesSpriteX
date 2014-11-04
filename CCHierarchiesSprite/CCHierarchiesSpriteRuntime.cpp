@@ -73,8 +73,8 @@ bool HierarchiesSpriteRuntime::init () {
         glProgram->link();
         glProgram->updateUniforms();
         
-        glProgram->bindAttribLocation(kHierarchiesSprite_Attribute_Name_ColorMul, kHierarchiesSprite_Attribute_ColorMul);
-        glProgram->bindAttribLocation(kHierarchiesSprite_Attribute_Name_ColorAdd, kHierarchiesSprite_Attribute_ColorAdd);
+        glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul, kHierarchiesSprite_GLProgram_Attribute_ColorMul);
+        glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd, kHierarchiesSprite_GLProgram_Attribute_ColorAdd);
         
         CHECK_GL_ERROR_DEBUG();
         
@@ -91,8 +91,8 @@ bool HierarchiesSpriteRuntime::init () {
         glProgram->link();
         glProgram->updateUniforms();
         
-        glProgram->bindAttribLocation(kHierarchiesSprite_Attribute_Name_ColorMul, kHierarchiesSprite_Attribute_ColorMul);
-        glProgram->bindAttribLocation(kHierarchiesSprite_Attribute_Name_ColorAdd, kHierarchiesSprite_Attribute_ColorAdd);
+        glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul, kHierarchiesSprite_GLProgram_Attribute_ColorMul);
+        glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd, kHierarchiesSprite_GLProgram_Attribute_ColorAdd);
         
         CHECK_GL_ERROR_DEBUG();
         

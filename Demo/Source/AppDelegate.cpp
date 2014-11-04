@@ -29,7 +29,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "extensions/cocos-ext.h"
 
-#include "DemoScene.h"
+#include "MainMenu.h"
 
 USING_NS_CC;
 
@@ -82,7 +82,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     glview->setDesignResolutionSize(designSize.width, designSize.height, ResolutionPolicy::SHOW_ALL);
 #endif
 
-    auto scene = DemoScene::create();
+    auto scene = MainMenu::scene();
     director->runWithScene(scene);
     
     return true;

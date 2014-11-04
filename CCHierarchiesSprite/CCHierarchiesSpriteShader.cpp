@@ -9,8 +9,8 @@
 #include "CCHierarchiesSpriteShader.h"
 
 
-const char* kHierarchiesSprite_Attribute_Name_ColorMul = "a_colorMul";
-const char* kHierarchiesSprite_Attribute_Name_ColorAdd = "a_colorAdd";
+const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul = "a_colorMul";
+const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd = "a_colorAdd";
 
 
 #define STRINGIZE(x) #x
@@ -57,14 +57,13 @@ varying lowp vec4 v_fragmentColorMul;
 varying lowp vec4 v_fragmentColorAdd;
 varying mediump vec2 v_texCoord;
  
-uniform sampler2D CC_Texture0;
- 
 void main()
 {
     vec4 color = texture2D(CC_Texture0, v_texCoord);
-    color *= v_fragmentColorMul;
-    color += v_fragmentColorAdd * color.a;
-    gl_FragColor = clamp(color, 0.0, 1.0) * u_color;
+//    color *= v_fragmentColorMul;
+//    color += v_fragmentColorAdd * color.a;
+//    gl_FragColor = clamp(color, 0.0, 1.0) * u_color;
+    gl_FragColor = color;
 }
 );
 
@@ -80,16 +79,15 @@ varying lowp vec4 v_fragmentColorMul;
 varying lowp vec4 v_fragmentColorAdd;
 varying mediump vec2 v_texCoord;
  
-uniform sampler2D CC_Texture0;
- 
 void main()
 {
     vec4 color = texture2D(CC_Texture0, v_texCoord);
-    color.rgb = color.rgb / color.a;
-    color *= v_fragmentColorMul;
-    color += v_fragmentColorAdd;
-    gl_FragColor = clamp(color, 0.0, 1.0) * u_color;
-    gl_FragColor.rgb = gl_FragColor.rgb * gl_FragColor.a;
+//    color.rgb = color.rgb / color.a;
+//    color *= v_fragmentColorMul;
+//    color += v_fragmentColorAdd;
+//    gl_FragColor = clamp(color, 0.0, 1.0) * u_color;
+//    gl_FragColor.rgb = gl_FragColor.rgb * gl_FragColor.a;
+    gl_FragColor = color;
 }
 );
 

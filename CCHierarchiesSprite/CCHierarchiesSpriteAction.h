@@ -138,15 +138,15 @@ public:
 class CC_DLL HierarchiesAvatarMapSet : public ActionInstant {
     
 protected:
-    AvatarMapType _avatarMap;
+    HierarchiesSprite::AvatarMapType _avatarMap;
     
 public:
-    static HierarchiesAvatarMapSet* create(const AvatarMapType& avatarMap);
+    static HierarchiesAvatarMapSet* create(const HierarchiesSprite::AvatarMapType& avatarMap);
     
     HierarchiesAvatarMapSet () {}
     virtual ~HierarchiesAvatarMapSet () {}
     
-    bool init (const AvatarMapType& avatarMap);
+    bool init (const HierarchiesSprite::AvatarMapType& avatarMap);
     
     virtual void update (float time) override;
     virtual ActionInstant* clone() const override;

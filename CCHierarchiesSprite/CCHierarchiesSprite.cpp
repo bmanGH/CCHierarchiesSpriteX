@@ -274,9 +274,7 @@ HierarchiesSprite* HierarchiesSprite::create (const std::string& sheetFileName,
 HierarchiesSprite::HierarchiesSprite ()
 : _sheet(nullptr)
 , _animation(nullptr)
-//, _mesh(nullptr)
-, _frameStartQuadIndex(0)
-, _curFrameIndex(0)
+, _curFrameIndex(UINT_MAX)
 , _blendFunc(BlendFunc::DISABLE)
 , _opacityModifyRGB(false)
 , _flipX(false)
@@ -285,34 +283,38 @@ HierarchiesSprite::HierarchiesSprite ()
 , _bbox(Rect::ZERO)
 , _insideBounds(true)
 , _texture(nullptr)
+, _vertexBuffer(nullptr)
+, _indexBuffer(nullptr)
+, _vertexData(nullptr)
 , _primitive(nullptr)
 {
-#if CC_SPRITE_DEBUG_DRAW
+//#if CC_SPRITE_DEBUG_DRAW
     _debugDrawNode = DrawNode::create();
     addChild(_debugDrawNode);
-#endif //CC_SPRITE_DEBUG_DRAW
+//#endif
 }
 
 HierarchiesSprite::~HierarchiesSprite ()
 {
-    CC_SAFE_RELEASE_NULL(_texture);
-//    CC_SAFE_RELEASE_NULL(_mesh);
+    CC_SAFE_RELEASE(_texture);
+    CC_SAFE_RELEASE(_vertexBuffer);
+    CC_SAFE_RELEASE(_indexBuffer);
+    CC_SAFE_RELEASE(_vertexData);
+    CC_SAFE_RELEASE(_primitive);
     
     HierarchiesSpriteRuntime::getInstance()->removeSheet(_sheetName);
     HierarchiesSpriteRuntime::getInstance()->removeAnimation(_animationName);
 }
 
-bool HierarchiesSprite::init (const std::string& sheetFileName,
-                              const std::string& animationFileNameBase,
-                              const std::string& animationFileNameSub,
-                              const AvatarMapType& avatarMap) {
+bool HierarchiesSprite::initWithFile (const std::string& sheetFileName,
+                                      const std::string& animationFileNameBase,
+                                      const std::string& animationFileNameSub,
+                                      const AvatarMapType& avatarMap) {
     if (Node::init()) {
         _sheetName = sheetFileName;
         _animationNameBase = animationFileNameBase;
         _animationNameSub = animationFileNameSub;
         _animationName = _animationNameBase + _animationNameSub;
-        
-        _curFrameIndex = UINT_MAX;
         
         _sheet = HierarchiesSpriteRuntime::getInstance()->addSheet(_sheetName);
         _animation = HierarchiesSpriteRuntime::getInstance()->addAnimation(_animationName);
@@ -370,31 +372,30 @@ bool HierarchiesSprite::displayFrameAtIndex (unsigned int frameIndex) {
     
 	if (_curFrameIndex == frameIndex)
         return true;
-	
-//	if (_curFrameIndex != frameIndex) {
-//		// event dispatch
-//		if (_delegate) {
-//			CCHierarchiesSpriteAnimation::Event event;
-//			if (_animation->getEventByFrameId(frameIndex, event)) {
-//				_delegate->onEventContent(this, event.content.c_str());
-//			}
-//		}
-//	}
     
     _curFrameIndex = frameIndex;
+	
+	// event dispatch
+    if (_eventHandle) {
+        HierarchiesSpriteAnimation::Event event;
+        if (_animation->getEventByFrameId(_curFrameIndex, event)) {
+            _eventHandle(_curFrameIndex, event.name);
+        }
+    }
     
     _quads.clear();
     float min_X = 10000, max_X = -10000, min_Y = 10000, max_Y = -10000;
-    this->buildAnimationData(HierarchiesSpriteAnimation::kNoneLoopMode,
-                                    0,
-                                    _curFrameIndex,
-                                    AffineTransformIdentity,
-                                    _animation,
-                                    min_X, max_X, min_Y, max_Y,
-                                    1, 0,
-                                    1, 0,
-                                    1, 0,
-                                    1, 0);
+    this->buildHierarchiesData(HierarchiesSpriteAnimation::kNoneLoopMode,
+                             0,
+                             _curFrameIndex,
+                             AffineTransformIdentity,
+                             _animation,
+                             min_X, max_X, min_Y, max_Y,
+                             1, 0,
+                             1, 0,
+                             1, 0,
+                             1, 0,
+                             0);
     
     if (min_X == 10000 ||
         max_X == -10000 ||
@@ -415,6 +416,8 @@ bool HierarchiesSprite::displayFrameAtIndex (unsigned int frameIndex) {
         this->setContentSize(_bbox.size);
     }
     
+    _indices.clear(); // need refresh vertex data
+    
     return true;
 }
 
@@ -422,10 +425,6 @@ bool HierarchiesSprite::freshCurrentFrame () {
 	unsigned int frameIndex = _curFrameIndex;
     _curFrameIndex = UINT_MAX;
 	return displayFrameAtIndex(frameIndex);
-}
-
-unsigned int HierarchiesSprite::getCurrentFrameIndex () {
-    return _curFrameIndex;
 }
 
 
@@ -460,61 +459,33 @@ void HierarchiesSprite::resetAvatarMap () {
 #pragma mark - Draw
 
 void HierarchiesSprite::draw(Renderer *renderer, const Mat4& transform, uint32_t flags) {
-    if (0 == _quads.size())
-    {
+    if (_quads.size() == 0)
         return;
-    }
     
     // Don't do calculate the culling if the transform was not updated
     _insideBounds = (flags & FLAGS_TRANSFORM_DIRTY) ? renderer->checkVisibility(transform, _contentSize) : _insideBounds;
-    
     if(_insideBounds)
     {
-        if (_needFresh) {
-            _indices.clear();
-            _indices.resize(_quads.size() * 6);
-            
-            for(size_t i = 0; i < _quads.size(); i++)
-            {
-#if HIERARCHIES_USE_TRIANGLE_STRIP
-                _indices[i*6+0] = i*4+0;
-                _indices[i*6+1] = i*4+0;
-                _indices[i*6+2] = i*4+2;
-                _indices[i*6+3] = i*4+1;
-                _indices[i*6+4] = i*4+3;
-                _indices[i*6+5] = i*4+3;
-#else
-                _indices[i*6+0] = i*4+0;
-                _indices[i*6+1] = i*4+1;
-                _indices[i*6+2] = i*4+2;
-                _indices[i*6+3] = i*4+3;
-                _indices[i*6+4] = i*4+2;
-                _indices[i*6+5] = i*4+1;
-#endif
-            }
-            
-            _needFresh = false;
-        }
+        this->buildPrimitiveData();
         
         // ignore the anchor point while drawing
-        CCPoint ap = this->getAnchorPointInPoints();
-        kmGLTranslatef(ap.x, ap.y, 0);
+        Vec2 ap = this->getAnchorPointInPoints();
+        Mat4 apMat;
+        Mat4::createTranslation(Vec3(ap.x, ap.y, 0), &apMat);
         
-        this->buildVertexData();
-        
-        _renderCommand.init(_globalZOrder, _texture->getName(), this->getGLProgramState(), _blendFunc, _primitive, transform);
+        _renderCommand.init(_globalZOrder, _texture->getName(), this->getGLProgramState(), _blendFunc, _primitive, transform * apMat);
         renderer->addCommand(&_renderCommand);
         
-#if CC_SPRITE_DEBUG_DRAW
+//#if CC_SPRITE_DEBUG_DRAW
         _debugDrawNode->clear();
         Vec2 vertices[4] = {
-            Vec2(_bbox.origin.x, _bbox.origin.y),
-            Vec2(_bbox.origin.x + _bbox.size.width, _bbox.origin.y),
-            Vec2(_bbox.origin.x + _bbox.size.width, _bbox.origin.y + _bbox.size.height),
-            Vec2(_bbox.origin.x, _bbox.origin.y + _bbox.size.height),
+            Vec2(_bbox.origin.x + ap.x, _bbox.origin.y + ap.y),
+            Vec2(_bbox.origin.x + ap.x + _bbox.size.width, _bbox.origin.y + ap.y),
+            Vec2(_bbox.origin.x + ap.x + _bbox.size.width, _bbox.origin.y + ap.y + _bbox.size.height),
+            Vec2(_bbox.origin.x + ap.x, _bbox.origin.y + ap.y + _bbox.size.height),
         };
         _debugDrawNode->drawPoly(vertices, 4, true, Color4F(1.0, 1.0, 1.0, 1.0));
-#endif //CC_SPRITE_DEBUG_DRAW
+//#endif
     }
 }
 
@@ -679,34 +650,32 @@ void HierarchiesSprite::setTexture(Texture2D *texture) {
     }
 }
 
+void HierarchiesSprite::setEventHandle (const std::function<void(int, const std::string&)>& eventHandle) {
+    _eventHandle = eventHandle;
+}
+
 
 #pragma mark - Private
 
 void HierarchiesSprite::updateShader () {
     if (_texture->hasPremultipliedAlpha()) {
         this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite_Premultiplied));
-        
-//        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
     }
     else {
         this->setGLProgramState(GLProgramState::getOrCreateWithGLProgramName(kShader_Name_HierarchiesSprite));
-        
-//        _uniformColorLocation = glProgram->getUniformLocationForName("u_color");
     }
 }
 
 void HierarchiesSprite::updateBlendFunc () {
-    if (!_texture->hasPremultipliedAlpha())
-    {
-        _blendFunc = BlendFunc::ALPHA_NON_PREMULTIPLIED;
-    }
-    else
-    {
+    if (_texture->hasPremultipliedAlpha()) {
         _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
+    }
+    else {
+        _blendFunc = BlendFunc::ALPHA_NON_PREMULTIPLIED;
     }
 }
 
-void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
+void HierarchiesSprite::buildHierarchiesData (HierarchiesSpriteAnimation::ElementLoopMode loopMode,
                                             int frameOffset,
                                             unsigned int frameIndex,
                                             const AffineTransform& parentMatrix,
@@ -715,7 +684,8 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
                                             const float parent_alpha_percent, const int parent_alpha_amount,
                                             const float parent_red_percent, const int parent_red_amount,
                                             const float parent_green_percent, const int parent_green_amount,
-                                            const float parent_blue_percent, const int parent_blue_amount)
+                                            const float parent_blue_percent, const int parent_blue_amount,
+                                            float depth)
 {
     HierarchiesSpriteAnimation::FrameElements frameElements;
     int eNum = animation->getFrameElementsAtFrameIndex(loopMode, frameOffset, frameIndex, frameElements); //!!! frameIndex will update with loop mode
@@ -749,7 +719,7 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
             hierarchiesUpdateQuadVertices(Size(spr.w, spr.h),
                                           &matrix,
                                           &quad,
-                                          0,
+                                          (depth + layerZOrder) * 0.01,
                                           spr.isRotation);
             
             // update color from animation
@@ -803,41 +773,94 @@ void HierarchiesSprite::buildAnimationData (HierarchiesSpriteAnimation::ElementL
             int green_amount = parent_green_percent * elementIter->color_green_amount + parent_green_amount;
             float blue_percent = parent_blue_percent * elementIter->color_blue_percent;
             int blue_amount = parent_blue_percent * elementIter->color_blue_amount + parent_blue_amount;
-            this->buildAnimationData(elementIter->loopMode,
-                                            elementIter->frameOffset,
-                                            frameIndex - elementIter->startDisplayFrameIndex,
-                                            matrix,
-                                            subAnimation,
-                                            min_X, max_X, min_Y, max_Y,
-                                            alpha_percent, alpha_amount,
-                                            red_percent, red_amount,
-                                            green_percent, green_amount,
-                                            blue_percent, blue_amount);
+            this->buildHierarchiesData(elementIter->loopMode,
+                                       elementIter->frameOffset,
+                                       frameIndex - elementIter->startDisplayFrameIndex,
+                                       matrix,
+                                       subAnimation,
+                                       min_X, max_X, min_Y, max_Y,
+                                       alpha_percent, alpha_amount,
+                                       red_percent, red_amount,
+                                       green_percent, green_amount,
+                                       blue_percent, blue_amount,
+                                       depth + layerZOrder);
         } // nesting sprite element END
         
         layerZOrder++;
     } // element layers END
 }
 
-void HierarchiesSprite::buildVertexData ()
+void HierarchiesSprite::buildPrimitiveData ()
 {
-    auto vertexBuffer = VertexBuffer::create(sizeof(HierarchiesSprite_V3F_C4B_T2F), _quads.size() * 4);
-	vertexBuffer->updateVertices(_quads.data(), _quads.size() * 4, 0);
-    
-    auto vertexData = VertexData::create();
-	vertexData->addStream(vertexBuffer, VertexStreamAttribute(0, cocos2d::GLProgram::VERTEX_ATTRIB_POSITION, GL_FLOAT, 3, fasle));
-	vertexData->addStream(vertexBuffer, VertexStreamAttribute(12, kHierarchiesSprite_Attribute_ColorMul, GL_UNSIGNED_BTYE, 4, true));
-	vertexData->addStream(vertexBuffer, VertexStreamAttribute(4, kHierarchiesSprite_Attribute_ColorAdd, GL_UNSIGNED_BTYE, 4, true));
-	vertexData->addStream(vertexBuffer, VertexStreamAttribute(4, cocos2d::GLProgram::VERTEX_ATTRIB_TEX_COORD, GL_FLOAT, 2, fasle));
-    
-    auto indexBuffer = IndexBuffer::create(IndexType::INDEX_TYPE_SHORT_16, 6);
-	indexBuffer->updateIndices(_indices.data(), _indices.size(), 0);
-    
-    CC_SAFE_RELEASE(_primitive);
-    _primitve = Primitive::create(vertexData, indexBuffer, GL_TRIANGLES);
-	primitive->setStart(0);
-	primitive->setCount(_indices.size());
-    CC_SAFE_RETAIN(_primitive);
+    // refresh check first
+    if (_indices.size() == 0 && _quads.size() > 0)
+    {
+//        CCLOG("<HierarchiesSprite> buildPrimitiveData BEGIN:%d", _curFrameIndex);
+        
+        // build indices
+        _indices.resize(_quads.size() * 6);
+        for(size_t i = 0; i < _quads.size(); i++)
+        {
+            _indices[i*6+0] = i*4+0;
+            _indices[i*6+1] = i*4+1;
+            _indices[i*6+2] = i*4+2;
+            _indices[i*6+3] = i*4+3;
+            _indices[i*6+4] = i*4+2;
+            _indices[i*6+5] = i*4+1;
+        }
+        
+        int vertexNumber = (int)_quads.size() * 4;
+        bool vertexBufferRecreated = false;
+        if (!_vertexBuffer || _vertexBuffer->getVertexNumber() < vertexNumber)
+        {
+            CC_SAFE_RELEASE(_vertexBuffer);
+            _vertexBuffer = VertexBuffer::create(sizeof(HierarchiesSprite_V3F_C4B_T2F), vertexNumber);
+            CC_SAFE_RETAIN(_vertexBuffer);
+            vertexBufferRecreated = true;
+            
+//            CCLOG("<HierarchiesSprite> vertexBufferRecreated:%d", _vertexBuffer->getVertexNumber());
+        }
+        _vertexBuffer->updateVertices(_quads.data(), vertexNumber, 0);
+        
+        if (!_vertexData || vertexBufferRecreated)
+        {
+            CC_SAFE_RELEASE(_vertexData);
+            _vertexData = VertexData::create();
+            _vertexData->setStream(_vertexBuffer, VertexStreamAttribute(0, cocos2d::GLProgram::VERTEX_ATTRIB_POSITION, GL_FLOAT, 3, false));
+            _vertexData->setStream(_vertexBuffer, VertexStreamAttribute(12, kHierarchiesSprite_GLProgram_Attribute_ColorMul, GL_UNSIGNED_BYTE, 4, true));
+            _vertexData->setStream(_vertexBuffer, VertexStreamAttribute(12 + 4, kHierarchiesSprite_GLProgram_Attribute_ColorAdd, GL_UNSIGNED_BYTE, 4, true));
+            _vertexData->setStream(_vertexBuffer, VertexStreamAttribute(12 + 4 + 4, cocos2d::GLProgram::VERTEX_ATTRIB_TEX_COORD, GL_FLOAT, 2, false));
+            CC_SAFE_RETAIN(_vertexData);
+            
+//            CCLOG("<HierarchiesSprite> vertexDataRecreated");
+        }
+        
+        int indexNumber = (int)_indices.size();
+        bool indexBufferRecreated = false;
+        if (!_indexBuffer || _indexBuffer->getIndexNumber() < indexNumber)
+        {
+            CC_SAFE_RELEASE(_indexBuffer);
+            _indexBuffer = IndexBuffer::create(IndexBuffer::IndexType::INDEX_TYPE_SHORT_16, indexNumber);
+            CC_SAFE_RETAIN(_indexBuffer);
+            indexBufferRecreated = true;
+            
+//            CCLOG("<HierarchiesSprite> indexBufferRecreated:%d", _indexBuffer->getIndexNumber());
+        }
+        _indexBuffer->updateIndices(_indices.data(), indexNumber, 0);
+        
+        if (vertexBufferRecreated || indexBufferRecreated)
+        {
+            CC_SAFE_RELEASE(_primitive);
+            _primitive = Primitive::create(_vertexData, _indexBuffer, GL_TRIANGLES);
+            CC_SAFE_RETAIN(_primitive);
+            
+//            CCLOG("<HierarchiesSprite> primitiveRecreated");
+        }
+        _primitive->setStart(0);
+        _primitive->setCount(indexNumber);
+        
+//        CCLOG("<HierarchiesSprite> buildPrimitiveData END:%d", _curFrameIndex);
+    }
 }
 
 

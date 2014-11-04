@@ -19,11 +19,11 @@
 
 
 // shader vertex attribute names and index
-extern const char* kHierarchiesSprite_Attribute_Name_ColorMul;
-extern const char* kHierarchiesSprite_Attribute_Name_ColorAdd;
+extern const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul;
+extern const char* kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd;
 enum {
-    kHierarchiesSprite_Attribute_ColorMul = cocos2d::GLProgram::VERTEX_ATTRIB_COLOR,
-    kHierarchiesSprite_Attribute_ColorAdd = cocos2d::GLProgram::VERTEX_ATTRIB_MAX,
+    kHierarchiesSprite_GLProgram_Attribute_ColorMul = cocos2d::GLProgram::VERTEX_ATTRIB_COLOR,
+    kHierarchiesSprite_GLProgram_Attribute_ColorAdd = cocos2d::GLProgram::VERTEX_ATTRIB_MAX,
 };
 
 
