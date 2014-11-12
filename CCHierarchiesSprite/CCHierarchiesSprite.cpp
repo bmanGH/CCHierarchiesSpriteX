@@ -620,6 +620,11 @@ const Mat4& HierarchiesSprite::getNodeToParentTransform() const {
             }
         }
         
+        if (_useAdditionalTransform)
+        {
+            _transform = _transform * _additionalTransform;
+        }
+        
         // HierarchiesSprite
         // flip
         if (_flipX && _flipY) {
@@ -630,11 +635,6 @@ const Mat4& HierarchiesSprite::getNodeToParentTransform() const {
         }
         else if (_flipY) {
             _transform.scale(1, -1, 1);
-        }
-        
-        if (_useAdditionalTransform)
-        {
-            _transform = _transform * _additionalTransform;
         }
         
         _transformDirty = false;
@@ -730,8 +730,7 @@ void HierarchiesSprite::buildHierarchiesData (HierarchiesSpriteAnimation::Elemen
             hierarchiesUpdateQuadVertices(Size(spr.w, spr.h),
                                           &matrix,
                                           &quad,
-//                                          (depth + layerZOrder) * 0.01,
-                                          0,
+                                          0, // (depth + layerZOrder) * 0.01,
                                           spr.isRotation);
             
             // update color from animation
