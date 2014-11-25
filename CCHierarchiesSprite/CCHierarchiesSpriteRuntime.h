@@ -79,6 +79,9 @@ public:
 	void removeAnimation (const std::string& name);
     
     void releaseUnusedResource ();
+    
+private:
+    CC_DISALLOW_COPY_AND_ASSIGN(HierarchiesSpriteRuntime);
 	
 };
 

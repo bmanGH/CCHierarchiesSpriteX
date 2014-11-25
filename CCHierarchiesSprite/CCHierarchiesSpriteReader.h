@@ -44,6 +44,9 @@ public:
     
     bool parse (HierarchiesSpriteAnimation& out);
     
+private:
+    CC_DISALLOW_COPY_AND_ASSIGN(HierarchiesSpriteAnimationReader);
+    
 };
 
 
@@ -65,6 +68,9 @@ public:
     }
     
     bool parse (HierarchiesSpriteSheet& out);
+    
+private:
+    CC_DISALLOW_COPY_AND_ASSIGN(HierarchiesSpriteSheetReader);
     
 };
 

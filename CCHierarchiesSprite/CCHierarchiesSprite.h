@@ -212,6 +212,9 @@ protected:
 
     void buildPrimitiveData ();
 
+private:
+    CC_DISALLOW_COPY_AND_ASSIGN(HierarchiesSprite);
+
 };
 
 
