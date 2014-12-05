@@ -56,6 +56,7 @@ protected:
     // data cache
     SheetCacheHashItem* _sheetCache;
     AnimationCacheHashItem* _animationCache;
+    EventListenerCustom* _rendererRecreatedListener;
     
 CC_CONSTRUCTOR_ACCESS:
     HierarchiesSpriteRuntime ();

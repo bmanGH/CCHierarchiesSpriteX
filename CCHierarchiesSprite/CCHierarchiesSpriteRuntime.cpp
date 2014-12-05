@@ -38,6 +38,7 @@ void HierarchiesSpriteRuntime::purge ()
 HierarchiesSpriteRuntime::HierarchiesSpriteRuntime ()
 : _sheetCache(nullptr)
 , _animationCache(nullptr)
+, _rendererRecreatedListener(nullptr)
 {
 }
 
@@ -60,6 +61,11 @@ HierarchiesSpriteRuntime::~HierarchiesSpriteRuntime ()
             delete hashItem;
         }
     }
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WP8 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    if (_rendererRecreatedListener)
+        Director::getInstance()->getEventDispatcher()->removeEventListener(_rendererRecreatedListener);
+#endif
 }
 
 bool HierarchiesSpriteRuntime::init () {
@@ -97,6 +103,33 @@ bool HierarchiesSpriteRuntime::init () {
         GLProgramCache::getInstance()->addGLProgram(glProgram, kShader_Name_HierarchiesSprite_Premultiplied);
         CC_SAFE_RELEASE_NULL(glProgram);
     }
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WP8 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    /** listen the event that renderer was recreated on Android/WP8 */
+    if (_rendererRecreatedListener == nullptr)
+    {
+        _rendererRecreatedListener = EventListenerCustom::create(EVENT_RENDERER_RECREATED, [] (EventCustom* e) {
+            GLProgram* glProgram = GLProgramCache::getInstance()->getGLProgram(kShader_Name_HierarchiesSprite);
+            glProgram->reset();
+            glProgram->initWithByteArrays(ccShader_HierarchiesSprite_vert,
+                                          ccShader_HierarchiesSprite_frag);
+            glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul, kHierarchiesSprite_GLProgram_Attribute_ColorMul);
+            glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd, kHierarchiesSprite_GLProgram_Attribute_ColorAdd);
+            glProgram->link();
+            glProgram->updateUniforms();
+            
+            glProgram = GLProgramCache::getInstance()->getGLProgram(kShader_Name_HierarchiesSprite_Premultiplied);
+            glProgram->reset();
+            glProgram->initWithByteArrays(ccShader_HierarchiesSprite_vert,
+                                          ccShader_HierarchiesSprite_PremultipliedAlpha_frag);
+            glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorMul, kHierarchiesSprite_GLProgram_Attribute_ColorMul);
+            glProgram->bindAttribLocation(kHierarchiesSprite_GLProgram_Attribute_Name_ColorAdd, kHierarchiesSprite_GLProgram_Attribute_ColorAdd);
+            glProgram->link();
+            glProgram->updateUniforms();
+        });
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_rendererRecreatedListener, -1);
+    }
+#endif
     
     return true;
 }
